@@ -1,0 +1,1468 @@
+body {
+  font-family: "Inter", sans-serif;
+}
+/*-----------------------------------------
+    ETC style
+-------------------------------------------*/
+.bd-lr {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+a {
+  text-decoration: none;
+}
+.lineR-center {
+  width: 30px;
+  height: 4px;
+  background-color: #e6262a;
+  margin: 0 auto 15px;
+}
+.lineR-left {
+  width: 30px;
+  height: 4px;
+  background-color: #e6262a;
+  margin: 0 0 15px;
+}
+.fw-semibold {
+  font-weight: 600;
+}
+.fw-medium {
+  font-weight: 500;
+}
+.borderR-25 {
+  border-radius: 25px;
+}
+.borderR-6 {
+  border-radius: 6px;
+}
+.btn-w130 {
+  width: 130px;
+}
+.form-label {
+  font-weight: 600;
+}
+.scroll {
+  height: 400px;
+  overflow-y: auto;
+  float: left;
+  margin: 0 10px 2rem;
+  .content {
+  }
+  &.scroll-terms {
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #666;
+      border-radius: 20px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #ddd;
+      border-radius: 20px;
+    }
+  }
+}
+ol.listNo {
+  counter-reset: item;
+  li {
+    display: block;
+    margin-bottom: 10px;
+    &:before {
+      content: counters(item, ".") ".";
+      counter-increment: item;
+      padding-right: 10px;
+      margin-left: -20px;
+      font-weight: 700;
+    }
+    ol {
+      padding-left: 30px;
+      li {
+        display: block;
+        &:before {
+          content: counters(item, ".") ".";
+          counter-increment: item;
+          padding-right: 10px;
+          margin-left: -30px;
+        }
+        ol {
+          padding-left: 30px;
+          li {
+            display: block;
+            &:before {
+              content: counters(item, ".") ".";
+              counter-increment: item;
+              padding-right: 10px;
+              margin-left: -40px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.account-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.container-fluid {
+  &.cf-50 {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+.fs-12 {
+  font-size: 12px;
+}
+.lineL-red {
+  width: 60px;
+  height: 5px;
+  background-color: #e6262a;
+}
+.text-justify {
+  text-align: justify;
+}
+/*-----------------------------------------
+    TAB style
+-------------------------------------------*/
+#account-tab {
+  .nav-link {
+    color: #012d6b;
+    font-weight: 600;
+    &.active {
+      background-color: #012d6b;
+      color: #fff;
+      border-radius: 0;
+    }
+  }
+}
+.flBtnCntr {
+  display: inline-flex;
+  position: fixed;
+  z-index: 99;
+  bottom: 50px;
+  right: 50px;
+  .flBtnBox {
+    // outline: 0;
+    // border: 0;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    &.big {
+      background: #e6262a;
+      color: white;
+      font-size: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 0;
+      height: 0;
+      padding: 70px;
+      text-decoration: none;
+      animation-play-state: paused;
+      border: 0;
+      border-radius: 50%;
+      animation-name: pulse-border;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-out;
+      animation-iteration-count: infinite;
+      &:hover {
+        box-shadow: 0 0 10px rgb(196, 27, 30);
+      }
+      &:before {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        padding: 0px;
+        border: 5px solid #e6262a;
+        opacity: 0.75;
+        animation-name: pulse-border;
+        animation-duration: 1.5s;
+        animation-timing-function: ease-out;
+        animation-iteration-count: infinite;
+      }
+    }
+    &.small {
+      animation: showBtn 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      transform: scale(0);
+      background-color: #fff;
+      border: 2px solid #012d6b;
+      color: #012d6b;
+      margin: 0 5px;
+      font-size: 36px;
+      line-height: 36px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      height: 70px;
+      width: 70px;
+      &:nth-child(1) {
+        animation-delay: 400ms;
+        background-color: #4bc013;
+        border: 2px solid #4bc013;
+      }
+      &:nth-child(2) {
+        animation-delay: 200ms;
+      }
+      &:nth-child(3) {
+        animation-delay: 100ms;
+      }
+      &:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+}
+@keyframes pulse-border {
+  0% {
+    padding: 40px;
+    opacity: 1;
+  }
+  75% {
+    padding: 60px;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes showBtn {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.flBtns {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  bottom: 0;
+  display: none;
+  padding: 0 5px;
+  align-items: center;
+}
+.flBtnCntr:hover .flBtns {
+  display: inline-flex;
+}
+/*-----------------------------------------
+    TABLE style
+-------------------------------------------*/
+.badge {
+  &.bg-primary {
+    background-color: #4b7cc1 !important;
+  }
+  &.bg-success {
+    background-color: #4bc013 !important;
+  }
+  &.bg-danger {
+    background-color: #e6262a !important;
+  }
+}
+#historyBook td,
+#historyBook th {
+  line-height: 1;
+}
+div.dataTables_wrapper div.dataTables_length select {
+  width: 80px !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0em 0em !important;
+}
+/*-----------------------------------------
+    COLOR style
+-------------------------------------------*/
+.text-navy {
+  color: #012d6b;
+}
+.text-red {
+  color: #e6262a;
+}
+.text-green {
+  color: #7fc013;
+}
+.fs-9 {
+  font-size: 9rem;
+}
+/*-----------------------------------------
+    BUTTON style
+-------------------------------------------*/
+.btn-navy {
+  color: white;
+  background-color: #012d6b;
+  &:hover {
+    background-color: #001e48;
+    color: white;
+  }
+}
+.btn-outline-navy {
+  color: #012d6b;
+  background-color: #fff;
+  border-color: #012d6b;
+  &:hover {
+    background-color: #012d6b;
+    color: white;
+  }
+}
+.btn-red {
+  color: white;
+  background-color: #e6262a;
+  &:hover {
+    background-color: #b70b0e;
+    color: white;
+  }
+}
+/*-----------------------------------------
+    BG style
+-------------------------------------------*/
+.bg-login {
+  background-image: url(../images/image_png1920.png);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: cover;
+}
+.bg-navy {
+  background-color: #012d6b;
+}
+.bg-home-section2 {
+  background-image: linear-gradient(
+      180deg,
+      rgba(1, 45, 107, 0.9) 0%,
+      rgba(0, 23, 56, 0.9) 100%
+    ),
+    url(../images/bg-h-s.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+/*-----------------------------------------
+    NAVBAR style
+-------------------------------------------*/
+#menu-top {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(1, 45, 107, 1);
+}
+.navbar-light .navbar-nav .nav-link:hover {
+  color: rgba(1, 45, 107, 0.8);
+}
+.navbar-light .navbar-nav .nav-item.active .nav-link {
+  color: rgba(230, 38, 42, 1);
+  font-weight: 600;
+}
+#head-top .nav-link {
+  color: rgba(255, 255, 255, 1);
+  font-size: 12px;
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+/*-----------------------------------------
+    Footer style
+-------------------------------------------*/
+#footer {
+  border-top: 5px solid #012d6b;
+}
+#footer-nav .nav-link {
+  color: rgba(1, 45, 107, 1);
+  &:hover {
+    color: rgba(1, 45, 107, 0.8);
+  }
+}
+/*-----------------------------------------
+    Form style
+-------------------------------------------*/
+.box-location {
+  position: relative;
+  input[type="text"] {
+    padding-left: 35px;
+  }
+  .icon-input {
+    float: left;
+    margin-left: 10px;
+    margin-top: -28px;
+    position: relative;
+    z-index: 2;
+    font-size: 1.3rem;
+    color: #012d6b;
+  }
+}
+.box-password {
+  position: relative;
+  .field-icon {
+    float: right;
+    margin-right: 10px;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+  }
+  #password-field {
+    padding-right: 40px;
+  }
+}
+.plusminus {
+  display: inline-block;
+  position: relative;
+  font-size: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  width: 44px;
+  height: 132px;
+  button {
+    display: block;
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #012d6b;
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    font-family: bonds, sans-serif;
+    cursor: pointer;
+    -moz-transition: color 200ms;
+    -o-transition: color 200ms;
+    -webkit-transition: color 200ms;
+    transition: color 200ms;
+    &:focus,
+    &:hover {
+      outline: none;
+      background: #001e48;
+    }
+    &:disabled {
+      background: #999;
+      color: #ccc;
+      cursor: default;
+    }
+    &:first-child {
+      top: 0px;
+      border-radius: 6px 0 0 6px;
+      &:before {
+        content: "-";
+      }
+    }
+    &:last-child {
+      top: 0px;
+      border-radius: 0 6px 6px 0;
+      &:before {
+        content: "+";
+      }
+    }
+  }
+  input[type="number"] {
+    position: absolute;
+    width: calc(100% - 76px);
+    height: 38px;
+    top: 38px;
+    margin: 0;
+    border: 0;
+    font-size: 1rem;
+    font-weight: normal;
+    text-align: center;
+    -moz-appearance: textfield;
+    border: 1px solid #ced4da;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  &.horiz {
+    width: 100%;
+    height: 38px;
+    &:after {
+      bottom: 0;
+    }
+    button {
+      &:first-child {
+        left: 0;
+      }
+      &:last-child {
+        right: 0;
+      }
+    }
+    input[type="number"] {
+      position: absolute;
+      top: 0;
+      left: 38px;
+    }
+  }
+}
+/*==================================
+  Pagination style
+==================================*/
+.pagination {
+  margin: 0px 0 0;
+  font-size: 0;
+  text-align: center;
+  align-items: baseline;
+  a {
+    text-decoration: none;
+    color: #012d6b;
+    display: inline-flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #012d6b;
+    padding: 5px 5px;
+    font-size: 14px;
+    line-height: 14px;
+    width: 30px;
+    height: 30px;
+    &:hover {
+      text-decoration: none;
+      background: #ddd;
+    }
+  }
+  ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+  }
+  li {
+    display: inline-block;
+    margin: 0 2.5px;
+
+    &.active {
+      a {
+        background: #012d6b;
+        color: #fff;
+
+        &:hover {
+          text-decoration: none;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  .prev,
+  .next {
+    color: #000;
+    border: 0;
+    &.disabled {
+      cursor: default;
+      color: #888;
+
+      &:hover {
+        cursor: default;
+        text-decoration: none;
+        background-color: #fff;
+      }
+    }
+  }
+  .prev {
+    margin-right: 2.5px;
+  }
+  .next {
+    margin-left: 2.5px;
+  }
+}
+
+///////// END: For demo only
+
+@mixin ellipsis($before: true) {
+  content: "\2026";
+  font-size: 24px;
+  display: inline-block;
+  @if ($before) {
+    margin-right: 2.5px;
+  } @else {
+    margin-left: 2.5px;
+  }
+}
+
+// Too much to override, just do the difference
+@media (max-width: 767px) {
+  .pagination li {
+    &:first-child,
+    &.active,
+    &.active-sibling:nth-last-child(2), // Show second to last child if the last one is active
+    &:last-child {
+      display: inline-block !important;
+    }
+
+    $how-many-on-ends: 3; // 1,2,3,...,10 || 1,...,8,9,10
+    // There are >= 5 pages
+    &:first-child:nth-last-child(n + 6) {
+      & ~ li {
+        // Start out with all siblings hidden
+        display: none;
+
+        // Show the last children in the list by default
+        &:nth-last-child(-n + #{$how-many-on-ends}) {
+          display: inline-block;
+        }
+
+        // The child at the beginning of the last group shows ellipsis for the group
+        &:nth-last-child(#{$how-many-on-ends}) {
+          &:before {
+            @include ellipsis(true);
+          }
+        }
+
+        // The very beginning elements do not need to show ellipsis
+        // The very end elements do not need to show ellipsis
+      }
+
+      &.active,
+      & ~ li.active {
+        // Show ellipsis before and after the active element
+        &:before {
+          @include ellipsis(true);
+        }
+        &:after {
+          @include ellipsis(false);
+        }
+
+        // If the active element is in the first or last group, don't show ellipsis (siblings will take care of it)
+        &:nth-child(-n + #{$how-many-on-ends - 1}),
+        &:nth-last-child(-n + #{$how-many-on-ends - 1}) {
+          &:before,
+          &:after {
+            display: none;
+          }
+        }
+
+        // Hide the last group if "active" comes before them
+        & ~ li:nth-last-child(-n + #{$how-many-on-ends}) {
+          display: none;
+        }
+
+        // Show the first group together if "active" comes before them
+        & ~ li:nth-child(-n + #{$how-many-on-ends}) {
+          display: inline-block;
+        }
+
+        // If "active" is before the last member in the group, don't show ellipsis
+        & ~ li:nth-child(-n + #{$how-many-on-ends - 1}) {
+          &:after {
+            display: none;
+          }
+        }
+
+        // The child at the end of the first group shows ellipsis for the group
+        & ~ li:nth-child(#{$how-many-on-ends}) {
+          &:after {
+            @include ellipsis(false);
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .pagination li {
+    &:first-child,
+    &.active-sibling,
+    &.active,
+    &.active + li,
+    &:last-child {
+      display: inline-block !important;
+    }
+
+    // There are >= 7 pages
+    &:first-child:nth-last-child(n + 8) {
+      $how-many-on-ends: 5; // 1,2,3,4,5,...,10 || 1,...6,7,8,9,10
+
+      & ~ li {
+        // Start out with all siblings hidden
+        display: none;
+
+        // Show ellipsis before the previous one
+        &.active-sibling:before {
+          @include ellipsis(true);
+        }
+        // Show ellipsis after the next one
+        &.active + li:after {
+          @include ellipsis(false);
+        }
+
+        // Show the last children in the list by default
+        &:nth-last-child(-n + #{$how-many-on-ends}) {
+          display: inline-block;
+        }
+
+        // The child at the beginning of the last group shows ellipsis for the group
+        &:nth-last-child(#{$how-many-on-ends}) {
+          &:before {
+            @include ellipsis(true);
+          }
+        }
+
+        // The very beginning elements do not need to show ellipsis
+        &:nth-child(-n+#{$how-many-on-ends - 3}),
+        // The very end elements do not need to show ellipsis
+        &:nth-last-child(-n+#{$how-many-on-ends - 3}),
+        // Even if it's a sibling to "active"
+        &.active-sibling:nth-last-child(-n+#{$how-many-on-ends - 1}) {
+          &:before,
+          &:after {
+            display: none !important;
+          }
+        }
+      }
+
+      &.active,
+      & ~ li.active {
+        // Hide the last group if "active" comes before them
+        & ~ li:nth-last-child(-n + #{$how-many-on-ends}) {
+          display: none;
+
+          // If there is overlap, the element will show, but hide it's ellipsis
+          &:before {
+            display: none;
+          }
+        }
+
+        // Show the first group together if "active" comes before them
+        & ~ li:nth-child(-n + #{$how-many-on-ends}) {
+          display: inline-block;
+        }
+
+        // If "active" is before the last member in the group, don't show ellipsis
+        & ~ li:nth-child(-n + #{$how-many-on-ends - 1}) {
+          &:after {
+            display: none;
+          }
+        }
+
+        // The child at the end of the first group shows ellipsis for the group
+        & ~ li:nth-child(#{$how-many-on-ends}) {
+          &:after {
+            @include ellipsis(false);
+          }
+        }
+
+        // "active" should never show ellipsis
+        &:before,
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+/*===================================
+  Animate style
+===================================*/
+.animation-wrapper {
+  position: relative;
+  height: 100px;
+  .water {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    ul {
+      &.waves {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        background-repeat: repeat-x;
+        // &.wave-one {
+        //   animation: wave 8.7s linear infinite;
+        //   -webkit-animation-fill-mode: forwards;
+        //   -o-animation-fill-mode: forwards;
+        //   animation-fill-mode: forwards;
+        //   top: 80px;
+        //   height: 50px;
+        //   left: 0;
+        //   position: absolute;
+        //   right: 0;
+        //   z-index: 10;
+        // }
+        // &.wave-two {
+        //   -webkit-animation-fill-mode: forwards;
+        //   -o-animation-fill-mode: forwards;
+        //   animation-fill-mode: forwards;
+        //   animation: wave 50s linear infinite;
+        //   top: -80px;
+        //   height: 84px;
+        //   left: 0;
+        //   position: absolute;
+        //   right: 0;
+        //   z-index: 4;
+        // }
+        &.wave-three {
+          -webkit-animation-fill-mode: forwards;
+          -o-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+          animation: wave 25s linear infinite;
+          top: 5px;
+          height: 78px;
+          left: 0;
+          position: absolute;
+          right: 0;
+          z-index: 8;
+        }
+        &.wave-four {
+          -webkit-animation-fill-mode: forwards;
+          -o-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+          animation: wave 25s linear infinite;
+          top: -10px;
+          height: 78px;
+          left: 0;
+          position: absolute;
+          right: 0;
+          z-index: 0;
+        }
+      }
+    }
+  }
+
+  .boat {
+    animation: boat 3s linear infinite;
+    background-repeat: no-repeat;
+    top: 0px;
+    height: 145px;
+    left: 50px;
+    position: absolute;
+    width: 250px;
+    z-index: 5;
+  }
+  .cloud {
+    animation: cloud 30s linear infinite;
+    background-repeat: no-repeat;
+    height: 165px;
+    top: 10px;
+    left: 0;
+    position: absolute;
+    width: 297px;
+  }
+
+  .cloud2 {
+    animation: cloud 25s linear infinite;
+    background-repeat: no-repeat;
+    top: 0px;
+    height: 165px;
+    left: 140px;
+    position: absolute;
+    width: 297px;
+  }
+}
+
+/*Animation Keyframe Section*/
+
+@keyframes wave {
+  0% {
+    background-position: 1920px 0;
+  }
+
+  100% {
+    background-position: 0px 0;
+  }
+}
+
+@keyframes boat {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(-3deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+@keyframes cloud {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+/*==================================
+  Slide
+==================================*/
+#banner-slide {
+  .item {
+    img {
+      height: 756px;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+  .owl-prev {
+    left: 0%;
+  }
+  .owl-next {
+    right: 0%;
+  }
+  .owl-prev,
+  .owl-next {
+    i {
+      transform: scale(2);
+      color: #fff;
+    }
+  }
+  .owl-dots {
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    padding-left: 0px;
+    width: 100% !important;
+    margin-top: -2.5%;
+    z-index: 0;
+    position: absolute;
+    .owl-dot {
+      &.active {
+        span {
+          background: rgba(230, 38, 42, 1);
+        }
+      }
+    }
+  }
+}
+#clientSlide {
+  .item {
+    img {
+      max-width: 100%;
+      height: 100px;
+      object-fit: contain;
+    }
+  }
+}
+button:focus {
+  outline: 0;
+}
+
+.owl-carousel-stacked {
+  margin-top: 20px;
+  img {
+    height: 450px;
+  }
+  .owl-item.center {
+    transform: scale(1) !important;
+    -webkit-box-shadow: 0px 0px 55px -12px rgba(0, 0, 0, 0.74);
+    -moz-box-shadow: 0px 0px 55px -12px rgba(0, 0, 0, 0.74);
+    box-shadow: 0px 0px 55px -12px rgba(0, 0, 0, 0.74);
+  }
+  .owl-item {
+    transition: all 0.5s;
+    transform: scale(0.7) !important;
+  }
+  .left-of-center {
+    transform: scale(0.7) translateX(50%) !important;
+  }
+  .right-of-center {
+    transform: scale(0.7) translateX(-50%) !important;
+  }
+  .center {
+    z-index: 2;
+  }
+  .owl-carousel {
+    position: relative;
+  }
+  .owl-prev,
+  .owl-next {
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    cursor: pointer;
+    color: #ddd !important;
+    i {
+      transform: scale(1);
+    }
+  }
+  .owl-prev {
+    left: 0;
+  }
+  .owl-next {
+    right: 0;
+  }
+  .owl-dots {
+    text-align: center;
+    .owl-dot {
+      cursor: pointer;
+      background-color: #ddd !important;
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      margin: 10px 2px;
+      border-radius: 100%;
+      &.active {
+        background-color: #d2181f !important;
+      }
+    }
+  }
+  .owl-stage-outer {
+    padding: 50px 0;
+  }
+}
+
+/*==================================
+    TIMELINE
+==================================*/
+.timeline {
+  line-height: 1.4em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  h1 {
+    line-height: inherit;
+  }
+  h2 {
+    line-height: inherit;
+  }
+  h3 {
+    line-height: inherit;
+  }
+  h4 {
+    line-height: inherit;
+  }
+  h5 {
+    line-height: inherit;
+  }
+  h6 {
+    line-height: inherit;
+  }
+}
+.timeline-item {
+  padding-left: 40px;
+  position: relative;
+  &:last-child {
+    padding-bottom: 0;
+    .timeline-marker {
+      &:after {
+        content: none;
+      }
+    }
+  }
+  &:not(.period) {
+    &:hover {
+      .timeline-marker {
+        &:before {
+          background: transparent;
+          border: 3px solid #ff6b6b;
+        }
+        &.dot-none {
+          &:before {
+            height: 0px;
+            top: 4px;
+            left: 0;
+            width: 0px;
+            border: 0;
+          }
+        }
+      }
+    }
+  }
+  &.img {
+    .timeline-marker:after {
+      content: "";
+      width: 1px;
+      background: #ccd5db;
+      display: block;
+      position: absolute;
+      top: 36px;
+      bottom: 0;
+      left: 6px;
+    }
+  }
+}
+.timeline-info {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: right;
+  span {
+    &.fs-12 {
+      text-transform: capitalize;
+      font-weight: 400;
+    }
+  }
+}
+.timeline-marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 7px;
+  width: 15px;
+  &.dot-none {
+    &:before {
+      height: 0px;
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 0px;
+      border: 0;
+    }
+    i {
+      margin-left: -5px;
+      &.bx-xs {
+        margin-left: 0px;
+      }
+    }
+    img {
+      margin-left: -9px;
+    }
+  }
+  &:before {
+    background: #ff6b6b;
+    border: 3px solid transparent;
+    border-radius: 100%;
+    content: "";
+    display: block;
+    height: 15px;
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 15px;
+    transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
+  }
+  &:after {
+    content: "";
+    width: 1px;
+    background: #ccd5db;
+    display: block;
+    position: absolute;
+    top: 24px;
+    bottom: 0;
+    left: 7px;
+  }
+}
+.timeline-content {
+  padding-bottom: 40px;
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+.period {
+  padding: 0;
+  .timeline-info {
+    display: none;
+  }
+  .timeline-marker {
+    &:before {
+      background: transparent;
+      content: "";
+      width: 15px;
+      height: auto;
+      border: none;
+      border-radius: 0;
+      top: 0;
+      bottom: 30px;
+      position: absolute;
+      border-top: 3px solid #ccd5db;
+      border-bottom: 3px solid #ccd5db;
+    }
+    &:after {
+      content: "";
+      height: 32px;
+      top: auto;
+    }
+  }
+  .timeline-content {
+    padding: 40px 0 70px;
+  }
+  .timeline-title {
+    margin: 0;
+  }
+}
+.marker-outline {
+  .timeline-marker {
+    &:before {
+      background: transparent;
+      border-color: #ff6b6b;
+    }
+  }
+  .timeline-item {
+    &:hover {
+      .timeline-marker {
+        &:before {
+          background: #ff6b6b;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .timeline-split {
+    .timeline {
+      display: table;
+    }
+    .timeline-item {
+      display: table-row;
+      padding: 0;
+    }
+    .timeline-info {
+      display: table-cell;
+      vertical-align: top;
+      padding-right: 30px;
+    }
+    .timeline-marker {
+      display: table-cell;
+      vertical-align: top;
+      position: relative;
+    }
+    .timeline-content {
+      display: table-cell;
+      vertical-align: top;
+      padding-left: 30px;
+    }
+    .period {
+      .timeline-info {
+        display: table-cell;
+        vertical-align: top;
+      }
+      .timeline-title {
+        position: relative;
+        left: -45px;
+      }
+    }
+  }
+}
+
+/*-----------------------------------------
+    BOX, CARD style
+-------------------------------------------*/
+.box-white {
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.box-login-left,
+.box-login-right {
+  padding: 5rem 3rem;
+}
+.box-service {
+  position: relative;
+  .box-img {
+    display: block;
+    position: relative;
+    max-width: 100%;
+    padding: 60% 0 0 0;
+    overflow: hidden;
+    .hover-container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.25s, background 0.25s;
+      background: rgba(0, 0, 0, 0.4);
+      .icon {
+        display: block;
+        width: 4rem;
+        i {
+          color: #ffffff;
+          position: relative;
+          z-index: 2;
+          font-size: 3.5rem;
+        }
+      }
+    }
+    .img-bg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s;
+    }
+  }
+  .service-title {
+    border-bottom: 3px solid #e6262a;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    &::after {
+      background-color: #e6262a;
+      width: 0;
+      height: 100%;
+      top: 0;
+      left: 0;
+      content: "";
+      position: absolute;
+      transition: width 0.5s linear;
+      z-index: 0;
+    }
+    .span-text {
+      background-color: transparent;
+      color: #000;
+      padding: 0.75rem 1rem 0.5rem;
+      font-size: 18px;
+      font-weight: 600;
+      z-index: 2;
+      position: relative;
+    }
+    .span-arrow {
+      background-color: #e6262a;
+      color: #fff;
+      padding: 0.75rem 1rem 0.5rem;
+      z-index: 1;
+      position: relative;
+    }
+  }
+  &:hover {
+    .img-bg {
+      transform: scale(1.1);
+    }
+    .hover-container {
+      opacity: 1;
+    }
+    .service-title {
+      .span-text {
+        color: #fff;
+      }
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
+/*---------------------------
+  LIST STYLE
+-------------------------------*/
+ol#ol-home {
+  list-style-type: none;
+  li {
+    counter-increment: step-counter;
+    margin-bottom: 20px;
+    font-size: 18px;
+    &:before {
+      content: counter(step-counter);
+      margin-right: 20px;
+      font-size: 18px;
+      background: white;
+      color: #e6262a;
+      font-weight: normal;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      display: inline-block;
+      padding-right: 0;
+    }
+  }
+}
+/*-----------------------------------------
+    RESPONSIVE
+-------------------------------------------*/
+@media screen and (max-width: 767px) {
+  .container-fluid.cf-50 {
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+  }
+  .account-img {
+    width: 50px;
+    height: 50px;
+  }
+  #footer-nav {
+    flex-direction: column;
+    .nav-link {
+      display: block;
+      padding: 0.5rem 1rem 0.5rem 0;
+    }
+  }
+  .timeline-info {
+    text-align: left;
+  }
+  #banner-slide .item img {
+    height: auto;
+    -o-object-fit: initial;
+    object-fit: initial;
+    width: 100%;
+    max-width: 100%;
+  }
+  .owl-carousel-stacked img {
+    height: 200px;
+  }
+  .flBtnCntr {
+    z-index: 99;
+    bottom: 50px;
+    right: 50px;
+    .flBtnBox {
+      border-radius: 50%;
+      color: #fff;
+      cursor: pointer;
+      &.big {
+        font-size: 20px;
+        display: flex;
+        width: 0;
+        height: 0;
+        padding: 100px;
+        &:hover {
+          box-shadow: 0 0 10px rgb(196, 27, 30);
+        }
+      }
+      &.small {
+        margin: 0 5px;
+        font-size: 30px;
+        line-height: 30px;
+        height: 50px;
+        width: 50px;
+      }
+    }
+  }
+  @keyframes pulse-border {
+    0% {
+      padding: 20px;
+      opacity: 1;
+    }
+    75% {
+      padding: 40px;
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  .flBtnCntr:hover .flBtns {
+    display: inline-flex;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 374px) {
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+}
+@media screen and (min-width: 414px) and (max-width: 424px) {
+}
+@media screen and (min-width: 425px) and (max-width: 767px) {
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .container-fluid.cf-50 {
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+}
+@media screen and (min-width: 1280px) and (max-width: 1359px) {
+}
+@media screen and (min-width: 1360px) and (max-width: 1439px) {
+}
+@media screen and (min-width: 1440px) and (max-width: 1599px) {
+}
+@media screen and (min-width: 1600px) and (max-width: 1919px) {
+}
+@media screen and (min-width: 1920px) and (max-width: 2559px) {
+}
+@media screen and (min-width: 2560px) {
+}
