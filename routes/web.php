@@ -62,13 +62,28 @@ Route::get('/backend/logout', 'LoginController@logout')->name('backoffice.logout
 Route::group(['middleware' => ['web', 'auth']], function () {
     ////////////////////<!** HOME **!>////////////////////
     //** BANNER **//
-    Route::get('/backend/home/banner', 'HomeBannerController@index'); // get all Banner data
-    Route::get('/backend/home/banner/create', 'HomeBannerController@create');  // create Banner view
-    Route::post('/backend/home/banner/store', 'HomeBannerController@store')->name('banner.store'); // store Banner data
-    Route::get('/backend/home/banner/edit/{id}', 'HomeBannerController@edit');   // edit Banner view
-    Route::put('/backend/home/banner/update/{id}', 'HomeBannerController@update'); //update Banner data
-    Route::delete('/backend/home/banner/delete/{id}', 'HomeBannerController@destroy'); //delete Banner data
+    Route::get('/backend/home/banner', 'Backend\HomeBannerController@index'); // get all Banner data
+    Route::get('/backend/home/banner/create', 'Backend\HomeBannerController@create');  // create Banner view
+    Route::post('/backend/home/banner/store', 'Backend\HomeBannerController@store')->name('banner.store'); // store Banner data
+    Route::get('/backend/home/banner/edit/{id}', 'Backend\HomeBannerController@edit');   // edit Banner view
+    Route::put('/backend/home/banner/update/{id}', 'Backend\HomeBannerController@update'); //update Banner data
+    Route::delete('/backend/home/banner/delete/{id}', 'Backend\HomeBannerController@destroy'); //delete Banner data
     //** END BANNER **//
+
+    //** SERVICES **//
+    Route::get('/backend/home/services', 'Backend\ServicesController@index'); // get all Banner data
+    Route::get('/backend/home/services/create', 'Backend\ServicesController@create');  // create Banner view
+    Route::post('/backend/home/services/store', 'Backend\ServicesController@store')->name('banner.store'); // store Banner data
+    Route::get('/backend/home/services/edit/{id}', 'Backend\ServicesController@edit');   // edit Banner view
+    Route::put('/backend/home/services/update/{id}', 'Backend\ServicesController@update'); //update Banner data
+    Route::delete('/backend/home/services/delete/{id}', 'Backend\ServicesController@destroy'); //delete Banner data
+    //** END SERVICES **//
+
+
+
+
+
+
     ////////////////////<!** END HOME **!>////////////////////
 });
 
