@@ -71,12 +71,12 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     //** END BANNER **//
 
     //** SERVICES **//
-    Route::get('/backend/home/services', 'Backend\ServicesController@index'); // get all Banner data
-    Route::get('/backend/home/services/create', 'Backend\ServicesController@create');  // create Banner view
-    Route::post('/backend/home/services/store', 'Backend\ServicesController@store')->name('banner.store'); // store Banner data
-    Route::get('/backend/home/services/edit/{id}', 'Backend\ServicesController@edit');   // edit Banner view
-    Route::put('/backend/home/services/update/{id}', 'Backend\ServicesController@update'); //update Banner data
-    Route::delete('/backend/home/services/delete/{id}', 'Backend\ServicesController@destroy'); //delete Banner data
+    Route::get('/backend/services', 'Backend\ServicesController@index'); // get all Banner data
+    Route::get('/backend/services/create', 'Backend\ServicesController@create');  // create Banner view
+    Route::post('/backend/services/store', 'Backend\ServicesController@store')->name('services.store'); // store Banner data
+    Route::get('/backend/services/edit/{id}', 'Backend\ServicesController@edit');   // edit Banner view
+    Route::put('/backend/services/update/{id}', 'Backend\ServicesController@update'); //update Banner data
+    Route::delete('/backend/services/delete/{id}', 'Backend\ServicesController@destroy'); //delete Banner data
     //** END SERVICES **//
 
 

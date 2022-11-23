@@ -24,8 +24,8 @@
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
-                                    <a class="btn btn-success" href="#" onclick="create_banner()"><i class="fa fa-plus"
-                                            title="Create"></i> Add</a>
+                                    <a class="btn btn-success" href="#" onclick="create_banner()"><i
+                                            class="fa fa-plus" title="Create"></i> Add</a>
                                 </div><br>
                             </div>
 
@@ -37,9 +37,11 @@
                                                 <th scope="col" class="text-center">#</th>
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Banner
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-check"></i> Status
+                                                <th scope="col" class="text-center"><i class="fa fa-check"></i>
+                                                    Status
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools</th>
+                                                <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -51,14 +53,14 @@
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
                                                 <td class="text-center">
-                                                    <img src="{{ ($val->img_banner != '')? asset('backend/assets/img/banner/'.$val->img_banner) : asset('backend/assets/img/banner/nopic.jpg') }}"
+                                                    <img src="{{ $val->img_banner != '' ? asset('backend/assets/img/banner/' . $val->img_banner) : asset('backend/assets/img/banner/nopic.jpg') }}"
                                                         class="img-slide" width="100">
                                                 </td>
                                                 <td class="text-center">
-                                                    @if($val->status == 1)
-                                                    <span class="text-success">Active</span>
+                                                    @if ($val->status == 1)
+                                                        <span class="text-success">Active</span>
                                                     @else
-                                                    <span class="text-danger">Deactive</span>
+                                                        <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
@@ -119,7 +121,7 @@
                         data: {
                             '_token': "{{ csrf_token() }}"
                         },
-                        success: function (data) {
+                        success: function(data) {
                             console.log(data);
                             location.reload();
                         }
@@ -127,7 +129,6 @@
                 }
             });
         }
-
     </script>
 </body>
 
