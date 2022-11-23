@@ -8,8 +8,8 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Home</li>
-            <li class="<?php echo isset($active[0]) ? $active[0] : ''; ?>"><a class="nav-link" href="{{ url('/backend/home/banner') }}"><i
-                        class="fas fa-bullhorn"></i> <span>Slide
+            <li class="<?php echo isset($active[0]) ? $active[0] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/home/banner') }}"><i class="fas fa-bullhorn"></i> <span>Slide
                         Banner</span></a>
             </li>
             <li class="<?php echo isset($active[1]) ? $active[1] : ''; ?>"><a class="nav-link"
@@ -18,8 +18,8 @@
             </li>
 
             <li class="menu-header">Service</li>
-            <li class="<?php echo isset($active[6]) ? $active[0] : ''; ?>"><a class="nav-link" href="{{ url('/backend/services') }}"><i
-                        class="fas fa-wrench"></i>
+            <li class="<?php echo isset($active[6]) ? $active[6] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/services') }}"><i class="fas fa-wrench"></i>
                     <span>Service </span></a>
             </li>
 

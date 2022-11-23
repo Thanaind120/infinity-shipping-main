@@ -7,8 +7,16 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link rel="stylesheet"
         href="{{ asset('backend/assets/vendors/bootstrap-fileupload/bootstrap-fileupload.min.css') }}" />
-    <?php $active[0] = 'active'; ?>
+    <?php $active[6] = 'active'; ?>
 </head>
+<style>
+    textarea {
+        outline: none !important;
+        border-color: #e4e6fc;
+        border-radius: 4px;
+        /* box-shadow: 0 0 10px #719ECE; */
+    }
+</style>
 
 <body>
     <div id="app">
@@ -46,20 +54,21 @@
                                 @if (!isset($services))
                                     <label for="" class="col-md-4 col-form-label mt-3  ">Service Name :</label>
                                     <div class="col-md-3">
-                                        <input type="text" class="form-control" name="service_name" id="">
+                                        <input type="text" class="form-control" name="service_name" id=""
+                                            required>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="" class="col-md-4 col-form-label">Description :</label>
-                                            <textarea name="service_description" class="form-control  mx-3" id="" rows="8">
+                                            <textarea name="service_description" class="  mx-3" id="" cols="100" rows="10">
 
-                                            </textarea>
+                                            </textarea required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="" class="col-md-4 col-form-label">Image No. 1 :</label>
                                             <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                 class="form-control" id="service_images1" name="service_images1"
-                                                required>
+                                                >
                                             <div class="d-flex justify-content-center">
                                                 <img src="" id="images1" width="40%"
                                                     class="mt-3 mb-3 d-flex">
@@ -69,7 +78,7 @@
                                             <label for="" class="col-md-4 col-form-label">Image No. 2 :</label>
                                             <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                 class="form-control" id="service_images2" name="service_images2"
-                                                required>
+                                                >
                                             <div class="d-flex justify-content-center">
                                                 <img src="" id="images2" width="40%"
                                                     class="mt-3 mb-3 d-flex">
@@ -77,8 +86,8 @@
 
                                         </div>
                                     </div>
-                                @else
-                                    <!-- End : form insert -->
+@else
+<!-- End : form insert -->
                                     <!-- form update -->
                                     <label for="" class="col-md-4 col-form-label mt-3  ">Service Name :</label>
                                     <div class="col-md-3">
@@ -88,7 +97,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="" class="col-md-4 col-form-label">Description :</label>
-                                            <textarea name="service_description" class="form-control  mx-3" id="" rows="3">{{ $services->service_description }}</textarea>
+                                            <textarea name="service_description" class=" mx-3" id="" cols="100" rows="10">{{ $services->service_description }}</textarea>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="" class="col-md-4 col-form-label">Image No. 1 :</label>
@@ -100,7 +109,8 @@
                                             </div>
 
                                             <hr>
-                                            <label for="" class="col-md-4 col-form-label">Image No. 2 :</label>
+                                            <label for="" class="col-md-4 col-form-label">Image No. 2
+                                                :</label>
                                             <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                 class="form-control" id="service_images2" name="service_images2">
                                             <div class="d-flex justify-content-center">
