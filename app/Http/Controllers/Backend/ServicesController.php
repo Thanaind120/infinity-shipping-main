@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\HomeBannerModel;
 use App\Models\Services;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,11 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        dd('test');
+        // dd('test');
+        $banner = HomeBannerModel::orderBy('id', 'DESC')->get();
+        return view("layouts/backend/banner/index", [
+            'banner' =>  $banner,
+        ]);
     }
 
     /**

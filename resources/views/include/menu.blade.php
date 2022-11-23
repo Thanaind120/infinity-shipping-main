@@ -12,7 +12,8 @@
                         class="fas fa-bullhorn"></i> <span>Slide Banner</span></a></li>
             <li class="<?php echo isset($active[1]) ? $active[1] : ''; ?>"><a class="nav-link" href="{{ url('/backend/home/services') }}"><i
                         class="fas fa-wrench"></i>
-                    <span>Logistics Service Topics</span></a></li>
+                    <span>Logistics Service Topics</span></a>
+            </li>
 
             <li class="menu-header">inventory</li>
             <li><a class="nav-link" href="/"><i class="fas fa-users"></i> <span>ซัพพลายเออร์</span></a></li>
