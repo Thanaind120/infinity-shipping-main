@@ -44,7 +44,7 @@
                                                 <th scope="col" class="text-center"><i class="fa fa-image"></i>
                                                     Images
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-check"></i>
+                                                <th scope="col" class="text-center" width="15%"><i class="fa fa-check"></i>
                                                     Status
                                                 </th>
                                                 <th scope="col" class="text-center" width="25%"><i class="fa fa-cog"></i> Tools
