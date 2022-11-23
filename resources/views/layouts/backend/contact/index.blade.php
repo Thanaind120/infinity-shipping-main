@@ -3,7 +3,7 @@
 
 <head>
     @include('include.style')
-    <?php $active[6] = 'active'; ?>
+    <?php $active[7] = 'active'; ?>
 </head>
 
 <body>

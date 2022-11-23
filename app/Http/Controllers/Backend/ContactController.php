@@ -16,7 +16,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $services = Services::orderBy('id', 'DESC')->get();
+        return view("layouts/backend/services/index", [
+            'services' =>  $services,
+        ]);
     }
 
     /**
