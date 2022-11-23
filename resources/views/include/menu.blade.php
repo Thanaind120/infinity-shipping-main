@@ -16,14 +16,19 @@
                     href="{{ url('/backend/home/logistics-service-topics') }}"><i class="fas fa-wrench"></i>
                     <span>Logistics Service Topics</span></a>
             </li>
-
             <li class="menu-header">Service</li>
             <li class="<?php echo isset($active[6]) ? $active[6] : ''; ?>"><a class="nav-link" href="{{ url('/backend/services') }}"><i
                         class="fas fa-wrench"></i>
                     <span>Service </span></a>
             </li>
+            <li class="menu-header">Contact US</li>
+            <li class="<?php echo isset($active[7]) ? $active[7] : ''; ?>"><a class="nav-link" href="{{ url('/backend/contact') }}"><i
+                        class="fas fa-phone"></i>
+                    <span>Contact US </span></a>
+            </li>
 
             <li><a class="nav-link" href="/"><i class="fas fa-users"></i> <span>ซัพพลายเออร์</span></a></li>
         </ul>
     </aside>
+
 </div>

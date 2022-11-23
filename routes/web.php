@@ -89,6 +89,15 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::delete('/backend/services/delete/{id}', 'Backend\ServicesController@destroy'); //delete Banner data
     //** END SERVICES **//
 
+    //** CONTACT **//
+    Route::get('/backend/contact', 'Backend\ServicesController@index'); // get all Banner data
+    Route::get('/backend/contact/create', 'Backend\ServicesController@create');  // create Banner view
+    Route::post('/backend/contact/store', 'Backend\ServicesController@store')->name('contact.store'); // store Banner data
+    Route::get('/backend/contact/edit/{id}', 'Backend\ServicesController@edit');   // edit Banner view
+    Route::put('/backend/contact/update/{id}', 'Backend\ServicesController@update'); //update Banner data
+    Route::delete('/backend/contact/delete/{id}', 'Backend\ServicesController@destroy'); //delete Banner data
+    //** END CONTACT **//
+
 
 
 
