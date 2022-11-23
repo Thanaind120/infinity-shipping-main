@@ -105,6 +105,7 @@ class HomeLogisticsServiceTopicsController extends Controller
                 'content' => $request->content,
                 'updated_at' => Carbon::now()
             ]);
+            return redirect()->to('/backend/home/logistics-service-topics')->with('success', 'Save Data Success');
         }
     }
 

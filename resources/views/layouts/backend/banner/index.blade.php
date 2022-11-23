@@ -68,10 +68,12 @@
                                                         onclick="update_banner({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @if($val->status == 0)
                                                     <button class="btn btn-danger"
                                                         onclick="delete_banner({{ $val->id }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <?php
