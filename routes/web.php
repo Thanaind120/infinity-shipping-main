@@ -69,22 +69,30 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::put('/backend/home/banner/update/{id}', 'Backend\HomeBannerController@update'); //update Banner data
     Route::delete('/backend/home/banner/delete/{id}', 'Backend\HomeBannerController@destroy'); //delete Banner data
     //** END BANNER **//
-
-    //** SERVICES **//
+    //** LOGISTICS SERVICE TOPICS **//
+    Route::get('/backend/home/logistics-service-topics', 'Backend\HomeLogisticsServiceTopicsController@index'); // get all Logistics Service Topics data
+    Route::get('/backend/home/logistics-service-topics/create', 'Backend\HomeLogisticsServiceTopicsController@create');  // create Logistics Service Topics view
+    Route::post('/backend/home/logistics-service-topics/store', 'Backend\HomeLogisticsServiceTopicsController@store')->name('topics.store'); // store Logistics Service Topics data
+    Route::get('/backend/home/logistics-service-topics/edit/{id}', 'Backend\HomeLogisticsServiceTopicsController@edit');   // edit Logistics Service Topics view
+    Route::put('/backend/home/logistics-service-topics/update/{id}', 'Backend\HomeLogisticsServiceTopicsController@update'); //update Logistics Service Topics data
+    Route::delete('/backend/home/logistics-service-topics/delete/{id}', 'Backend\HomeLogisticsServiceTopicsController@destroy'); //delete Logistics Service Topics data
+    //** END LOGISTICS SERVICE TOPICS **//
+    ////////////////////<!** END HOME **!>////////////////////
+    ////////////////////<!** SERVICES **!>////////////////////
     Route::get('/backend/home/services', 'Backend\ServicesController@index'); // get all Banner data
     Route::get('/backend/home/services/create', 'Backend\ServicesController@create');  // create Banner view
-    Route::post('/backend/home/services/store', 'Backend\ServicesController@store')->name('banner.store'); // store Banner data
+    Route::post('/backend/home/services/store', 'Backend\ServicesController@store')->name('banners.store'); // store Banner data
     Route::get('/backend/home/services/edit/{id}', 'Backend\ServicesController@edit');   // edit Banner view
     Route::put('/backend/home/services/update/{id}', 'Backend\ServicesController@update'); //update Banner data
     Route::delete('/backend/home/services/delete/{id}', 'Backend\ServicesController@destroy'); //delete Banner data
-    //** END SERVICES **//
+    ////////////////////<!** END SERVICES **!>////////////////////
 
 
 
 
 
 
-    ////////////////////<!** END HOME **!>////////////////////
+    
 });
 
 //*-----------------------------------------------------------------------------------------------------------------------------------------*//
