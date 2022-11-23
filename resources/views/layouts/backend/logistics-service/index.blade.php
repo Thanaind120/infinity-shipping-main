@@ -3,7 +3,7 @@
 
 <head>
     @include('include.style')
-    <?php $active[0] = 'active'; ?>
+    <?php $active[1] = 'active'; ?>
 </head>
 
 <body>
@@ -16,18 +16,18 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Slide Banner</h1>
+                        <h1>Logistics Service Topics</h1>
                     </div>
 
                     <div class="section-body">
                         <div class="card">
-                            <div class="card-header">
+                            {{-- <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
-                                    <a class="btn btn-success" href="#" onclick="create_banner()"><i
-                                            class="fa fa-plus" title="Create"></i> Add</a>
+                                    <a class="btn btn-success" href="#" onclick="create_topics()"><i class="fa fa-plus"
+                                            title="Create"></i> Add</a>
                                 </div><br>
-                            </div>
+                            </div> --}}
 
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -35,43 +35,41 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="text-center">#</th>
-                                                <th scope="col" class="text-center"><i class="far fa-image"></i> Banner
+                                                <th scope="col" class="text-center"> Topic
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-check"></i>
-                                                    Status
+                                                <th scope="col" class="text-center"> Content
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools
+                                                <th scope="col" class="text-center"><i class="fa fa-check"></i> Status
                                                 </th>
+                                                <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                                 $i = 0;
-                                                foreach ($banner as $key=>$val){
+                                                foreach ($logistics_service_topics as $key=>$val){
                                                 $i++
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
+                                                <td class="text-center">{{ $val->topic }}</td>
+                                                <td class="text-center">{{ $val->content }}</td>
                                                 <td class="text-center">
-                                                    <img src="{{ $val->img_banner != '' ? asset('backend/assets/img/banner/' . $val->img_banner) : asset('backend/assets/img/banner/nopic.jpg') }}"
-                                                        class="img-slide" width="100">
-                                                </td>
-                                                <td class="text-center">
-                                                    @if ($val->status == 1)
-                                                        <span class="text-success">Active</span>
+                                                    @if($val->status == 1)
+                                                    <span class="text-success">Active</span>
                                                     @else
-                                                        <span class="text-danger">Deactive</span>
+                                                    <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
                                                     <button class="btn btn-warning"
-                                                        onclick="update_banner({{ $val->id }})">
+                                                        onclick="update_topics({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
-                                                    <button class="btn btn-danger"
-                                                        onclick="delete_banner({{ $val->id }})">
-                                                        <i class="fa fa-trash" title="Delete"></i> Delete
-                                                    </button>
+                                                    {{-- <button class="btn btn-danger"
+                                                        onclick="delete_topics({{ $val->id }})">
+                                                    <i class="fa fa-trash" title="Delete"></i> Delete
+                                                    </button> --}}
                                                 </td>
                                             </tr>
                                             <?php
@@ -94,17 +92,17 @@
     <script>
         $('#simpletable').dataTable();
 
-        function create_banner() {
-            var _url = "{{ url('backend/home/banner/create') }}";
+        function create_topics() {
+            var _url = "{{ url('backend/home/logistics-service-topics/create') }}";
             window.location.href = _url;
         };
 
-        function update_banner(id) {
-            var _url = "{{ url('backend/home/banner/edit') }}" + '/' + id;
+        function update_topics(id) {
+            var _url = "{{ url('backend/home/logistics-service-topics/edit') }}" + '/' + id;
             window.location.href = _url;
         };
 
-        function delete_banner(id) {
+        function delete_topics(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -117,11 +115,11 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: "{!! url('/backend/home/banner/delete/" + id + "') !!}",
+                        url: "{!! url('/backend/home/logistics-service-topics/delete/" + id + "') !!}",
                         data: {
                             '_token': "{{ csrf_token() }}"
                         },
-                        success: function(data) {
+                        success: function (data) {
                             console.log(data);
                             location.reload();
                         }
@@ -129,6 +127,7 @@
                 }
             });
         }
+
     </script>
 </body>
 

@@ -70,6 +70,16 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::delete('/backend/home/banner/delete/{id}', 'Backend\HomeBannerController@destroy'); //delete Banner data
     //** END BANNER **//
 
+    //** LOGISTICS SERVICE TOPICS **//
+    Route::get('/backend/home/logistics-service-topics', 'Backend\HomeLogisticsServiceTopicsController@index'); // get all Logistics Service Topics data
+    Route::get('/backend/home/logistics-service-topics/create', 'Backend\HomeLogisticsServiceTopicsController@create');  // create Logistics Service Topics view
+    Route::post('/backend/home/logistics-service-topics/store', 'Backend\HomeLogisticsServiceTopicsController@store')->name('topics.store'); // store Logistics Service Topics data
+    Route::get('/backend/home/logistics-service-topics/edit/{id}', 'Backend\HomeLogisticsServiceTopicsController@edit');   // edit Logistics Service Topics view
+    Route::put('/backend/home/logistics-service-topics/update/{id}', 'Backend\HomeLogisticsServiceTopicsController@update'); //update Logistics Service Topics data
+    Route::delete('/backend/home/logistics-service-topics/delete/{id}', 'Backend\HomeLogisticsServiceTopicsController@destroy'); //delete Logistics Service Topics data
+    //** END LOGISTICS SERVICE TOPICS **//
+    ////////////////////<!** END HOME **!>////////////////////
+
     //** SERVICES **//
     Route::get('/backend/services', 'Backend\ServicesController@index'); // get all Banner data
     Route::get('/backend/services/create', 'Backend\ServicesController@create');  // create Banner view
@@ -83,8 +93,6 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
 
 
-
-    ////////////////////<!** END HOME **!>////////////////////
 });
 
 //*-----------------------------------------------------------------------------------------------------------------------------------------*//
