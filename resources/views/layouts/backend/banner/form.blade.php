@@ -92,7 +92,7 @@
                                         <div class="form-group mb-0 row">
                                             <div class="col-md-6">
                                                 <a class="btn btn-secondary btn-sm waves-effect"
-                                                    href="{{ url("backend/home/banner") }}">
+                                                    href="{{ url("/backend/home/banner") }}">
                                                     <i class="fa fa-reply font-size-16 align-middle mr-1"></i> Return
                                                 </a>
                                             </div>
