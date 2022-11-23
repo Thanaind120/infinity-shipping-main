@@ -3,6 +3,7 @@
 
 <head>
     @include('include.style')
+    <?php $active[0]='active'; ?>
 </head>
 
 <body>

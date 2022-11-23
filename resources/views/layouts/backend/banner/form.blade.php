@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link rel="stylesheet"
         href="{{ asset('backend/assets/vendors/bootstrap-fileupload/bootstrap-fileupload.min.css') }}" />
+    <?php $active[0]='active'; ?>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
                                         <!-- form insert -->
                                         @if(!isset($banner))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="firstname" class="col-md-2 col-form-label">Banner :</label>
+                                            <label for="img_banner" class="col-md-2 col-form-label">Banner :</label>
                                             <div class="col-md-8">
                                                 <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                     class="form-control" id="img_banner" name="img_banner[]" multiple
@@ -54,7 +55,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="firstname" class="col-md-2 col-form-label">Banner :</label>
+                                            <label for="img_banner" class="col-md-2 col-form-label">Banner :</label>
                                             <div class="col-md-8">
                                                 <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                     class="form-control" id="img_banner" name="img_banner">
