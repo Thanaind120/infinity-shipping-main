@@ -35,7 +35,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="text-center">#</th>
-                                                <th scope="col" class="text-center"><i class="fa fa-user"></i>
+                                                <th scope="col" class="text-center" width="15%"><i class="fa fa-user"></i>
                                                     Service Name
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i>
@@ -47,7 +47,7 @@
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i>
                                                     Status
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools
+                                                <th scope="col" class="text-center" width="25%"><i class="fa fa-cog"></i> Tools
                                                 </th>
                                             </tr>
                                         </thead>
@@ -80,10 +80,12 @@
                                                         onclick="update_services({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @if ($val->status == 0)
                                                     <button class="btn btn-danger"
                                                         onclick="delete_services({{ $val->id }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <?php

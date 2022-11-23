@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-
-use App\Contact;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -16,7 +15,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $services = Services::orderBy('id', 'DESC')->get();
+        $services = Contact::orderBy('id', 'DESC')->get();
         return view("layouts/backend/services/index", [
             'services' =>  $services,
         ]);
