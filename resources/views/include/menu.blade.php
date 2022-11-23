@@ -18,7 +18,7 @@
             </li>
 
             <li class="menu-header">Service</li>
-            <li class="<?php echo isset($active[6]) ? $active[0] : ''; ?>"><a class="nav-link" href="{{ url('/backend/services') }}"><i
+            <li class="<?php echo isset($active[6]) ? $active[6] : ''; ?>"><a class="nav-link" href="{{ url('/backend/services') }}"><i
                         class="fas fa-wrench"></i>
                     <span>Service </span></a>
             </li>
