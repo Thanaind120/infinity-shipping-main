@@ -24,8 +24,8 @@
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
-                                    <a class="btn btn-success" href="#" onclick="create_banner()"><i
-                                            class="fa fa-plus" title="Create"></i> Add</a>
+                                    <a class="btn btn-success" href="#" onclick="create_banner()"><i class="fa fa-plus"
+                                            title="Create"></i> Add</a>
                                 </div><br>
                             </div>
 
@@ -58,9 +58,9 @@
                                                 </td>
                                                 <td class="text-center">
                                                     @if ($val->status == 1)
-                                                        <span class="text-success">Active</span>
+                                                    <span class="text-success">Active</span>
                                                     @else
-                                                        <span class="text-danger">Deactive</span>
+                                                    <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
@@ -88,9 +88,7 @@
             @include('include.footer')
         </div>
     </div>
-
     @include('include.script')
-
     <script>
         $('#simpletable').dataTable();
 
@@ -121,7 +119,7 @@
                         data: {
                             '_token': "{{ csrf_token() }}"
                         },
-                        success: function(data) {
+                        success: function (data) {
                             console.log(data);
                             location.reload();
                         }
@@ -129,6 +127,7 @@
                 }
             });
         }
+
     </script>
 </body>
 

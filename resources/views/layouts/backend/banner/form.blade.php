@@ -20,9 +20,9 @@
                 <section class="section">
                     <div class="section-header">
                         @if (!isset($banner))
-                            <h1 class="font-large-1">Create Slide Banner</h1>
+                        <h1 class="font-large-1">Create Slide Banner</h1>
                         @else
-                            <h1 class="font-large-1">Edit Slide Banner</h1>
+                        <h1 class="font-large-1">Edit Slide Banner</h1>
                         @endif
                     </div>
 
@@ -30,87 +30,86 @@
                         <div class="card col-8">
                             <div class="card-body p-0">
                                 @if (!isset($banner))
-                                    <form action="{{ route('banner.store') }}" enctype="multipart/form-data"
-                                        method="POST">
-                                        @csrf
-                                        <input type="hidden" name="type" value="1">
+                                <form action="{{ route('banner.store') }}" enctype="multipart/form-data" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="type" value="1">
                                     @else
-                                        <form action="{{ url('backend/home/banner/update/' . $banner->id) }}"
-                                            enctype="multipart/form-data" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="hidden" name="id" value="{{ $banner->id }}">
-                                            <input type="hidden" name="type" value="2">
-                                @endif
-                                <!-- form insert -->
-                                @if (!isset($banner))
-                                    <div class="form-group row ml-4 mt-5">
-                                        <label for="img_banner" class="col-md-2 col-form-label">Banner :</label>
-                                        <div class="col-md-8">
-                                            <input type="file" accept="image/jpeg, image/png, image/jpg"
-                                                class="form-control" id="img_banner" name="img_banner[]" multiple
-                                                required>
+                                    <form action="{{ url('backend/home/banner/update/' . $banner->id) }}"
+                                        enctype="multipart/form-data" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="id" value="{{ $banner->id }}">
+                                        <input type="hidden" name="type" value="2">
+                                        @endif
+                                        <!-- form insert -->
+                                        @if (!isset($banner))
+                                        <div class="form-group row ml-4 mt-5">
+                                            <label for="img_banner" class="col-md-2 col-form-label">Banner :</label>
+                                            <div class="col-md-8">
+                                                <input type="file" accept="image/jpeg, image/png, image/jpg"
+                                                    class="form-control" id="img_banner" name="img_banner[]" multiple
+                                                    required>
+                                            </div>
                                         </div>
-                                    </div>
-                                @else
-                                    <!-- End : form insert -->
-                                    <!-- form update -->
-                                    <div class="form-group row ml-4 mt-5">
-                                        <label for="img_banner" class="col-md-2 col-form-label">Banner :</label>
-                                        <div class="col-md-8">
-                                            <input type="file" accept="image/jpeg, image/png, image/jpg"
-                                                class="form-control" id="img_banner" name="img_banner">
+                                        @else
+                                        <!-- End : form insert -->
+                                        <!-- form update -->
+                                        <div class="form-group row ml-4 mt-5">
+                                            <label for="img_banner" class="col-md-2 col-form-label">Banner :</label>
+                                            <div class="col-md-8">
+                                                <input type="file" accept="image/jpeg, image/png, image/jpg"
+                                                    class="form-control" id="img_banner" name="img_banner">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group row ml-4 mt-5">
-                                        <div class="col-md-8" align="center">
-                                            <img src="{{ $banner->img_banner != '' ? asset('backend/assets/img/banner/' . $banner->img_banner) : asset('backend/assets/img/banner/nopic.jpg') }}"
-                                                id="images" width="40%">
+                                        <div class="form-group row ml-4 mt-5">
+                                            <div class="col-md-8" align="center">
+                                                <img src="{{ $banner->img_banner != '' ? asset('backend/assets/img/banner/' . $banner->img_banner) : asset('backend/assets/img/banner/nopic.jpg') }}"
+                                                    id="images" width="40%">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group row ml-4 mt-5">
-                                        <label class="col-md-2 col-form-label">Status :</label>
-                                        <div class="col-md-10 mt-2">
-                                            <div class="custom-control custom-switch">
-                                                @if (empty($banner))
+                                        <div class="form-group row ml-4 mt-5">
+                                            <label class="col-md-2 col-form-label">Status :</label>
+                                            <div class="col-md-10 mt-2">
+                                                <div class="custom-control custom-switch">
+                                                    @if (empty($banner))
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="customSwitch" name="status" value="1" checked>
-                                                @else
+                                                    @else
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="customSwitch" name="status" value="1"
                                                         {{ @$banner->status == '1' ? 'checked' : '' }}>
-                                                @endif
-                                                <label class="custom-control-label" for="customSwitch"> Active /
-                                                    Deactive</label>
+                                                    @endif
+                                                    <label class="custom-control-label" for="customSwitch"> Active /
+                                                        Deactive</label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endif
-                                <!-- End : form update -->
-                                <div class="form-group mb-0 row">
-                                    <div class="col-md-6">
-                                        <a class="btn btn-secondary btn-sm waves-effect"
-                                            href="{{ url('/backend/home/banner') }}">
-                                            <i class="fa fa-reply font-size-16 align-middle mr-1"></i> Return
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6 text-right">
-                                        <button type="submit" class="btn btn-success btn-sm waves-effect">
-                                            <i class="fa fa-save font-size-16 align-middle mr-1"></i>
-                                            @if (!isset($banner))
-                                                Save
-                                            @else
-                                                Update
-                                            @endif
-                                        </button>
-                                    </div>
-                                </div><br>
-                                @if (!isset($banner))
+                                        @endif
+                                        <!-- End : form update -->
+                                        <div class="form-group mb-0 row">
+                                            <div class="col-md-6">
+                                                <a class="btn btn-secondary btn-sm waves-effect"
+                                                    href="{{ url('/backend/home/banner') }}">
+                                                    <i class="fa fa-reply font-size-16 align-middle mr-1"></i> Return
+                                                </a>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <button type="submit" class="btn btn-success btn-sm waves-effect">
+                                                    <i class="fa fa-save font-size-16 align-middle mr-1"></i>
+                                                    @if (!isset($banner))
+                                                    Save
+                                                    @else
+                                                    Update
+                                                    @endif
+                                                </button>
+                                            </div>
+                                        </div><br>
+                                        @if (!isset($banner))
                                     </form>
-                                @else
-                                    </form>
+                                    @else
+                                </form>
                                 @endif
                             </div>
                         </div>
@@ -125,7 +124,7 @@
     <script>
         var _URL = window.URL || window.webkitURL;
 
-        $("#img_banner").change(function() {
+        $("#img_banner").change(function () {
 
             var image, file;
 
@@ -135,7 +134,7 @@
 
                 image = new Image();
 
-                image.onload = function() {
+                image.onload = function () {
 
                     signature(value_input);
 
@@ -153,7 +152,7 @@
 
                 var reader = new FileReader();
 
-                reader.onload = function(e) {
+                reader.onload = function (e) {
 
                     $('#images').attr('src', e.target.result);
 
@@ -172,6 +171,7 @@
                 'success'
             )
         }
+
     </script>
 
 </body>

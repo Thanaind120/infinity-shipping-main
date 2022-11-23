@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\HomeBannerModel;
-
 use App\Models\Services;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -26,6 +24,7 @@ class ServicesController extends Controller
         ]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -35,6 +34,7 @@ class ServicesController extends Controller
     {
         return view("layouts/backend/services/form", []);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -85,6 +85,7 @@ class ServicesController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -95,6 +96,7 @@ class ServicesController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -111,6 +113,7 @@ class ServicesController extends Controller
             'services' =>  $services,
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -178,6 +181,7 @@ class ServicesController extends Controller
             }
         }
     }
+
 
     /**
      * Remove the specified resource from storage.

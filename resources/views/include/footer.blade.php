@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="footer-left">
-        Copyright &copy; 2022 <div class="bullet"></div> <a href="/"> Infinity Shipping</a>
+        Copyright &copy; 2022 <div class="bullet"></div> <a href="{{ url('/') }}"> Infinity Shipping</a>
     </div>
     <div class="footer-right">
         Version 1.0

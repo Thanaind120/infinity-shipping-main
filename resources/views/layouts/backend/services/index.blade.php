@@ -41,7 +41,7 @@
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i>
                                                     Description
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-user"></i>
+                                                <th scope="col" class="text-center"><i class="fa fa-image"></i>
                                                     Images
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i>
@@ -70,9 +70,9 @@
                                                 </td>
                                                 <td class="text-center">
                                                     @if ($val->status == 1)
-                                                        <span class="text-success">Active</span>
+                                                    <span class="text-success">Active</span>
                                                     @else
-                                                        <span class="text-danger">Deactive</span>
+                                                    <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
@@ -133,7 +133,7 @@
                         data: {
                             '_token': "{{ csrf_token() }}"
                         },
-                        success: function(data) {
+                        success: function (data) {
                             console.log(data);
                             location.reload();
                         }
@@ -141,6 +141,7 @@
                 }
             });
         }
+
     </script>
 </body>
 

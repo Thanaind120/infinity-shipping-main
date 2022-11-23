@@ -28,7 +28,6 @@
                                             title="Create"></i> Add</a>
                                 </div><br>
                             </div> --}}
-
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">

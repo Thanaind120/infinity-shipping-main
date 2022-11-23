@@ -100,9 +100,7 @@
             @include('include.footer')
         </div>
     </div>
-
     @include('include.script')
-
     <script>
         $('#simpletable').dataTable();
 

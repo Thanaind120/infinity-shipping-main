@@ -123,9 +123,7 @@
             @include('include.footer')
         </div>
     </div>
-
     @include('include.script')
-    
 </body>
 
 </html>

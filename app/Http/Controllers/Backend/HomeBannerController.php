@@ -29,6 +29,7 @@ class HomeBannerController extends Controller
         return view('layouts/backend/banner/index', $data);
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -38,6 +39,7 @@ class HomeBannerController extends Controller
     {
         return view('layouts/backend/banner/form');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -88,6 +90,7 @@ class HomeBannerController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -98,6 +101,7 @@ class HomeBannerController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -113,6 +117,7 @@ class HomeBannerController extends Controller
         );
         return view('layouts/backend/banner/form', $data);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -160,6 +165,7 @@ class HomeBannerController extends Controller
             return redirect()->to('/backend/home/banner')->with('success', 'Save Data Success');
         }
     }
+
 
     /**
      * Remove the specified resource from storage.

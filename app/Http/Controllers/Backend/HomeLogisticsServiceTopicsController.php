@@ -29,6 +29,7 @@ class HomeLogisticsServiceTopicsController extends Controller
         return view('layouts/backend/logistics-service/index', $data);
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -38,6 +39,7 @@ class HomeLogisticsServiceTopicsController extends Controller
     {
         return view('layouts/backend/logistics-service/form');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -59,6 +61,7 @@ class HomeLogisticsServiceTopicsController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -69,6 +72,7 @@ class HomeLogisticsServiceTopicsController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -84,6 +88,7 @@ class HomeLogisticsServiceTopicsController extends Controller
         );
         return view('layouts/backend/logistics-service/form', $data);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -102,6 +107,7 @@ class HomeLogisticsServiceTopicsController extends Controller
             ]);
         }
     }
+
 
     /**
      * Remove the specified resource from storage.

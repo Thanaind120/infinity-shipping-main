@@ -27,7 +27,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        @if (!isset($banner))
+                        @if (!isset($services))
                             <h1 class="font-large-1">Create Services</h1>
                         @else
                             <h1 class="font-large-1">Edit Services</h1>
@@ -86,8 +86,8 @@
 
                                         </div>
                                     </div>
-@else
-<!-- End : form insert -->
+                                    @else
+                                    <!-- End : form insert -->
                                     <!-- form update -->
                                     <label for="" class="col-md-4 col-form-label mt-3  ">Service Name :</label>
                                     <div class="col-md-3">
@@ -151,7 +151,7 @@
                                     <div class="col-md-6 text-right">
                                         <button type="submit" class="btn btn-success btn-sm waves-effect">
                                             <i class="fa fa-save font-size-16 align-middle mr-1"></i>
-                                            @if (!isset($banner))
+                                            @if (!isset($services))
                                                 Save
                                             @else
                                                 Update
@@ -159,7 +159,7 @@
                                         </button>
                                     </div>
                                 </div><br>
-                                @if (!isset($banner))
+                                @if (!isset($services))
                                     </form>
                                 @else
                                     </form>
