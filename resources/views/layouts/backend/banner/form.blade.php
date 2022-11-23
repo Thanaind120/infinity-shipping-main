@@ -19,9 +19,9 @@
                 <section class="section">
                     <div class="section-header">
                         @if(!isset($banner))
-                        <h1 class="font-large-1">Create Banner</h1>
+                        <h1 class="font-large-1">Create Slide Banner</h1>
                         @else
-                        <h1 class="font-large-1">Edit Banner</h1>
+                        <h1 class="font-large-1">Edit Slide Banner</h1>
                         @endif
                     </div>
 
