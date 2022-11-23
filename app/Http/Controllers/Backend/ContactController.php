@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Backend\Contact;
+
+use App\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -42,7 +43,7 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Backend\Contact  $contact
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function show(Contact $contact)
@@ -53,7 +54,7 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Backend\Contact  $contact
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function edit(Contact $contact)
@@ -65,7 +66,7 @@ class ContactController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Backend\Contact  $contact
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Contact $contact)
@@ -76,7 +77,7 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Backend\Contact  $contact
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function destroy(Contact $contact)
