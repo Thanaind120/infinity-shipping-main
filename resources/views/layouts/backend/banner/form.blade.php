@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link rel="stylesheet"
         href="{{ asset('backend/assets/vendors/bootstrap-fileupload/bootstrap-fileupload.min.css') }}" />
-    <?php $active[0]='active'; ?>
+    <?php $active[0] = 'active'; ?>
 </head>
 
 <body>
