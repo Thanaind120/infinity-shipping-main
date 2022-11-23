@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -13,17 +14,17 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/clc', function() {
-	Artisan::call('cache:clear');
-	Artisan::call('config:clear');
-	Artisan::call('config:cache');
+Route::get('/clc', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
     Artisan::call('view:clear');
-    
+
     // Artisan::call('optimize');
     // Artisan::call('clear-compiled');
     // Artisan::call('view:clear');
     // session()->forget('key');
-	return "Cleared!";
+    return "Cleared!";
 });
 
 // Route::get('/', function () {
@@ -54,21 +55,21 @@ Route::get('/terms', 'HomeController@terms');
 
 //*---------------------------------------------------------------- BACKEND ----------------------------------------------------------------*//
 
-Route::get('/backend/login','LoginController@login');
-Route::post('/backend/login','LoginController@in_progress')->name('backoffice.login');
-Route::get('/backend/logout','LoginController@logout')->name('backoffice.logout');
+Route::get('/backend/login', 'LoginController@login');
+Route::post('/backend/login', 'LoginController@in_progress')->name('backoffice.login');
+Route::get('/backend/logout', 'LoginController@logout')->name('backoffice.logout');
 
-Route::group(['middleware' => ['web','auth']], function(){
-////////////////////<!** HOME **!>////////////////////
+Route::group(['middleware' => ['web', 'auth']], function () {
+    ////////////////////<!** HOME **!>////////////////////
     //** BANNER **//
-        Route::get('/backend/home/banner','HomeBannerController@index'); // get all Banner data
-        Route::get('/backend/home/banner/create','HomeBannerController@create');  // create Banner view
-        Route::post('/backend/home/banner/store','HomeBannerController@store')->name('banner.store'); // store Banner data
-        Route::get('/backend/home/banner/edit/{id}','HomeBannerController@edit');   // edit Banner view
-        Route::put('/backend/home/banner/update/{id}','HomeBannerController@update'); //update Banner data
-        Route::delete('/backend/home/banner/delete/{id}','HomeBannerController@destroy'); //delete Banner data
+    Route::get('/backend/home/banner', 'HomeBannerController@index'); // get all Banner data
+    Route::get('/backend/home/banner/create', 'HomeBannerController@create');  // create Banner view
+    Route::post('/backend/home/banner/store', 'HomeBannerController@store')->name('banner.store'); // store Banner data
+    Route::get('/backend/home/banner/edit/{id}', 'HomeBannerController@edit');   // edit Banner view
+    Route::put('/backend/home/banner/update/{id}', 'HomeBannerController@update'); //update Banner data
+    Route::delete('/backend/home/banner/delete/{id}', 'HomeBannerController@destroy'); //delete Banner data
     //** END BANNER **//
-////////////////////<!** END HOME **!>////////////////////
+    ////////////////////<!** END HOME **!>////////////////////
 });
 
 //*-----------------------------------------------------------------------------------------------------------------------------------------*//
