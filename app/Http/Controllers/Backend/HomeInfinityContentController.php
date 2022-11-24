@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\HomeLogisticsServiceTopicsModel;
+use App\Models\HomeInfinityContentModel;
 
-class HomeLogisticsServiceTopicsController extends Controller
+class HomeInfinityContentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,14 +22,13 @@ class HomeLogisticsServiceTopicsController extends Controller
      */
     public function index()
     {
-        $logistics_service_topics = HomeLogisticsServiceTopicsModel::orderBy('id', 'DESC')->get();
+        $infinity_content = HomeInfinityContentModel::orderBy('id', 'DESC')->get();
         $data = array(
-            'logistics_service_topics' => $logistics_service_topics,
+            'infinity_content' => $infinity_content,
         );
-        return view('layouts/backend/logistics-service/index', $data);
+        return view('layouts/backend/infinity-content/index', $data);
     }
 
-    
     /**
      * Show the form for creating a new resource.
      *
@@ -37,9 +36,8 @@ class HomeLogisticsServiceTopicsController extends Controller
      */
     public function create()
     {
-        return view('layouts/backend/logistics-service/form');
+        return view('layouts/backend/infinity-content/form');
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -50,7 +48,7 @@ class HomeLogisticsServiceTopicsController extends Controller
     public function store(Request $request)
     {
         if ($request->type == 1) {
-            HomeLogisticsServiceTopicsModel::create([
+            HomeInfinityContentModel::create([
                 'id' => $request->id,
                 'topic' => $request->topic,
                 'content' => $request->content,
@@ -58,10 +56,9 @@ class HomeLogisticsServiceTopicsController extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
-            return redirect()->to('/backend/home/logistics-service-topics')->with('success', 'Save Data Success');
+            return redirect()->to('/backend/home/infinity-content')->with('success', 'Save Data Success');
         }
     }
-
 
     /**
      * Display the specified resource.
@@ -74,7 +71,6 @@ class HomeLogisticsServiceTopicsController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -83,13 +79,12 @@ class HomeLogisticsServiceTopicsController extends Controller
      */
     public function edit($id)
     {
-        $logistics_service_topics = HomeLogisticsServiceTopicsModel::find($id);
+        $infinity_content = HomeInfinityContentModel::find($id);
         $data = array(
-            'logistics_service_topics' => $logistics_service_topics,
+            'infinity_content' => $infinity_content,
         );
-        return view('layouts/backend/logistics-service/form', $data);
+        return view('layouts/backend/infinity-content/form', $data);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -101,15 +96,14 @@ class HomeLogisticsServiceTopicsController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->type == 2) {
-            HomeLogisticsServiceTopicsModel::find($id)->update([
+            HomeInfinityContentModel::find($id)->update([
                 'topic' => $request->topic,
                 'content' => $request->content,
                 'updated_at' => Carbon::now()
             ]);
-            return redirect()->to('/backend/home/logistics-service-topics')->with('success', 'Save Data Success');
+            return redirect()->to('/backend/home/infinity-content')->with('success', 'Save Data Success');
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -119,6 +113,6 @@ class HomeLogisticsServiceTopicsController extends Controller
      */
     public function destroy($id)
     {
-        HomeLogisticsServiceTopicsModel::find($id)->delete();
+        HomeInfinityContentModel::find($id)->delete();
     }
 }

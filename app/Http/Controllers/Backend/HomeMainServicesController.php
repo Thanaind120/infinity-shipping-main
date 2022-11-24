@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\HomeLogisticsServiceTopicsModel;
+use App\Models\HomeMainServicesModel;
 
-class HomeLogisticsServiceTopicsController extends Controller
+class HomeMainServicesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,14 +22,13 @@ class HomeLogisticsServiceTopicsController extends Controller
      */
     public function index()
     {
-        $logistics_service_topics = HomeLogisticsServiceTopicsModel::orderBy('id', 'DESC')->get();
+        $main_services = HomeMainServicesModel::orderBy('id', 'DESC')->get();
         $data = array(
-            'logistics_service_topics' => $logistics_service_topics,
+            'main_services' => $main_services,
         );
-        return view('layouts/backend/logistics-service/index', $data);
+        return view('layouts/backend/main-services/index', $data);
     }
 
-    
     /**
      * Show the form for creating a new resource.
      *
@@ -37,9 +36,8 @@ class HomeLogisticsServiceTopicsController extends Controller
      */
     public function create()
     {
-        return view('layouts/backend/logistics-service/form');
+        return view('layouts/backend/main-services/form');
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -50,18 +48,16 @@ class HomeLogisticsServiceTopicsController extends Controller
     public function store(Request $request)
     {
         if ($request->type == 1) {
-            HomeLogisticsServiceTopicsModel::create([
+            HomeMainServicesModel::create([
                 'id' => $request->id,
-                'topic' => $request->topic,
-                'content' => $request->content,
+                'service_name' => $request->service_name,
                 'status' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
-            return redirect()->to('/backend/home/logistics-service-topics')->with('success', 'Save Data Success');
+            return redirect()->to('/backend/home/main-services')->with('success', 'Save Data Success');
         }
     }
-
 
     /**
      * Display the specified resource.
@@ -74,7 +70,6 @@ class HomeLogisticsServiceTopicsController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -83,13 +78,12 @@ class HomeLogisticsServiceTopicsController extends Controller
      */
     public function edit($id)
     {
-        $logistics_service_topics = HomeLogisticsServiceTopicsModel::find($id);
+        $main_services = HomeMainServicesModel::find($id);
         $data = array(
-            'logistics_service_topics' => $logistics_service_topics,
+            'main_services' => $main_services,
         );
-        return view('layouts/backend/logistics-service/form', $data);
+        return view('layouts/backend/main-services/form', $data);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -101,15 +95,19 @@ class HomeLogisticsServiceTopicsController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->type == 2) {
-            HomeLogisticsServiceTopicsModel::find($id)->update([
-                'topic' => $request->topic,
-                'content' => $request->content,
+            if (isset($request->status)) {
+                $status = 1;
+            } else {
+                $status = 0;
+            }
+            HomeMainServicesModel::find($id)->update([
+                'service_name' => $request->service_name,
+                'status' => $status,
                 'updated_at' => Carbon::now()
             ]);
-            return redirect()->to('/backend/home/logistics-service-topics')->with('success', 'Save Data Success');
+            return redirect()->to('/backend/home/main-services')->with('success', 'Save Data Success');
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -119,6 +117,6 @@ class HomeLogisticsServiceTopicsController extends Controller
      */
     public function destroy($id)
     {
-        HomeLogisticsServiceTopicsModel::find($id)->delete();
+        HomeMainServicesModel::find($id)->delete();
     }
 }

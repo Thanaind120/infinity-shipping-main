@@ -77,6 +77,22 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::put('/backend/home/logistics-service-topics/update/{id}', 'Backend\HomeLogisticsServiceTopicsController@update'); //update Logistics Service Topics data
         Route::delete('/backend/home/logistics-service-topics/delete/{id}', 'Backend\HomeLogisticsServiceTopicsController@destroy'); //delete Logistics Service Topics data
     //** END LOGISTICS SERVICE TOPICS **//
+    //** MAIN SERVICES **//
+        Route::get('/backend/home/main-services', 'Backend\HomeMainServicesController@index'); // get all Main Services data
+        Route::get('/backend/home/main-services/create', 'Backend\HomeMainServicesController@create');  // create Main Services view
+        Route::post('/backend/home/main-services/store', 'Backend\HomeMainServicesController@store')->name('main_services.store'); // store Main Services data
+        Route::get('/backend/home/main-services/edit/{id}', 'Backend\HomeMainServicesController@edit');   // edit Main Services view
+        Route::put('/backend/home/main-services/update/{id}', 'Backend\HomeMainServicesController@update'); //update Main Services data
+        Route::delete('/backend/home/main-services/delete/{id}', 'Backend\HomeMainServicesController@destroy'); //delete Main Services data
+    //** END MAIN SERVICES **//
+    //** INFINITY CONTENT **//
+        Route::get('/backend/home/infinity-content', 'Backend\HomeInfinityContentController@index'); // get all Infinity Content data
+        Route::get('/backend/home/infinity-content/create', 'Backend\HomeInfinityContentController@create');  // create Infinity Content view
+        Route::post('/backend/home/infinity-content/store', 'Backend\HomeInfinityContentController@store')->name('infinity_content.store'); // store Infinity Content data
+        Route::get('/backend/home/infinity-content/edit/{id}', 'Backend\HomeInfinityContentController@edit');   // edit Infinity Content view
+        Route::put('/backend/home/infinity-content/update/{id}', 'Backend\HomeInfinityContentController@update'); //update Infinity Content data
+        Route::delete('/backend/home/infinity-content/delete/{id}', 'Backend\HomeInfinityContentController@destroy'); //delete Infinity Content data
+    //** END INFINITY CONTENT **//
 ////////////////////<!** END HOME **!>////////////////////
 ////////////////////<!** SERVICES **!>////////////////////
     //** SERVICES **//

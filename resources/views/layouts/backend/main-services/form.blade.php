@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link rel="stylesheet"
         href="{{ asset('backend/assets/vendors/bootstrap-fileupload/bootstrap-fileupload.min.css') }}" />
-    <?php $active[1] = 'active'; ?>
+    <?php $active[2] = 'active'; ?>
 </head>
 
 <body>
@@ -19,98 +19,84 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        @if(!isset($logistics_service_topics))
-                        <h1 class="font-large-1">Create Logistics Service Topics</h1>
+                        @if(!isset($main_services))
+                        <h1 class="font-large-1">Create Main Services</h1>
                         @else
-                        <h1 class="font-large-1">Edit Logistics Service Topics</h1>
+                        <h1 class="font-large-1">Edit Main Services</h1>
                         @endif
                     </div>
 
                     <div class="section-body">
                         <div class="card col-8">
                             <div class="card-body p-0">
-                                @if(!isset($logistics_service_topics))
-                                <form action="{{ route('topics.store') }}" enctype="multipart/form-data" method="POST">
+                                @if(!isset($main_services))
+                                <form action="{{ route('main_services.store') }}" enctype="multipart/form-data" method="POST">
                                     @csrf
                                     <input type="hidden" name="type" value="1">
                                     @else
                                     <form
-                                        action="{{ url('backend/home/logistics-service-topics/update/' . $logistics_service_topics->id) }}"
+                                        action="{{ url('backend/home/main-services/update/' . $main_services->id) }}"
                                         enctype="multipart/form-data" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <input type="hidden" name="id" value="{{ $logistics_service_topics->id }}">
+                                        <input type="hidden" name="id" value="{{ $main_services->id }}">
                                         <input type="hidden" name="type" value="2">
                                         @endif
                                         <!-- form insert -->
-                                        @if(!isset($logistics_service_topics))
+                                        @if(!isset($main_services))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="topic" class="col-md-2 col-form-label">Topic :</label>
+                                            <label for="service_name" class="col-md-2 col-form-label">Service Name :</label>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" id="topic" name="topic"
+                                                <input type="text" class="form-control" id="service_name" name="service_name"
                                                     value="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row ml-4 mt-5">
-                                            <label for="content" class="col-md-2 col-form-label">Content :</label>
-                                            <div class="col-md-9">
-                                                <textarea type="text" id="content"
-                                                    name="content" class="mx-3" cols="62" rows="5"></textarea>
                                             </div>
                                         </div>
                                         @else
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="topic" class="col-md-2 col-form-label">Topic :</label>
+                                            <label for="service_name" class="col-md-2 col-form-label">Service Name :</label>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" id="topic" name="topic"
-                                                    value="{{ $logistics_service_topics->topic }}">
+                                                <input type="text" class="form-control" id="service_name" name="service_name"
+                                                    value="{{ $main_services->service_name }}">
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="content" class="col-md-2 col-form-label">Content :</label>
-                                            <div class="col-md-9">
-                                                <textarea type="text" id="content"
-                                                    name="content" class="mx-3" cols="62" rows="5">{{ $logistics_service_topics->content }}</textarea>
-                                            </div>
-                                        </div>
-                                        {{-- <div class="form-group row ml-4 mt-5">
                                             <label class="col-md-2 col-form-label">Status :</label>
                                             <div class="col-md-10 mt-2">
                                                 <div class="custom-control custom-switch">
-                                                    @if(empty($logistics_service_topics))
+                                                    @if(empty($main_services))
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="customSwitch" name="status" value="1" checked>
                                                     @else
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="customSwitch" name="status" value="1"
-                                                        {{ ( @$logistics_service_topics->status=='1')?'checked':'' }}>
+                                                        {{ ( @$main_services->status=='1')?'checked':'' }}>
                                                     @endif
                                                     <label class="custom-control-label" for="customSwitch"> Active /
                                                         Deactive</label>
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                         @endif
                                         <!-- End : form update -->
 
                                         <div class="form-group mb-0 row">
                                             <div class="col-md-6">
                                                 <a class="btn btn-secondary btn-sm waves-effect"
-                                                    href="{{ url("/backend/home/logistics-service-topics") }}">
+                                                    href="{{ url("/backend/home/main-services") }}">
                                                     <i class="fa fa-reply font-size-16 align-middle mr-1"></i> Return
                                                 </a>
                                             </div>
                                             <div class="col-md-6 text-right">
                                                 <button type="submit" class="btn btn-success btn-sm waves-effect">
                                                     <i class="fa fa-save font-size-16 align-middle mr-1"></i>
-                                                    @if(!isset($logistics_service_topics)) Save
+                                                    @if(!isset($main_services)) Save
                                                     @else Update @endif
                                                 </button>
                                             </div>
                                         </div><br>
-                                        @if(!isset($logistics_service_topics))
+                                        @if(!isset($main_services))
                                     </form>
                                     @else
                                 </form>

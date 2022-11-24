@@ -3,7 +3,7 @@
 
 <head>
     @include('include.style')
-    <?php $active[1] = 'active'; ?>
+    <?php $active[3] = 'active'; ?>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Logistics Service Topics</h1>
+                        <h1>Infinity Content</h1>
                     </div>
 
                     <div class="section-body">
@@ -38,20 +38,20 @@
                                                 </th>
                                                 <th scope="col" class="text-center"> Content
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-check"></i> Status
+                                                <th scope="col" class="text-center" width="10%"><i class="fa fa-check"></i> Status
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools</th>
+                                                <th scope="col" class="text-center" width="15%"><i class="fa fa-cog"></i> Tools</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                                 $i = 0;
-                                                foreach ($logistics_service_topics as $key=>$val){
+                                                foreach ($infinity_content as $key=>$val){
                                                 $i++
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->topic }}</td>
+                                                <td class="text-left">{{ $val->topic }}</td>
                                                 <td class="text-left">{{ $val->content }}</td>
                                                 <td class="text-center">
                                                     @if($val->status == 1)
@@ -62,7 +62,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <button class="btn btn-warning"
-                                                        onclick="update_topics({{ $val->id }})">
+                                                        onclick="update_content({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
                                                     {{-- <button class="btn btn-danger"
@@ -91,17 +91,17 @@
     <script>
         $('#simpletable').dataTable();
 
-        function create_topics() {
-            var _url = "{{ url('backend/home/logistics-service-topics/create') }}";
+        function create_content() {
+            var _url = "{{ url('backend/home/infinity-content/create') }}";
             window.location.href = _url;
         };
 
-        function update_topics(id) {
-            var _url = "{{ url('backend/home/logistics-service-topics/edit') }}" + '/' + id;
+        function update_content(id) {
+            var _url = "{{ url('backend/home/infinity-content/edit') }}" + '/' + id;
             window.location.href = _url;
         };
 
-        function delete_topics(id) {
+        function delete_content(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -114,7 +114,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: "{!! url('/backend/home/logistics-service-topics/delete/" + id + "') !!}",
+                        url: "{!! url('/backend/home/infinity-content/delete/" + id + "') !!}",
                         data: {
                             '_token': "{{ csrf_token() }}"
                         },
