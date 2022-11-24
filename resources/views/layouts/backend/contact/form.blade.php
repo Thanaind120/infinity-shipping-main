@@ -14,6 +14,7 @@
         outline: none !important;
         border-color: #e4e6fc;
         border-radius: 4px;
+        width: 100%;
         /* box-shadow: 0 0 10px #719ECE; */
     }
 </style>
@@ -27,111 +28,122 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        @if (!isset($services))
-                            <h1 class="font-large-1">Create Services</h1>
+                        @if (!isset($contact))
+                            <h1 class="font-large-1">Create Contact Us</h1>
                         @else
-                            <h1 class="font-large-1">Edit Services</h1>
+                            <h1 class="font-large-1">Edit Contact Us</h1>
                         @endif
                     </div>
 
                     <div class="section-body">
-                        <div class="card col-12">
+                        <div class="card col-8 ">
                             <div class="card-body p-0">
-                                @if (!isset($services))
-                                    <form action="{{ route('services.store') }}" enctype="multipart/form-data"
+                                @if (!isset($contact))
+                                    <form action="{{ route('contact.store') }}" enctype="multipart/form-data"
                                         method="POST">
                                         @csrf
                                         <input type="hidden" name="type" value="1">
                                     @else
-                                        <form action="{{ url('backend/services/update/' . $services->id) }}"
+                                        <form action="{{ url('backend/contact/update/' . $contact->id) }}"
                                             enctype="multipart/form-data" method="POST">
                                             @csrf
                                             @method('PUT')
-                                            <input type="hidden" name="id" value="{{ $services->id }}">
+                                            <input type="hidden" name="id" value="{{ $contact->id }}">
                                             <input type="hidden" name="type" value="2">
                                 @endif
                                 <!-- form insert -->
-                                @if (!isset($services))
-                                    <label for="" class="col-md-4 col-form-label mt-3  ">Service Name :</label>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control" name="service_name" id=""
-                                            required>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="" class="col-md-4 col-form-label">Description :</label>
-                                            <textarea name="service_description" class="  mx-3" id="" cols="100" rows="10">
-
-                                            </textarea required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="" class="col-md-4 col-form-label">Image No. 1 :</label>
-                                            <input type="file" accept="image/jpeg, image/png, image/jpg"
-                                                class="form-control" id="service_images1" name="service_images1"
-                                                >
-                                            <div class="d-flex justify-content-center">
-                                                <img src="" id="images1" width="40%"
-                                                    class="mt-3 mb-3 d-flex">
-                                            </div>
-
-                                            <hr>
-                                            <label for="" class="col-md-4 col-form-label">Image No. 2 :</label>
-                                            <input type="file" accept="image/jpeg, image/png, image/jpg"
-                                                class="form-control" id="service_images2" name="service_images2"
-                                                >
-                                            <div class="d-flex justify-content-center">
-                                                <img src="" id="images2" width="40%"
-                                                    class="mt-3 mb-3 d-flex">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    @else
+                                @if (!isset($contact))
+                                @else
                                     <!-- End : form insert -->
                                     <!-- form update -->
-                                    <label for="" class="col-md-4 col-form-label mt-3  ">Service Name :</label>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control" name="service_name" id=""
-                                            value="{{ $services->service_name }}">
+
+                                    <h3 class="mt-3 ml-3">Contact Us</h3>
+                                    <div class="col-md-12">
+                                        <label for="" class="ml-2 col-form-label">Description :</label>
+                                        <textarea name="contact_description" class="ml-2 mt-2" id="" cols="" rows="4">{{ $contact->contact_description }}</textarea>
                                     </div>
-                                    <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="" class="ml-2 col-form-label">Address :</label>
+                                        <textarea name="contact_address" class="ml-2 mt-2" id="" cols="" rows="4">{{ $contact->contact_address }}</textarea>
+                                    </div>
+                                    <div class="row mr-2">
                                         <div class="col-md-6">
-                                            <label for="" class="col-md-4 col-form-label">Description :</label>
-                                            <textarea name="service_description" class=" mx-3" id="" cols="100" rows="10">{{ $services->service_description }}</textarea>
+                                            <label for="" class="ml-3 col-form-label">Phone number :</label>
+                                            <input type="text" class="form-control ml-3 mt-2" name="contact_phone"
+                                                id="" value="{{ $contact->contact_phone }}" required>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="" class="col-md-4 col-form-label">Image No. 1 :</label>
-                                            <input type="file" accept="image/jpeg, image/png, image/jpg"
-                                                class="form-control" id="service_images1" name="service_images1">
-                                            <div class="d-flex justify-content-center">
-                                                <img src="{{ $services->service_images1 != '' ? asset('backend/assets/img/services/' . $services->service_images1) : asset('backend/assets/img/services/nopic.jpg') }}"
-                                                    id="images1" width="40%" class="mt-3 mb-3 d-flex">
+
+                                        <div class="col-md-6 ">
+                                            <label for="" class="ml-3 col-form-label">Fax :</label>
+                                            <input type="text" class="form-control ml-3 mt-2" name="contact_fax"
+                                                id="" value="{{ $contact->contact_fax }}" required>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mr-2">
+                                        <div class="col-md-6 ">
+                                            <label for="" class="ml-3 col-form-label">Email :</label>
+                                            <input type="text" class="form-control ml-3 mt-2" name="contact_email"
+                                                id="" value="{{ $contact->contact_email }}" required>
+                                        </div>
+
+                                        <div class="col-md-6 ">
+                                            <label for="" class="ml-3 col-form-label">Line : </label>
+                                            <input type="text" class="form-control ml-3 mt-2" name="contact_line"
+                                                id="" value="{{ $contact->contact_line }}" required>
+                                        </div>
+
+                                    </div>
+                                    <h6 class="ml-3 mt-3"> SALES & MARKETING TEAM <input id=""
+                                            class="btn btn-primary contact_add_sales" type="button" value="+">
+                                    </h6>
+                                    <input type="hidden" name="sales_old_delete" id="sales_old_delete">
+                                    @foreach ($contactsales as $item)
+                                        <div class="row mr-2" id="sales_old{{ $item->id }}">
+                                            <div class="col-md-5">
+                                                <input type="hidden" name="contact_sales_id[]"
+                                                    value="{{ $item->id }}">
+                                                <label for="" class="ml-3 col-form-label">Sales
+                                                    Name:</label>
+                                                <input type="text" class="form-control ml-3 mt-2"
+                                                    name="sales_name_old[]" id=""
+                                                    value="{{ $item->sales_name }}" required>
                                             </div>
 
-                                            <hr>
-                                            <label for="" class="col-md-4 col-form-label">Image No. 2
-                                                :</label>
-                                            <input type="file" accept="image/jpeg, image/png, image/jpg"
-                                                class="form-control" id="service_images2" name="service_images2">
-                                            <div class="d-flex justify-content-center">
-                                                <img src="{{ $services->service_images2 != '' ? asset('backend/assets/img/services/' . $services->service_images2) : asset('backend/assets/img/services/nopic.jpg') }}"
-                                                    id="images2" width="40%" class="mt-3 mb-3 d-flex">
+                                            <div class="col-md-5">
+                                                <label for="" class="ml-3 col-form-label">Tel :</label>
+                                                <input type="text" value="{{ $item->tel }}"
+                                                    class="form-control ml-3 mt-2" name="tel_old[]" id=""
+                                                    required>
                                             </div>
-
+                                            <div class="col-md-2">
+                                                <br>
+                                                <input id="" class="mt-4 btn btn-danger"
+                                                    onclick="delete_sales_old({{ $item->id }})" type="button"
+                                                    value="X">
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endforeach
+                                    <div id="output">
 
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <label for="" class="ml-2 col-form-label">Link Google Maps (Iframe)
+                                            :</label>
+                                        <input type="text" name="link_map" class="form-control"
+                                            value="{{ $contact->link_map }}">
+                                    </div>
                                     <div class="form-group row ml-4 mt-5">
                                         <label class="col-md-2 col-form-label">Status :</label>
                                         <div class="col-md-10 mt-2">
                                             <div class="custom-control custom-switch">
-                                                @if (empty($services))
+                                                @if (empty($contact))
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="customSwitch" name="status" value="1" checked>
                                                 @else
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="customSwitch" name="status" value="1"
-                                                        {{ @$services->status == '1' ? 'checked' : '' }}>
+                                                        {{ @$contact->status == '1' ? 'checked' : '' }}>
                                                 @endif
                                                 <label class="custom-control-label" for="customSwitch"> Active /
                                                     Deactive</label>
@@ -151,7 +163,7 @@
                                     <div class="col-md-6 text-right">
                                         <button type="submit" class="btn btn-success btn-sm waves-effect">
                                             <i class="fa fa-save font-size-16 align-middle mr-1"></i>
-                                            @if (!isset($services))
+                                            @if (!isset($contact))
                                                 Save
                                             @else
                                                 Update
@@ -159,7 +171,7 @@
                                         </button>
                                     </div>
                                 </div><br>
-                                @if (!isset($services))
+                                @if (!isset($contact))
                                     </form>
                                 @else
                                     </form>
@@ -174,6 +186,67 @@
     </div>
 
     @include('include.script')
+    <script>
+        // เพิ่มช่องกรอกข้อมูล Sales
+        $(document).ready(function() {
+
+            var count = 1;
+            dynamic_field(count);
+
+            function dynamic_field(count) {
+                if (count > 1) {
+                    $(`#output`).append(
+                        `                
+                     <div class="row mr-2" id="sales${count}">
+                        <div class="col-md-5">
+                            <label for="" class="ml-3 col-form-label">Sales Name:</label>
+                            <input type="text" class="form-control ml-3 mt-2" name="sales_name[]"
+                                id="" required>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="" class="ml-3 col-form-label">Tel :</label>
+                            <input type="text" class="form-control ml-3 mt-2" name="tel[]"
+                                id="" required>
+                        </div>
+                        <div class="col-md-2">
+                            <br> 
+                            <input id=""  class="mt-4 btn btn-danger"  onclick="delete_sales(${count})" type="button"
+                                value="X">
+                        </div>
+                    </div>
+                          `
+                    );
+                }
+            }
+
+
+
+
+            $(document).on('click', '.contact_add_sales', function() {
+                count++;
+                dynamic_field(count);
+            });
+
+
+        });
+    </script>
+    <script>
+        function delete_sales(id) {
+            $(`#sales${id}`).html(' ');
+        }
+
+        // เอาของ id ที่ลบ sales เข้า array (ข้อมูลเก่า)
+        const count_delete = [];
+
+        function delete_sales_old(id) {
+            // alert(id);
+            count_delete.push(id);
+            $('#sales_old_delete').val(count_delete);
+            // alert(count_delete);
+            $(`#sales_old${id}`).html(' ');
+        }
+    </script>
     <script>
         var _URL = window.URL || window.webkitURL;
 
