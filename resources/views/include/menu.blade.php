@@ -24,6 +24,10 @@
                     href="{{ url('/backend/home/infinity-content') }}"><i class="fas fa-building"></i>
                     <span>Infinity Content</span></a>
             </li>
+            <li class="<?php echo isset($active[4]) ? $active[4] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/home/image') }}"><i class="fas fa-bullhorn"></i> <span>Slide
+                        Image</span></a>
+            </li>
 
             <li class="menu-header">Service</li>
             <li class="<?php echo isset($active[6]) ? $active[6] : ''; ?>"><a class="nav-link"

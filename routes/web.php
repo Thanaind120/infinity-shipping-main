@@ -61,14 +61,14 @@ Route::get('/backend/logout', 'LoginController@logout')->name('backoffice.logout
 
 Route::group(['middleware' => ['web', 'auth']], function () {
 ////////////////////<!** HOME **!>////////////////////
-    //** BANNER **//
-        Route::get('/backend/home/banner', 'Backend\HomeBannerController@index'); // get all Banner data
-        Route::get('/backend/home/banner/create', 'Backend\HomeBannerController@create');  // create Banner view
-        Route::post('/backend/home/banner/store', 'Backend\HomeBannerController@store')->name('banner.store'); // store Banner data
-        Route::get('/backend/home/banner/edit/{id}', 'Backend\HomeBannerController@edit');   // edit Banner view
-        Route::put('/backend/home/banner/update/{id}', 'Backend\HomeBannerController@update'); //update Banner data
-        Route::delete('/backend/home/banner/delete/{id}', 'Backend\HomeBannerController@destroy'); //delete Banner data
-    //** END BANNER **//
+    //** SLIDE BANNER **//
+        Route::get('/backend/home/banner', 'Backend\HomeBannerController@index'); // get all Slide Banner data
+        Route::get('/backend/home/banner/create', 'Backend\HomeBannerController@create');  // create Slide Banner view
+        Route::post('/backend/home/banner/store', 'Backend\HomeBannerController@store')->name('banner.store'); // store Slide Banner data
+        Route::get('/backend/home/banner/edit/{id}', 'Backend\HomeBannerController@edit');   // edit Slide Banner view
+        Route::put('/backend/home/banner/update/{id}', 'Backend\HomeBannerController@update'); //update Slide Banner data
+        Route::delete('/backend/home/banner/delete/{id}', 'Backend\HomeBannerController@destroy'); //delete Slide Banner data
+    //** END SLIDE BANNER **//
     //** LOGISTICS SERVICE TOPICS **//
         Route::get('/backend/home/logistics-service-topics', 'Backend\HomeLogisticsServiceTopicsController@index'); // get all Logistics Service Topics data
         Route::get('/backend/home/logistics-service-topics/create', 'Backend\HomeLogisticsServiceTopicsController@create');  // create Logistics Service Topics view
@@ -93,6 +93,14 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::put('/backend/home/infinity-content/update/{id}', 'Backend\HomeInfinityContentController@update'); //update Infinity Content data
         Route::delete('/backend/home/infinity-content/delete/{id}', 'Backend\HomeInfinityContentController@destroy'); //delete Infinity Content data
     //** END INFINITY CONTENT **//
+    //** SLIDE IMAGE **//
+        Route::get('/backend/home/image', 'Backend\HomeImageController@index'); // get all Slide Image data
+        Route::get('/backend/home/image/create', 'Backend\HomeImageController@create');  // create Banner view
+        Route::post('/backend/home/image/store', 'Backend\HomeImageController@store')->name('image.store'); // store Slide Image data
+        Route::get('/backend/home/image/edit/{id}', 'Backend\HomeImageController@edit');   // edit Slide Image view
+        Route::put('/backend/home/image/update/{id}', 'Backend\HomeImageController@update'); //update Slide Image data
+        Route::delete('/backend/home/image/delete/{id}', 'Backend\HomeImageController@destroy'); //delete Slide Image data
+    //** END SLIDE IMAGE **//
 ////////////////////<!** END HOME **!>////////////////////
 ////////////////////<!** SERVICES **!>////////////////////
     //** SERVICES **//

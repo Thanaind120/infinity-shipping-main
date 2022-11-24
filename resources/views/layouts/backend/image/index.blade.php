@@ -3,7 +3,7 @@
 
 <head>
     @include('include.style')
-    <?php $active[0] = 'active'; ?>
+    <?php $active[4] = 'active'; ?>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Slide Banner</h1>
+                        <h1>Slide Image</h1>
                     </div>
 
                     <div class="section-body">
@@ -24,7 +24,7 @@
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
-                                    <a class="btn btn-success" href="#" onclick="create_banner()"><i class="fa fa-plus"
+                                    <a class="btn btn-success" href="#" onclick="create_image()"><i class="fa fa-plus"
                                             title="Create"></i> Add</a>
                                 </div><br>
                             </div>
@@ -35,7 +35,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="text-center">#</th>
-                                                <th scope="col" class="text-center"><i class="far fa-image"></i> Banner
+                                                <th scope="col" class="text-center"><i class="far fa-image"></i> Image
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i>
                                                     Status
@@ -47,13 +47,13 @@
                                         <tbody>
                                             <?php
                                                 $i = 0;
-                                                foreach ($banner as $key=>$val){
+                                                foreach ($image as $key=>$val){
                                                 $i++
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
                                                 <td class="text-center">
-                                                    <img src="{{ $val->img_banner != '' ? asset('backend/assets/img/banner/' . $val->img_banner) : asset('backend/assets/img/banner/nopic.jpg') }}"
+                                                    <img src="{{ $val->img_image != '' ? asset('backend/assets/img/image/' . $val->img_image) : asset('backend/assets/img/image/nopic.jpg') }}"
                                                         class="img-slide" width="100">
                                                 </td>
                                                 <td class="text-center">
@@ -65,11 +65,11 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <button class="btn btn-warning"
-                                                        onclick="update_banner({{ $val->id }})">
+                                                        onclick="update_image({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
                                                     <button class="btn btn-danger"
-                                                        onclick="delete_banner({{ $val->id }})">
+                                                        onclick="delete_image({{ $val->id }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
                                                 </td>
@@ -92,17 +92,17 @@
     <script>
         $('#simpletable').dataTable();
 
-        function create_banner() {
-            var _url = "{{ url('backend/home/banner/create') }}";
+        function create_image() {
+            var _url = "{{ url('backend/home/image/create') }}";
             window.location.href = _url;
         };
 
-        function update_banner(id) {
-            var _url = "{{ url('backend/home/banner/edit') }}" + '/' + id;
+        function update_image(id) {
+            var _url = "{{ url('backend/home/image/edit') }}" + '/' + id;
             window.location.href = _url;
         };
 
-        function delete_banner(id) {
+        function delete_image(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -115,7 +115,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: "{!! url('/backend/home/banner/delete/" + id + "') !!}",
+                        url: "{!! url('/backend/home/image/delete/" + id + "') !!}",
                         data: {
                             '_token': "{{ csrf_token() }}"
                         },
