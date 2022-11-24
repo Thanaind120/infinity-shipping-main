@@ -101,9 +101,15 @@ class HomeLogisticsServiceTopicsController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->type == 2) {
+            if (isset($request->status)) {
+                $status = 1;
+            } else {
+                $status = 0;
+            }
             HomeLogisticsServiceTopicsModel::find($id)->update([
                 'topic' => $request->topic,
                 'content' => $request->content,
+                'status' => $status,
                 'updated_at' => Carbon::now()
             ]);
             return redirect()->to('/backend/home/logistics-service-topics')->with('success', 'Save Data Success');

@@ -30,7 +30,8 @@
                         <div class="card col-8">
                             <div class="card-body p-0">
                                 @if(!isset($infinity_content))
-                                <form action="{{ route('infinity_content.store') }}" enctype="multipart/form-data" method="POST">
+                                <form action="{{ route('infinity_content.store') }}" enctype="multipart/form-data"
+                                    method="POST">
                                     @csrf
                                     <input type="hidden" name="type" value="1">
                                     @else
@@ -54,8 +55,8 @@
                                         <div class="form-group row ml-4 mt-5">
                                             <label for="content" class="col-md-2 col-form-label">Content :</label>
                                             <div class="col-md-9">
-                                                <textarea type="text" id="content"
-                                                    name="content" class="mx-3" cols="62" rows="5"></textarea>
+                                                <textarea type="text" id="content" name="content" class="mx-3" cols="62"
+                                                    rows="5"></textarea>
                                             </div>
                                         </div>
                                         @else
@@ -71,11 +72,11 @@
                                         <div class="form-group row ml-4 mt-5">
                                             <label for="content" class="col-md-2 col-form-label">Content :</label>
                                             <div class="col-md-9">
-                                                <textarea type="text" id="content"
-                                                    name="content" class="mx-3" cols="62" rows="5">{{ $infinity_content->content }}</textarea>
+                                                <textarea type="text" id="content" name="content" class="mx-3" cols="62"
+                                                    rows="5">{{ $infinity_content->content }}</textarea>
                                             </div>
                                         </div>
-                                        {{-- <div class="form-group row ml-4 mt-5">
+                                        <div class="form-group row ml-4 mt-5">
                                             <label class="col-md-2 col-form-label">Status :</label>
                                             <div class="col-md-10 mt-2">
                                                 <div class="custom-control custom-switch">
@@ -91,7 +92,7 @@
                                                         Deactive</label>
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                         @endif
                                         <!-- End : form update -->
 

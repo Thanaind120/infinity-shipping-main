@@ -54,8 +54,8 @@
                                         <div class="form-group row ml-4 mt-5">
                                             <label for="content" class="col-md-2 col-form-label">Content :</label>
                                             <div class="col-md-9">
-                                                <textarea type="text" id="content"
-                                                    name="content" class="mx-3" cols="62" rows="5"></textarea>
+                                                <textarea type="text" id="content" name="content" class="mx-3" cols="62"
+                                                    rows="5"></textarea>
                                             </div>
                                         </div>
                                         @else
@@ -71,11 +71,11 @@
                                         <div class="form-group row ml-4 mt-5">
                                             <label for="content" class="col-md-2 col-form-label">Content :</label>
                                             <div class="col-md-9">
-                                                <textarea type="text" id="content"
-                                                    name="content" class="mx-3" cols="62" rows="5">{{ $logistics_service_topics->content }}</textarea>
+                                                <textarea type="text" id="content" name="content" class="mx-3" cols="62"
+                                                    rows="5">{{ $logistics_service_topics->content }}</textarea>
                                             </div>
                                         </div>
-                                        {{-- <div class="form-group row ml-4 mt-5">
+                                        <div class="form-group row ml-4 mt-5">
                                             <label class="col-md-2 col-form-label">Status :</label>
                                             <div class="col-md-10 mt-2">
                                                 <div class="custom-control custom-switch">
@@ -91,7 +91,7 @@
                                                         Deactive</label>
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                         @endif
                                         <!-- End : form update -->
 
