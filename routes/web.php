@@ -95,13 +95,31 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     //** END INFINITY CONTENT **//
     //** SLIDE IMAGE **//
         Route::get('/backend/home/image', 'Backend\HomeImageController@index'); // get all Slide Image data
-        Route::get('/backend/home/image/create', 'Backend\HomeImageController@create');  // create Banner view
+        Route::get('/backend/home/image/create', 'Backend\HomeImageController@create');  // create Slide Image view
         Route::post('/backend/home/image/store', 'Backend\HomeImageController@store')->name('image.store'); // store Slide Image data
         Route::get('/backend/home/image/edit/{id}', 'Backend\HomeImageController@edit');   // edit Slide Image view
         Route::put('/backend/home/image/update/{id}', 'Backend\HomeImageController@update'); //update Slide Image data
         Route::delete('/backend/home/image/delete/{id}', 'Backend\HomeImageController@destroy'); //delete Slide Image data
     //** END SLIDE IMAGE **//
+    //** OUR CliENTS **//
+        Route::get('/backend/home/our-clients', 'Backend\HomeOurClientsController@index'); // get all Our Clients data
+        Route::get('/backend/home/our-clients/create', 'Backend\HomeOurClientsController@create');  // create Our Clients view
+        Route::post('/backend/home/our-clients/store', 'Backend\HomeOurClientsController@store')->name('logo.store'); // store Our Clients data
+        Route::get('/backend/home/our-clients/edit/{id}', 'Backend\HomeOurClientsController@edit');   // edit Our Clients view
+        Route::put('/backend/home/our-clients/update/{id}', 'Backend\HomeOurClientsController@update'); //update Our Clients data
+        Route::delete('/backend/home/our-clients/delete/{id}', 'Backend\HomeOurClientsController@destroy'); //delete Our Clients data
+    //** END OUR CliENTS **//
 ////////////////////<!** END HOME **!>////////////////////
+////////////////////<!** ABOUT US **!>////////////////////
+    //** ABOUT **//
+        Route::get('/backend/about', 'Backend\AboutController@index'); // get all About data
+        Route::get('/backend/about/create', 'Backend\AboutController@create');  // create About view
+        Route::post('/backend/about/store', 'Backend\AboutController@store')->name('about.store'); // store About data
+        Route::get('/backend/about/edit/{id}', 'Backend\AboutController@edit');   // edit About view
+        Route::put('/backend/about/update/{id}', 'Backend\AboutController@update'); //update About data
+        Route::delete('/backend/about/delete/{id}', 'Backend\AboutController@destroy'); //delete About data
+    //** END ABOUT **//
+////////////////////<!** END ABOUT US **!>////////////////////
 ////////////////////<!** SERVICES **!>////////////////////
     //** SERVICES **//
         Route::get('/backend/services', 'Backend\ServicesController@index'); // get all Services data
@@ -112,7 +130,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::delete('/backend/services/delete/{id}', 'Backend\ServicesController@destroy'); //delete Services data
     //** END SERVICES **//
 ////////////////////<!** END SERVICES **!>////////////////////
-////////////////////<!** CONTACT **!>////////////////////
+////////////////////<!** CONTACT US **!>////////////////////
     //** CONTACT **//
         Route::get('/backend/contact', 'Backend\ContactController@index'); // get all Contact data
         Route::get('/backend/contact/create', 'Backend\ContactController@create');  // create Contact view
@@ -121,7 +139,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::put('/backend/contact/update/{id}', 'Backend\ContactController@update'); //update Contact data
         Route::delete('/backend/contact/delete/{id}', 'Backend\ContactController@destroy'); //delete Contact data
     //** END CONTACT **//
-////////////////////<!** END CONTACT **!>////////////////////
+////////////////////<!** END CONTACT US **!>////////////////////
 
 
 

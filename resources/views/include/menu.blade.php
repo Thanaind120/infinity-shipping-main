@@ -28,6 +28,16 @@
                     href="{{ url('/backend/home/image') }}"><i class="fas fa-bullhorn"></i> <span>Slide
                         Image</span></a>
             </li>
+            <li class="<?php echo isset($active[5]) ? $active[5] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/home/our-clients') }}"><i class="fas fa-image"></i> <span>Our
+                        Clients</span></a>
+            </li>
+
+            <li class="menu-header">About Us</li>
+            <li class="<?php echo isset($active[8]) ? $active[8] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/about') }}"><i class="fas fa-copy"></i>
+                    <span>About US</span></a>
+            </li>
 
             <li class="menu-header">Service</li>
             <li class="<?php echo isset($active[6]) ? $active[6] : ''; ?>"><a class="nav-link"
