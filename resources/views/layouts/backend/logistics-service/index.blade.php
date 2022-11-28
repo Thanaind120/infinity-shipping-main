@@ -52,7 +52,7 @@
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
                                                 <td class="text-center">{{ $val->topic }}</td>
-                                                <td class="text-center">{{ $val->content }}</td>
+                                                <td class="text-left">{{ $val->content }}</td>
                                                 <td class="text-center">
                                                     @if($val->status == 1)
                                                     <span class="text-success">Active</span>

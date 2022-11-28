@@ -164,14 +164,6 @@
 
         }
 
-        function success_alert() {
-            Swal.fire(
-                'Success!',
-                'Data is save!',
-                'success'
-            )
-        }
-
     </script>
 
 </body>

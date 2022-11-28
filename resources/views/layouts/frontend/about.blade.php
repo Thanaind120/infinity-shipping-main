@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="pe-5">
-                        <h2 class="text-navy fw-bold mb-0">About</h2>
+                        <h2 class="text-navy fw-bold mb-0">About Us</h2>
                         <h4 class="text-navy fw-bold">INFINITY SHIPPING <span class="text-red">(THAILAND)</span> CO.,LTD
                         </h4>
                         <div class="lineL-red mb-4"></div>
