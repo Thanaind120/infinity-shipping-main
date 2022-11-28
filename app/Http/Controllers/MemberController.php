@@ -36,11 +36,13 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('asdasdasd');
+        // dd($request->checkbox);
         $validator = Validator::make(
             $request->all(),
             [
                 'password' => 'required',
+                'checkbox' => 'required',
+                'g-recaptcha-response' => 'required',
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'phone_number' => 'required',

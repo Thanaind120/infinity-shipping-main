@@ -24,7 +24,9 @@ class HomeController extends Controller
 
     public function register()
     {
-        return view('layouts/frontend/register');
+        return view('layouts/frontend/register', [
+            'g-recaptcha-response' => 'required|captcha',
+        ]);
     }
 
     public function login()
@@ -82,7 +84,7 @@ class HomeController extends Controller
         return view('layouts/frontend/nvocc');
     }
 
-     public function price()
+    public function price()
     {
         return view('layouts/frontend/price');
     }
@@ -106,5 +108,4 @@ class HomeController extends Controller
     {
         return view('layouts/frontend/terms');
     }
-
 }

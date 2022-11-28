@@ -4,6 +4,9 @@
 <head>
     <title>Register - Infinity Shipping (Thailand)Co.,Ltd.</title>
     @include('layouts.frontend.inc_header')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {!! NoCaptcha::renderJs() !!}
 </head>
 
 <body>
@@ -165,18 +168,43 @@
                                             <div class="col-md-12">
 
                                             </div>
+
+                                            {{-- recaptcha --}}
+                                            <div
+                                                class="form-group row {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                                {{-- <label for="captcha"
+                                                    class="col-md-5 col-form-label text-md-right">{{ __('') }}</label> --}}
+
+                                                <div class="col-md-12 d-flex justify-content-center" style="">
+                                                    {!! app('captcha')->display() !!}
+                                                    @if ($errors->has('g-recaptcha-response'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                        </span>
+                                                    @endif
+
+                                                </div>
+                                                <span
+                                                    class="text-danger error-text g-recaptcha-response_error text-center"></span>
+                                            </div>
+
                                             <div class="col-md-8 offset-md-2 text-center">
-                                                <div class="card card-body mb-3">Recaptcha</div>
+
+
                                                 <div class="form-check mb-3">
                                                     <input class="form-check-input float-none" type="checkbox"
-                                                        value="" id="flexCheckDefault">
+                                                        value="checkbox" id="flexCheckDefault" name="checkbox">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         I have read and agreed to the <a
                                                             href="{{ url('/terms') }}">"Membership
                                                             terms and conditions"</a>
                                                     </label>
+                                                    <br>
+                                                    <span class="text-danger error-text checkbox_error"></span>
                                                 </div>
-                                                <button type="submit" class="btn btn-navy rounded-pill mb-5 px-5"
+
+
+                                                <button type="submit" class="btn btn-navy  rounded-pill mb-5 px-5"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#finishRegisterModal">Submit</button>
                                             </div>
@@ -190,6 +218,29 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade mailtest" id="finishRegisterModal" tabindex="-1"
+        aria-labelledby="finishRegisterModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content borderR-25 p-4">
+                <div class="modal-body text-center">
+                    <i class='bx bx-check-circle text-green fs-9 mb-3'></i>
+                    <h5 class="fw-bold" id="finishRegisterModalLabel">REGISTERATION SUCCESS</h5>
+                    <p>Thank you. You will receive an email to verification account. <br>Please wait for confirmation
+                        via email within 1 hour.</p>
+                    <div class="text-center pt-4">
+                        <button type="button" class="btn btn-navy rounded-pill px-4"
+                            data-bs-dismiss="modal">OK</button><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.mailtest').hide();
+        });
+    </script>
     <script>
         $(function() {
             $("#main_form").on('submit', function(e) {
@@ -206,38 +257,40 @@
                         $(document).find('span.error-text').text('');
                     },
                     success: function(data) {
-                        if (data.status == 0) {
-                            $.each(data.error, function(prefix, val) {
-                                $('span.' + prefix + '_error').text(val[0]);
-                            });
-                        }
-                        if (data.status == 1 && data.statusCheck == 2) {
-                            Swal.fire({
-                                title: "สำเร็จ",
-                                text: `Load completed ` + data.loadcompleted + ` Record 
-                                Load reject ` + data.loadreject + ` Record`,
-                                icon: "success",
-                                allowOutsideClick: false,
-                            }).then((result) => {
-                                window.location.href = window.location.origin + '/' +
-                                    'perfect' + '/' +
-                                    data.segment +
-                                    '/' + data.folder;
-                            })
-                        }
-                        if (data.status == 1 && data.statusCheck == 3) {
-                            Swal.fire({
-                                title: "สำเร็จ",
-                                text: `ระบบได้ทำการบันทึกข้อมูลเรียบร้อย`,
-                                icon: "success",
-                                allowOutsideClick: false,
-                            }).then((result) => {
-                                window.location.href = window.location.origin + '/' +
-                                    'perfect' + '/' +
-                                    data.segment +
-                                    '/' + data.folder;
-                            })
-                        }
+                        $('.mailtest').show();
+
+                        // if (data.status == 0) {
+                        // $.each(data.error, function(prefix, val) {
+                        // $('span.' + prefix + '_error').text(val[0]);
+                        // });
+                        // }
+                        // if (data.status == 1 && data.statusCheck == 2) {
+                        // Swal.fire({
+                        // title: "สำเร็จ",
+                        // text: `Load completed ` + data.loadcompleted + ` Record
+                    // Load reject ` + data.loadreject + ` Record`,
+                        // icon: "success",
+                        // allowOutsideClick: false,
+                        // }).then((result) => {
+                        // window.location.href = window.location.origin + '/' +
+                        // 'perfect' + '/' +
+                        // data.segment +
+                        // '/' + data.folder;
+                        // })
+                        // }
+                        // if (data.status == 1 && data.statusCheck == 3) {
+                        // Swal.fire({
+                        // title: "สำเร็จ",
+                        // text: `ระบบได้ทำการบันทึกข้อมูลเรียบร้อย`,
+                        // icon: "success",
+                        // allowOutsideClick: false,
+                        // }).then((result) => {
+                        // window.location.href = window.location.origin + '/' +
+                        // 'perfect' + '/' +
+                        // data.segment +
+                        // '/' + data.folder;
+                        // })
+                        // }
 
                     }
 
@@ -247,23 +300,7 @@
     </script>
     @include('layouts.frontend.inc_footer')
     <!-- Modal -->
-    {{-- <div class="modal fade" id="finishRegisterModal" tabindex="-1" aria-labelledby="finishRegisterModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content borderR-25 p-4">
-                <div class="modal-body text-center">
-                    <i class='bx bx-check-circle text-green fs-9 mb-3'></i>
-                    <h5 class="fw-bold" id="finishRegisterModalLabel">REGISTERATION SUCCESS</h5>
-                    <p>Thank you. You will receive an email to verification account. <br>Please wait for confirmation
-                        via email within 1 hour.</p>
-                    <div class="text-center pt-4">
-                        <button type="button" class="btn btn-navy rounded-pill px-4"
-                            data-bs-dismiss="modal">OK</button><br>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+
     <script>
         $('#linkMenuTop .nav-item').eq(0).addClass('active');
     </script>
