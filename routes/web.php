@@ -56,6 +56,7 @@ Route::get('/terms', 'HomeController@terms');
 
 //** MEMBER **//
 Route::get('member', 'MemberController@index'); // get all Slide member data
+Route::post('member/in_progress', 'MemberController@in_progress'); // get all Slide member data
 Route::get('member/create', 'MemberController@create');  // create Slide member view
 Route::post('member/store', 'MemberController@store')->name('member.store'); // store Slide member data
 Route::get('member/edit/{id}', 'MemberController@edit');   // edit Slide member view
@@ -151,7 +152,16 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     //** END CONTACT **//
     ////////////////////<!** END CONTACT US **!>////////////////////
 
-
+    ////////////////////<!** MEMBER **!>////////////////////
+    //** MEMBER **//
+    Route::get('/backend/member', 'Backend\MemberController@index'); // get all Services data
+    Route::get('/backend/member/create', 'Backend\MemberController@create');  // create Services view
+    Route::post('/backend/member/store', 'Backend\MemberController@store')->name('member.store'); // store Services data
+    Route::get('/backend/member/edit/{id}', 'Backend\MemberController@edit');   // edit Services view
+    Route::put('/backend/member/update/{id}', 'Backend\MemberController@update'); //update Services data
+    Route::delete('/backend/member/delete/{id}', 'Backend\MemberController@destroy'); //delete Services data
+    //** END MEMBER **//
+    ////////////////////<!** END MEMBER **!>////////////////////
 
 
 });

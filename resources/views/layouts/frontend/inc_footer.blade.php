@@ -4,11 +4,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <img src="{{ asset('frontend/images/logo.svg') }}" class="mw-100 mb-2" alt="">
-                    <p class="text-navy ps-xl-2">109 CCT Bldg., 9th Fl., Unit 1, Surawongse Rd., Suriyawongse, Bangrak Bangkok 10500.</p>
+                    <p class="text-navy ps-xl-2">109 CCT Bldg., 9th Fl., Unit 1, Surawongse Rd., Suriyawongse, Bangrak
+                        Bangkok 10500.</p>
                     <p class="text-navy ps-xl-2">
                         TEL : 02 634 0610<br>
                         Fax :+662 6340617<br>
-                        EMAIL :  sales5@infinity.co.th
+                        EMAIL : sales5@infinity.co.th
                     </p>
                 </div>
                 <div class="col-md-6">
@@ -42,7 +43,8 @@
                 <div class="col-2 col-md-6 pb-2">
                     <ul class="nav justify-content-end mb-0">
                         <li class="nav-item">
-                            <a class="nav-link p-0 text-navy" aria-current="page" href="http://line.me/ti/p/@infinitythai"><i class="fab fa-line fa-2x"></i></a>
+                            <a class="nav-link p-0 text-navy" aria-current="page"
+                                href="http://line.me/ti/p/@infinitythai"><i class="fab fa-line fa-2x"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -50,3 +52,4 @@
         </div>
     </div>
 </div>
+@include('include.script')

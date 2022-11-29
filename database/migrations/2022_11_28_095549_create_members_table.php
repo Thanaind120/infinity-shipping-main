@@ -22,6 +22,7 @@ class CreateMembersTable extends Migration
             $table->string('phone_number', 20);
             $table->string('company_name')->nullable();
             $table->string('company_type')->nullable();
+            $table->string('company_type_other')->nullable();
             $table->text('address')->nullable();
             $table->text('address_more')->nullable()->comment('ที่อยู่ ที่2');
             $table->string('city')->nullable();
@@ -31,7 +32,7 @@ class CreateMembersTable extends Migration
             $table->date('last_login')->nullable();
             $table->date('email_verified_at')->nullable();
             $table->string('remember_token', 100);
-            $table->integer('status')->nullable()->default('1')->comment('0 = ปิดใช้งาน 1 = เปิดใช้งาน');
+            $table->integer('status')->nullable()->default('0')->comment('0 = ปิดใช้งาน 1 = เปิดใช้งาน');
             $table->timestamps();
         });
     }

@@ -46,6 +46,14 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'Member' => [
+            'driver' => 'session',
+            'provider' => 'member_auth'
+        ],
+        'member_auth' => [
+            'driver' => 'session',
+            'model' => App\Loginmember::class,
+        ],
     ],
 
     /*
@@ -71,7 +79,10 @@ return [
             'model' => App\Login::class,
             // 'model' => App\User::class,
         ],
-
+        'member_auth' => [
+            'driver' => 'eloquent',
+            'model' => App\Loginmember::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

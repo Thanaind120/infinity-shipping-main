@@ -9,6 +9,8 @@
     {!! NoCaptcha::renderJs() !!}
 </head>
 
+
+
 <body>
     @include('layouts.frontend.inc_navbar')
     <div class="bg-light">
@@ -85,7 +87,6 @@
                                                     <input type="text" class="form-control" name="phone_number"
                                                         placeholder="xxxxxxx" aria-label="Username"
                                                         aria-describedby="basic-addon1">
-
                                                 </div>
                                                 <span class="text-danger error-text phone_number_error"></span>
                                             </div>
@@ -95,13 +96,13 @@
                                         <div class="row g-3 pb-2">
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Company name</label>
-                                                <input type="text" class="form-control borderR-6" id=""
-                                                    placeholder="Enter Company name">
+                                                <input type="text" class="form-control borderR-6" name="company_name"
+                                                    id="" placeholder="Enter Company name">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Company Type</label>
                                                 <select class="form-select mb-3" aria-label="Default select example"
-                                                    id="selectCompanyT">
+                                                    id="selectCompanyT" name="company_type">
                                                     <option selected>Choose company type</option>
                                                     <option value="1">Supplier / Explorter</option>
                                                     <option value="2">Freight Forwarder</option>
@@ -109,34 +110,35 @@
                                                 </select>
                                                 <div id="boxOther" class="3 box">
                                                     <input type="text" class="form-control"
-                                                        placeholder="Enter text...">
+                                                        placeholder="Enter text..." name="company_type_other">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Address</label>
-                                                <input type="text" class="form-control borderR-6" id=""
-                                                    placeholder="Enter Address">
+                                                <input type="text" class="form-control borderR-6" name="address"
+                                                    id="" placeholder="Enter Address">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">For more information <i
                                                         class="text-muted fw-light">(Optional)</i></label>
-                                                <input type="text" class="form-control borderR-6" id=""
+                                                <input type="text" class="form-control borderR-6"
+                                                    name="address_more" id=""
                                                     placeholder="Enter more address">
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="form-label">City</label>
-                                                <input type="text" class="form-control borderR-6" id=""
-                                                    placeholder="Enter City">
+                                                <input type="text" class="form-control borderR-6" name="city"
+                                                    id="" placeholder="Enter City">
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="form-label">Zip code</label>
-                                                <input type="text" class="form-control borderR-6" id=""
-                                                    placeholder="Enter zip code">
+                                                <input type="text" class="form-control borderR-6" name="zip_code"
+                                                    id="" placeholder="Enter zip code">
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="form-label">Country / Region</label>
-                                                <select class="form-select" aria-label="Default select example"
-                                                    id="">
+                                                <select class="form-select" name="country_region"
+                                                    aria-label="Default select example" id="">
                                                     <option selected>Choose your country</option>
                                                     <option value=""></option>
                                                     <option value=""></option>
@@ -149,8 +151,8 @@
                                             <div class="col-md-12">
                                                 <label for="" class="form-label">Colleague's email <i
                                                         class="text-muted fw-light">(Optional)</i></label>
-                                                <input type="text" class="form-control borderR-6 mb-3"
-                                                    id=""
+                                                <input type="text" name="colleague_email"
+                                                    class="form-control borderR-6 mb-3" id=""
                                                     placeholder="Enter his/her email address or booking reference">
                                                 <div class="alert alert-warning" role="alert">
                                                     <div class="d-flex">
@@ -219,8 +221,8 @@
         </div>
     </div>
 
-    <div class="modal fade mailtest" id="finishRegisterModal" tabindex="-1"
-        aria-labelledby="finishRegisterModalLabel" aria-hidden="true">
+    <div class="modal0 fade " id="finishRegisterModal" tabindex="-1" aria-labelledby="finishRegisterModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content borderR-25 p-4">
                 <div class="modal-body text-center">
@@ -236,11 +238,7 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('.mailtest').hide();
-        });
-    </script>
+
     <script>
         $(function() {
             $("#main_form").on('submit', function(e) {
@@ -257,39 +255,15 @@
                         $(document).find('span.error-text').text('');
                     },
                     success: function(data) {
-                        $('.mailtest').show();
-
-                        // if (data.status == 0) {
-                        // $.each(data.error, function(prefix, val) {
-                        // $('span.' + prefix + '_error').text(val[0]);
-                        // });
-                        // }
-                        // if (data.status == 1 && data.statusCheck == 2) {
-                        // Swal.fire({
-                        // title: "สำเร็จ",
-                        // text: `Load completed ` + data.loadcompleted + ` Record
-                    // Load reject ` + data.loadreject + ` Record`,
-                        // icon: "success",
-                        // allowOutsideClick: false,
-                        // }).then((result) => {
-                        // window.location.href = window.location.origin + '/' +
-                        // 'perfect' + '/' +
-                        // data.segment +
-                        // '/' + data.folder;
-                        // })
-                        // }
-                        // if (data.status == 1 && data.statusCheck == 3) {
-                        // Swal.fire({
-                        // title: "สำเร็จ",
-                        // text: `ระบบได้ทำการบันทึกข้อมูลเรียบร้อย`,
-                        // icon: "success",
-                        // allowOutsideClick: false,
-                        // }).then((result) => {
-                        // window.location.href = window.location.origin + '/' +
-                        // 'perfect' + '/' +
-                        // data.segment +
-                        // '/' + data.folder;
-                        // })
+                        if (data.status == 0) {
+                            $.each(data.error, function(prefix, val) {
+                                $('span.' + prefix + '_error').text(val[0]);
+                            });
+                        }
+                        if (data.status == 1) {
+                            var myBookId = $(this).data('id');
+                            $(".modal-body #bookId").val(myBookId);
+                        }
                         // }
 
                     }

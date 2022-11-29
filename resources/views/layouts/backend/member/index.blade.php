@@ -3,7 +3,7 @@
 
 <head>
     @include('include.style')
-    <?php $active[6] = 'active'; ?>
+    <?php $active[9] = 'active'; ?>
 </head>
 
 <body>
@@ -21,13 +21,13 @@
 
                     <div class="section-body">
                         <div class="card">
-                            <div class="card-header">
+                            {{-- <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
-                                    <a class="btn btn-success" href="#" onclick="create_services()"><i
+                                    <a class="btn btn-success" href="#" onclick="create_members()"><i
                                             class="fa fa-plus" title="Create"></i> Add</a>
                                 </div><br>
-                            </div>
+                            </div> --}}
 
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -36,14 +36,17 @@
                                             <tr>
                                                 <th scope="col" class="text-center">#</th>
                                                 <th scope="col" class="text-center" width="15%"><i
-                                                        class="fa fa-user"></i>
-                                                    Service Name
+                                                        class="fa fa-mail"></i>
+                                                    Email
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-user"></i>
-                                                    Description
+                                                <th scope="col" class="text-center"><i class="fa fa-"></i>
+                                                    First name
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-image"></i>
-                                                    Images
+                                                <th scope="col" class="text-center"><i class="fa fa-"></i>
+                                                    Last name
+                                                </th>
+                                                <th scope="col" class="text-center"><i class="fa fa-"></i>
+                                                    Phone number
                                                 </th>
                                                 <th scope="col" class="text-center" width="15%"><i
                                                         class="fa fa-check"></i>
@@ -57,34 +60,36 @@
                                         <tbody>
                                             <?php
                                                 $i = 0;
-                                                foreach ($services as $key=>$val){
+                                                foreach ($members as $key=>$val){
                                                 $i++
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->service_name }}</td>
-                                                <td class="text-center"> {{ Str::limit($val->service_description, 50) }}
+                                                <td class="text-center">{{ $val->email }}</td>
+                                                <td class="text-center"> {{ $val->first_name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <img src="{{ $val->service_images1 != '' ? asset('backend/assets/img/services/' . $val->service_images1) : asset('backend/assets/img/services/nopic.jpg') }}"
-                                                        class="img-slide" width="100" height="70">
-                                                    <img src="{{ $val->service_images2 != '' ? asset('backend/assets/img/services/' . $val->service_images2) : asset('backend/assets/img/services/nopic.jpg') }}"
-                                                        class="img-slide" width="100" height="70">
+                                                    {{ $val->last_name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $val->phone_number }}
                                                 </td>
                                                 <td class="text-center">
                                                     @if ($val->status == 1)
                                                         <span class="text-success">Active</span>
-                                                    @else
+                                                    @elseif($val->status == 0)
                                                         <span class="text-danger">Deactive</span>
+                                                    @elseif($val->status == 2)
+                                                        <span class="text-warning">Pending </span>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
                                                     <button class="btn btn-warning"
-                                                        onclick="update_services({{ $val->id }})">
+                                                        onclick="update_members({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
                                                     <button class="btn btn-danger"
-                                                        onclick="delete_services({{ $val->id }})">
+                                                        onclick="delete_members({{ $val->id }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
                                                 </td>
@@ -109,17 +114,17 @@
     <script>
         $('#simpletable').dataTable();
 
-        function create_services() {
-            var _url = "{{ url('backend/services/create') }}";
+        function create_members() {
+            var _url = "{{ url('backend/member/create') }}";
             window.location.href = _url;
         };
 
-        function update_services(id) {
-            var _url = "{{ url('backend/services/edit') }}" + '/' + id;
+        function update_members(id) {
+            var _url = "{{ url('backend/member/edit') }}" + '/' + id;
             window.location.href = _url;
         };
 
-        function delete_services(id) {
+        function delete_members(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -132,7 +137,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: "{!! url('/backend/services/delete/" + id + "') !!}",
+                        url: "{!! url('/backend/member/delete/" + id + "') !!}",
                         data: {
                             '_token': "{{ csrf_token() }}"
                         },
