@@ -221,7 +221,7 @@
         </div>
     </div>
 
-    <div class="modal0 fade " id="finishRegisterModal" tabindex="-1" aria-labelledby="finishRegisterModalLabel"
+    {{-- <div class="modal0 fade " id="finishRegisterModal" tabindex="-1" aria-labelledby="finishRegisterModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content borderR-25 p-4">
@@ -237,7 +237,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <script>
         $(function() {
