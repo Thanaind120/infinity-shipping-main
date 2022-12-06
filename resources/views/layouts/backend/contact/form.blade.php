@@ -26,6 +26,7 @@
             @include('include.menu')
             <!-- Main Content -->
             <div class="main-content">
+
                 <section class="section">
                     <div class="section-header">
                         @if (!isset($contact))
@@ -97,6 +98,7 @@
                                     <h6 class="ml-3 mt-3"> SALES & MARKETING TEAM <input id=""
                                             class="btn btn-primary contact_add_sales" type="button" value="+">
                                     </h6>
+
                                     <input type="hidden" name="sales_old_delete" id="sales_old_delete">
                                     @foreach ($contactsales as $item)
                                         <div class="row mr-2" id="sales_old{{ $item->id }}">
@@ -127,9 +129,11 @@
                                     <div id="output">
 
                                     </div>
+
                                     <div class="col-md-12 mt-3">
                                         <label for="" class="ml-2 col-form-label">Link Google Maps (Iframe)
-                                            :</label>
+                                            :
+                                        </label>
                                         <input type="text" name="link_map" class="form-control"
                                             value="{{ $contact->link_map }}">
                                     </div>

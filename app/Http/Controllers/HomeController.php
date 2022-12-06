@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\AboutModel;
 use App\Models\Contact;
+use App\Models\ContactSales;
 use App\Models\HomeBannerModel;
 use App\Models\HomeLogisticsServiceTopicsModel;
 use App\Models\HomeInfinityContentModel;
@@ -106,7 +107,13 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('layouts/frontend/contact');
+        $contact = Contact::find(1);
+        $contact_sale = ContactSales::where('status', 1)->orderBy('id', 'DESC')->get();
+        $data = array(
+            'contact' => $contact,
+            'contact_sale' => $contact_sale,
+        );
+        return view('layouts/frontend/contact', $data);
     }
 
     public function freightForwarding()
