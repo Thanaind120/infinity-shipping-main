@@ -122,11 +122,7 @@ class HomeController extends Controller
         return view('layouts/frontend/nvocc');
     }
 
-<<<<<<< HEAD
     public function price(Request $request)
-=======
-    public function price()
->>>>>>> 1cfe2fae5d7e7e02413de96deef83f453fc39e0b
     {
         return view('layouts/frontend/price');
     }
