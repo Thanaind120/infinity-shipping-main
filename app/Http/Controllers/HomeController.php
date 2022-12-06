@@ -2,7 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use App\Models\AboutModel;
+use App\Models\HomeBannerModel;
+use App\Models\HomeLogisticsServiceTopicsModel;
+use App\Models\HomeInfinityContentModel;
+use App\Models\HomeImageModel;
+use App\Models\HomeMainServicesModel;
+use App\Models\HomeOurClientsModel;
+use App\Models\Services;
+use App\Models\PricesModel;
 
 class HomeController extends Controller
 {
@@ -34,12 +50,34 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('layouts/frontend/index');
+        $banner = HomeBannerModel::where('status', 1)->orderBy('id', 'DESC')->get();
+        $logistics_service_topics = HomeLogisticsServiceTopicsModel::where('status', 1)->orderBy('id', 'DESC')->get();
+        $services = Services::where('status', 1)->orderBy('id', 'DESC')->get();
+        $sum_main_services = HomeMainServicesModel::select(DB::raw('SUM(status) as sum_main_services'))->where('status', 1)->get();
+        $main_services = HomeMainServicesModel::where('status', 1)->orderBy('id', 'DESC')->get();
+        $infinity_content = HomeInfinityContentModel::where('status', 1)->orderBy('id', 'DESC')->get();
+        $image = HomeImageModel::where('status', 1)->orderBy('id', 'DESC')->get();
+        $logo = HomeOurClientsModel::where('status', 1)->orderBy('id', 'DESC')->get();
+        $data = array(
+            'banner' => $banner,
+            'logistics_service_topics' => $logistics_service_topics,
+            'services' => $services,
+            'sum_main_services' => $sum_main_services,
+            'main_services' => $main_services,
+            'infinity_content' => $infinity_content,
+            'image' => $image,
+            'logo' => $logo,
+        );
+        return view('layouts/frontend/index', $data);
     }
 
     public function about()
     {
-        return view('layouts/frontend/about');
+        $about = AboutModel::where('status', 1)->orderBy('id', 'DESC')->get();
+        $data = array(
+            'about' => $about,
+        );
+        return view('layouts/frontend/about', $data);
     }
 
     public function account()
@@ -82,7 +120,7 @@ class HomeController extends Controller
         return view('layouts/frontend/nvocc');
     }
 
-     public function price()
+    public function price(Request $request)
     {
         return view('layouts/frontend/price');
     }

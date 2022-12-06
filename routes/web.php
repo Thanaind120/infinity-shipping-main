@@ -48,6 +48,7 @@ Route::get('/freightForwarding', 'HomeController@freightForwarding');
 Route::get('/landLogistics', 'HomeController@landLogistics');
 Route::get('/nvocc', 'HomeController@nvocc');
 Route::get('/price', 'HomeController@price');
+Route::post('/price/get_quote', 'PricesController@store')->name('quote.store');
 Route::get('/schedule-result', 'HomeController@schedule_result');
 Route::get('/schedule', 'HomeController@schedule');
 Route::get('/service', 'HomeController@service');
