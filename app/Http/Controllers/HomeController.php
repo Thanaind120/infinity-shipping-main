@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\AboutModel;
+use App\Models\Contact;
 use App\Models\HomeBannerModel;
 use App\Models\HomeLogisticsServiceTopicsModel;
 use App\Models\HomeInfinityContentModel;
@@ -52,6 +53,7 @@ class HomeController extends Controller
 
     public function index()
     {
+
         $banner = HomeBannerModel::where('status', 1)->orderBy('id', 'DESC')->get();
         $logistics_service_topics = HomeLogisticsServiceTopicsModel::where('status', 1)->orderBy('id', 'DESC')->get();
         $services = Services::where('status', 1)->orderBy('id', 'DESC')->get();
@@ -139,7 +141,32 @@ class HomeController extends Controller
 
     public function service()
     {
-        return view('layouts/frontend/service');
+        $services = Services::where('status', 1)->orderBy('id', 'DESC')->get();
+        $contact = Contact::find(1);
+        $data = array(
+            'services' => $services,
+            'contact' => $contact,
+        );
+        return view('layouts/frontend/service', $data);
+    }
+    public function service_detail($service_name)
+    {
+        $ServicesAll =  Services::all();
+        foreach ($ServicesAll as $item) {
+            // เช็คค่า ถ้ามีช่องว่าให้มันเขียนทับไม่ให้มีช่องว่าง
+            $service_replace = $string = str_replace(' ', '', $item->service_name);
+            if ($service_replace == $service_name) {
+                $id = $item->id;
+            }
+        }
+        $services = Services::find($id);
+        $contact = Contact::find(1);
+        $data = array(
+
+            'services' => $services,
+            'contact' => $contact,
+        );
+        return view('layouts/frontend/service_detail', $data);
     }
 
     public function terms()

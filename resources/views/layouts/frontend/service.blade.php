@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="th">
-<head>      
+
+<head>
     <title>Services - Infinity Shipping (Thailand)Co.,Ltd.</title>
-    @include('layouts.frontend.inc_header') 
+    @include('layouts.frontend.inc_header')
 </head>
+
 <body>
     @include('layouts.frontend.inc_navbar')
     <div class="bg-white">
@@ -18,94 +20,36 @@
                 </div>
             </div>
             <div class="row mt-4">
-                <div class="col-md-3">
-                    <a href="{{ url('/landLogistics') }}">
-                    <div class="box-service mb-3">
-                        <div class="box-img">
-                            <div class="img-bg" style="background-image:url('frontend/images/service/cover-LandLogistics.png');"></div>
-                            <div class="hover-container">
-                                <div class="icon">
-                                    <i class='bx bx-search'></i>
+                @foreach ($services as $val)
+                    @php
+                        // เช็คค่า ถ้ามีช่องว่าให้มันเขียนทับไม่ให้มีช่องว่าง  เอาไว้ส่งชื่อ services เข้า url
+                        $service_name = $string = str_replace(' ', '', $val->service_name);
+                    @endphp
+                    <div class="col-md-3">
+                        <a href="{{ url('/service' . '/' . $service_name) }}">
+                            <div class="box-service mb-3">
+                                <div class="box-img">
+                                    <div class="img-bg"
+                                        style="background-image:url('{{ asset('backend/assets/img/services/' . $val->service_images1) }}');">
+                                    </div>
+                                    <div class="hover-container">
+                                        <div class="icon">
+                                            <i class='bx bx-search'></i>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="service-title">
-                            <div class="span-text">
-                                Land Logistics
-                            </div>    
-                            <div class="span-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="{{ url('/nvocc') }}">
-                    <div class="box-service mb-3">
-                        <div class="box-img">
-                            <div class="img-bg" style="background-image:url('frontend/images/service/cover-NVOCC.png');"></div>
-                            <div class="hover-container">
-                                <div class="icon">
-                                    <i class='bx bx-search'></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="service-title">
-                            <div class="span-text">
-                                NVOCC
-                            </div>    
-                            <div class="span-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="{{ url('/freightForwarding') }}">
-                        <div class="box-service mb-3">
-                            <div class="box-img">
-                                <div class="img-bg" style="background-image:url('frontend/images/service/cover-FreightForwarding.png');"></div>
-                                <div class="hover-container">
-                                    <div class="icon">
-                                        <i class='bx bx-search'></i>
+                                <div class="service-title">
+                                    <div class="span-text">
+                                        {{ $val->service_name }}
+                                    </div>
+                                    <div class="span-arrow">
+                                        <i class="fas fa-arrow-right"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="service-title">
-                                <div class="span-text">
-                                    Freight Forwarding
-                                </div>    
-                                <div class="span-arrow">
-                                    <i class="fas fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="{{ url('/bulkLogistics') }}">
-                    <div class="box-service mb-3">
-                        <div class="box-img">
-                            <div class="img-bg" style="background-image:url('frontend/images/service/cover-BulkLogistics.png');"></div>
-                            <div class="hover-container">
-                                <div class="icon">
-                                    <i class='bx bx-search'></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="service-title">
-                            <div class="span-text">
-                            Bulk Logistics
-                            </div>    
-                            <div class="span-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                    </a>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -117,15 +61,17 @@
                     <p class="mb-0">Have questions or want to consult more information about transportation?</p>
                 </div>
                 <div class="col-sm-5 text-md-end">
-                    <a href="tel:+6626340610" class="btn btn-navy rounded-pill px-4 py-2"><i class="fas fa-phone"></i> Contact here</a>
+                    <a href="tel:{{ $contact->contact_phone }}" class="btn btn-navy rounded-pill px-4 py-2"><i
+                            class="fas fa-phone"></i>
+                        Contact here</a>
                 </div>
             </div>
         </div>
     </div>
-    @include('layouts.frontend.inc_footer') 
+    @include('layouts.frontend.inc_footer')
     <script>
-    
-    $('#linkMenuTop .nav-item').eq(2).addClass('active');   
+        $('#linkMenuTop .nav-item').eq(2).addClass('active');
     </script>
 </body>
-</html>    
+
+</html>

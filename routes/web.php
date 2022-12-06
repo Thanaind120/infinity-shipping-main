@@ -52,6 +52,7 @@ Route::post('/price/get_quote', 'PricesController@store')->name('quote.store');
 Route::get('/schedule-result', 'HomeController@schedule_result');
 Route::get('/schedule', 'HomeController@schedule');
 Route::get('/service', 'HomeController@service');
+Route::get('/service/{service_name}', 'HomeController@service_detail');
 Route::get('/terms', 'HomeController@terms');
 
 
