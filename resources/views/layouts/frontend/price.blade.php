@@ -141,12 +141,13 @@
                                     </div>
                                     <br>
                                     <div class="text-center">
-                                        @if(isset(Auth::user()->id))
+                                        @if(Auth::user() != '' || Auth::user() != NULL)
+                                        {{-- data-bs-toggle="modal" data-bs-target="#finishQuoteModal" --}}
                                         <button type="button" class="btn btn-navy rounded-pill px-4 mb-3"
-                                            data-bs-toggle="modal" data-bs-target="#finishQuoteModal">Get a
+                                            id="submitBtn_quote">Get a
                                             quote</button>
                                         @else
-                                        <a href="{{ url('/login') }}" class="btn btn-navy rounded-pill px-4 mb-3">Get a
+                                        <a class="btn btn-navy rounded-pill px-4 mb-3" id="submitBtn_quotes">Get a
                                             quote
                                         </a>
                                         @endif
@@ -206,6 +207,38 @@
             $('.filter').val('');
             $('.filters').val('0');
         }
+
+        $("#submitBtn_quote").on("click", function () {
+
+            if ($('#equipment_type').val() == '' || $('#equipment_type').val() == null) {
+                alert('กรุณาเลือก ประเภทอุปกรณ์ให้ครบถ้วน');
+            } else if ($('#weight').val() == '' || $('#weight').val() == null) {
+                alert('กรุณากรอก น้ำหนักสุทธิสูงสุด(KGM) ให้ครบถ้วน');
+            } else if ($('#productQty').val() == '' || $('#productQty').val() == null) {
+                alert('กรุณาเลือก จำนวนคอนเทนเนอร์ให้ครบถ้วน');
+            } else if ($('#commodity').val() == '' || $('#commodity').val() == null) {
+                alert('กรุณาเลือก สินค้าให้ครบถ้วน');
+            } else {
+                $('#finishQuoteModal').modal('show');
+            }
+
+        });
+
+        $("#submitBtn_quotes").on("click", function () {
+
+            if ($('#equipment_type').val() == '' || $('#equipment_type').val() == null) {
+                alert('กรุณาเลือก ประเภทอุปกรณ์ให้ครบถ้วน');
+            } else if ($('#weight').val() == '' || $('#weight').val() == null) {
+                alert('กรุณากรอก น้ำหนักสุทธิสูงสุด(KGM) ให้ครบถ้วน');
+            } else if ($('#productQty').val() == '' || $('#productQty').val() == null) {
+                alert('กรุณาเลือก จำนวนคอนเทนเนอร์ให้ครบถ้วน');
+            } else if ($('#commodity').val() == '' || $('#commodity').val() == null) {
+                alert('กรุณาเลือก สินค้าให้ครบถ้วน');
+            } else {
+                window.location.href = "{{ url('/login') }}"
+            }
+
+        });
 
     </script>
     <script>
