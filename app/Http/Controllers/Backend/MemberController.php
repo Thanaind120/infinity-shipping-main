@@ -116,8 +116,11 @@ class MemberController extends Controller
      * @param  \App\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $member)
+    public function destroy($id)
     {
-        //
+        $member = Member::find($id);
+        if ($member != null) {
+            Member::find($member->id)->delete();
+        }
     }
 }

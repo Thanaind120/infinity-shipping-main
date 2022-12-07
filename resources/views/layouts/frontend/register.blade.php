@@ -206,9 +206,11 @@
                                                 </div>
 
 
-                                                <button type="submit" class="btn btn-navy  rounded-pill mb-5 px-5"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#finishRegisterModal">Submit</button>
+                                                <button type="submit"
+                                                    class="btn btn-navy  rounded-pill mb-5 px-5">Submit</button>
+                                                <input type="hidden"id="testtest" data-bs-toggle="modal"
+                                                    data-bs-target="#finishRegisterModal">
+
                                             </div>
                                         </div>
                                     </form>
@@ -221,7 +223,8 @@
         </div>
     </div>
 
-    {{-- <div class="modal0 fade " id="finishRegisterModal" tabindex="-1" aria-labelledby="finishRegisterModalLabel"
+
+    <div class="modal fade " id="finishRegisterModal" tabindex="-1" aria-labelledby="finishRegisterModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content borderR-25 p-4">
@@ -237,7 +240,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <script>
         $(function() {
@@ -253,6 +256,7 @@
                     contentType: false,
                     beforeSend: function() {
                         $(document).find('span.error-text').text('');
+
                     },
                     success: function(data) {
                         if (data.status == 0) {
@@ -261,8 +265,13 @@
                             });
                         }
                         if (data.status == 1) {
-                            var myBookId = $(this).data('id');
-                            $(".modal-body #bookId").val(myBookId);
+                            // alert('1');
+                            $('#testtest').click();
+                            setTimeout(function() {
+
+                                location.reload(true);
+                            }, 3000);
+                            // location.reload();
                         }
                         // }
 

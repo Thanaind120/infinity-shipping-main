@@ -127,7 +127,7 @@ class MemberController extends Controller
                 if ($member->save()) {
                     DB::commit();
                     // return redirect()->to('/login')->with('success', 'Save Data Success');
-                    response()->json(['status' => 1]);
+                    return response()->json(['status' => 1]);
                 } else {
                     return redirect()->to('/register')->with('error', 'Save Data error');
                 }
