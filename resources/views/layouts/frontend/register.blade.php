@@ -234,7 +234,7 @@
                     <p>Thank you. You will receive an email to verification account. <br>Please wait for confirmation
                         via email within 1 hour.</p>
                     <div class="text-center pt-4">
-                        <button type="button" class="btn btn-navy rounded-pill px-4"
+                        <button type="button" id="email_ok" class="btn btn-navy rounded-pill px-4"
                             data-bs-dismiss="modal">OK</button><br>
                     </div>
                 </div>
@@ -243,6 +243,10 @@
     </div>
 
     <script>
+        $("#email_ok").on('click', function() {
+            location.reload();
+
+        });
         $(function() {
             $("#main_form").on('submit', function(e) {
                 e.preventDefault();
@@ -267,10 +271,10 @@
                         if (data.status == 1) {
                             // alert('1');
                             $('#testtest').click();
-                            setTimeout(function() {
+                            // setTimeout(function() {
 
-                                location.reload(true);
-                            }, 3000);
+                            //     location.reload(true);
+                            // }, 3000);
                             // location.reload();
                         }
                         // }
