@@ -208,7 +208,7 @@
 
                                                 <button type="submit"
                                                     class="btn btn-navy  rounded-pill mb-5 px-5">Submit</button>
-                                                <input type="hidden"id="testtest" data-bs-toggle="modal"
+                                                <input type="hidden"id="alertmail" data-bs-toggle="modal"
                                                     data-bs-target="#finishRegisterModal">
 
                                             </div>
@@ -270,7 +270,7 @@
                         }
                         if (data.status == 1) {
                             // alert('1');
-                            $('#testtest').click();
+                            $('#alertmail').click();
                             // setTimeout(function() {
 
                             //     location.reload(true);
