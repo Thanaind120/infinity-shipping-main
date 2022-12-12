@@ -21,6 +21,10 @@ use App\Models\HomeMainServicesModel;
 use App\Models\HomeOurClientsModel;
 use App\Models\Services;
 use App\Models\PricesModel;
+use App\Models\PricesPortOfLoadingModel;
+use App\Models\PricesPortOfDischargeModel;
+use App\Models\PricesEquipmentTypeModel;
+use App\Models\PricesCommodityModel;
 
 class HomeController extends Controller
 {
@@ -133,7 +137,17 @@ class HomeController extends Controller
 
     public function price(Request $request)
     {
-        return view('layouts/frontend/price');
+        $POL = PricesPortOfLoadingModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $POD = PricesPortOfDischargeModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $EquipmentType = PricesEquipmentTypeModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $Commodity = PricesCommodityModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $data = array(
+            'POL' => $POL,
+            'POD' => $POD,
+            'EquipmentType' => $EquipmentType,
+            'Commodity' => $Commodity,
+        );
+        return view('layouts/frontend/price', $data);
     }
 
     public function schedule_result()
