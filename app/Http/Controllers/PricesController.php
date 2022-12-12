@@ -54,6 +54,8 @@ class PricesController extends Controller
             'commodity' => $request->commodity,
             'other' => $request->other,
             'status' => 1,
+            'created_id' => Auth::user()->id,
+            'created_by' => Auth::user()->first_name.' '.Auth::user()->last_name,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
