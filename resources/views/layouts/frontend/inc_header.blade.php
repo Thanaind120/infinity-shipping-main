@@ -46,11 +46,17 @@
     <script src="{{ asset('frontend/owlcarousel/js/owl.carousel.min.js') }}"></script>
 
     <!--sweetalert2-->
-    <link rel="stylesheet" href="sweetalert2.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!--datepicker-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0-rc.2/jquery-ui.min.js"></script>
 
     <!--Animation-->
     <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
     <script>
         new WOW().init();
+
     </script>

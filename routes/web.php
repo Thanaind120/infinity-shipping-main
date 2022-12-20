@@ -19,19 +19,12 @@ Route::get('/clc', function () {
     Artisan::call('config:clear');
     Artisan::call('config:cache');
     Artisan::call('view:clear');
-
     // Artisan::call('optimize');
     // Artisan::call('clear-compiled');
     // Artisan::call('view:clear');
     // session()->forget('key');
     return "Cleared!";
 });
-
-// Route::get('/', function () {
-//     // return view('welcome');
-//     return view('layouts/backend/index');
-// });
-// Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
@@ -57,13 +50,13 @@ Route::get('/terms', 'HomeController@terms');
 
 
 //** MEMBER **//
-Route::get('member', 'MemberController@index'); // get all Slide member data
-Route::post('member/in_progress', 'MemberController@in_progress'); // get all Slide member data
-Route::get('member/create', 'MemberController@create');  // create Slide member view
-Route::post('member/store', 'MemberController@store')->name('member.store'); // store Slide member data
-Route::get('member/edit/{id}', 'MemberController@edit');   // edit Slide member view
-Route::put('member/update/{id}', 'MemberController@update'); //update Slide member data
-Route::delete('member/delete/{id}', 'MemberController@destroy'); //delete Slide member data
+Route::get('member', 'MemberController@index'); // get all member data
+Route::post('member/in_progress', 'MemberController@in_progress'); // get all member data
+Route::get('member/create', 'MemberController@create');  // create member view
+Route::post('member/store', 'MemberController@store')->name('member.store'); // store member data
+Route::get('member/edit/{id}', 'MemberController@edit');   // edit member view
+Route::put('member/update/{id}', 'MemberController@update'); //update member data
+Route::delete('member/delete/{id}', 'MemberController@destroy'); //delete member data
 //** END MEMBER **//
 
 //*---------------------------------------------------------------- BACKEND ----------------------------------------------------------------*//
@@ -123,6 +116,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::delete('/backend/home/our-clients/delete/{id}', 'Backend\HomeOurClientsController@destroy'); //delete Our Clients data
     //** END OUR CliENTS **//
     ////////////////////<!** END HOME **!>////////////////////
+
     ////////////////////<!** ABOUT US **!>////////////////////
     //** ABOUT **//
     Route::get('/backend/about', 'Backend\AboutController@index'); // get all About data
@@ -133,6 +127,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::delete('/backend/about/delete/{id}', 'Backend\AboutController@destroy'); //delete About data
     //** END ABOUT **//
     ////////////////////<!** END ABOUT US **!>////////////////////
+
     ////////////////////<!** SERVICES **!>////////////////////
     //** SERVICES **//
     Route::get('/backend/services', 'Backend\ServicesController@index'); // get all Services data
@@ -143,6 +138,42 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::delete('/backend/services/delete/{id}', 'Backend\ServicesController@destroy'); //delete Services data
     //** END SERVICES **//
     ////////////////////<!** END SERVICES **!>////////////////////
+
+    ////////////////////<!** PRICES **!>////////////////////
+    //** PORT OF lOADING **//
+    Route::get('/backend/price/POL', 'Backend\PricesPortOfLoadingController@index'); // get all Port of loading data
+    Route::get('/backend/price/POL/create', 'Backend\PricesPortOfLoadingController@create');  // create Port of loading view
+    Route::post('/backend/price/POL/store', 'Backend\PricesPortOfLoadingController@store')->name('POL.store'); // store Port of loading data
+    Route::get('/backend/price/POL/edit/{id}', 'Backend\PricesPortOfLoadingController@edit');   // edit Port of loading view
+    Route::put('/backend/price/POL/update/{id}', 'Backend\PricesPortOfLoadingController@update'); //update Port of loading data
+    Route::delete('/backend/price/POL/delete/{id}', 'Backend\PricesPortOfLoadingController@destroy'); //delete Port of loading data
+    //** END PORT OF lOADING **//
+    //** PORT OF DISCHARGE **//
+    Route::get('/backend/price/POD', 'Backend\PricesPortOfDischargeController@index'); // get all Port of discharge data
+    Route::get('/backend/price/POD/create', 'Backend\PricesPortOfDischargeController@create');  // create Port of discharge view
+    Route::post('/backend/price/POD/store', 'Backend\PricesPortOfDischargeController@store')->name('POD.store'); // store Port of discharge data
+    Route::get('/backend/price/POD/edit/{id}', 'Backend\PricesPortOfDischargeController@edit');   // edit Port of discharge view
+    Route::put('/backend/price/POD/update/{id}', 'Backend\PricesPortOfDischargeController@update'); //update Port of discharge data
+    Route::delete('/backend/price/POD/delete/{id}', 'Backend\PricesPortOfDischargeController@destroy'); //delete Port of discharge data
+    //** END PORT OF DISCHARGE **//
+    //** EQUIPMENT TYPE **//
+    Route::get('/backend/price/equipment-type', 'Backend\PricesEquipmentTypeController@index'); // get all Equipment type data
+    Route::get('/backend/price/equipment-type/create', 'Backend\PricesEquipmentTypeController@create');  // create Equipment type view
+    Route::post('/backend/price/equipment-type/store', 'Backend\PricesEquipmentTypeController@store')->name('EquipmentType.store'); // store Equipment type data
+    Route::get('/backend/price/equipment-type/edit/{id}', 'Backend\PricesEquipmentTypeController@edit');   // edit Equipment type view
+    Route::put('/backend/price/equipment-type/update/{id}', 'Backend\PricesEquipmentTypeController@update'); //update Equipment type data
+    Route::delete('/backend/price/equipment-type/delete/{id}', 'Backend\PricesEquipmentTypeController@destroy'); //delete Equipment type data
+    //** END EQUIPMENT TYPE **//
+    //** COMMODITY **//
+    Route::get('/backend/price/commodity', 'Backend\PricesCommodityController@index'); // get all Commodity data
+    Route::get('/backend/price/commodity/create', 'Backend\PricesCommodityController@create');  // create Commodity view
+    Route::post('/backend/price/commodity/store', 'Backend\PricesCommodityController@store')->name('commodity.store'); // store Commodity data
+    Route::get('/backend/price/commodity/edit/{id}', 'Backend\PricesCommodityController@edit');   // edit Commodity view
+    Route::put('/backend/price/commodity/update/{id}', 'Backend\PricesCommodityController@update'); //update Commodity data
+    Route::delete('/backend/price/commodity/delete/{id}', 'Backend\PricesCommodityController@destroy'); //delete Commodity data
+    //** END COMMODITY **//
+    ////////////////////<!** END PRICES **!>////////////////////
+
     ////////////////////<!** CONTACT US **!>////////////////////
     //** CONTACT **//
     Route::get('/backend/contact', 'Backend\ContactController@index'); // get all Contact data
@@ -154,7 +185,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     //** END CONTACT **//
     ////////////////////<!** END CONTACT US **!>////////////////////
 
-    ////////////////////<!** MEMBER **!>////////////////////
+    ////////////////////<!** MANAGEMENT **!>////////////////////
     //** MEMBER **//
     Route::get('/backend/member', 'Backend\MemberController@index'); // get all Services data
     Route::get('/backend/member/create', 'Backend\MemberController@create');  // create Services view
@@ -163,7 +194,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::put('/backend/member/update/{id}', 'Backend\MemberController@update'); //update Services data
     Route::delete('/backend/member/delete/{id}', 'Backend\MemberController@destroy'); //delete Services data
     //** END MEMBER **//
-    ////////////////////<!** END MEMBER **!>////////////////////
+    ////////////////////<!** END MANAGEMENT **!>////////////////////
 
 
 });

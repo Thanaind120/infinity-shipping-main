@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Carbon\Carbon;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\PricesModel;
+use App\Models\PricesPortOfLoadingModel;
 
-class PricesController extends Controller
+class PricesPortOfLoadingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +22,11 @@ class PricesController extends Controller
      */
     public function index()
     {
-        //
+        $POL = PricesPortOfLoadingModel::orderBy('id', 'DESC')->get();
+        $data = array(
+            'POL' => $POL,
+        );
+        return view('layouts/backend/port-of-loading/index', $data);
     }
 
     /**
@@ -31,7 +36,7 @@ class PricesController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts/backend/port-of-loading/form');
     }
 
     /**
@@ -42,24 +47,17 @@ class PricesController extends Controller
      */
     public function store(Request $request)
     {
-        PricesModel::create([
-            'id_quote' => $request->id_quote,
-            'location' => $request->location,
-            'POL' => $request->POL,
-            'ETD' => $request->ETD,
-            'POD' => $request->POD,
-            'equipment_type' => $request->equipment_type,
-            'weight' => $request->weight,
-            'productQty' => $request->productQty,
-            'commodity' => $request->commodity,
-            'other' => $request->other,
-            'status' => 1,
-            'created_id' => Auth::user()->id,
-            'created_by' => Auth::user()->first_name.' '.Auth::user()->last_name,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-        return redirect()->to('/price');
+        // save
+        if ($request->type == 1) {
+            PricesPortOfLoadingModel::create([
+                'id' => $request->id,
+                'POL_name' => $request->POL_name,
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+            return redirect()->to('/backend/price/POL')->with('success', 'Save Data Success');
+        }
     }
 
     /**
@@ -81,7 +79,11 @@ class PricesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $POL = PricesPortOfLoadingModel::find($id);
+        $data = array(
+            'POL' => $POL,
+        );
+        return view('layouts/backend/port-of-loading/form', $data);
     }
 
     /**
@@ -93,7 +95,20 @@ class PricesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //update
+        if ($request->type == 2) {
+            if (isset($request->status)) {
+                $status = 1;
+            } else {
+                $status = 0;
+            }
+            PricesPortOfLoadingModel::find($id)->update([
+                'POL_name' => $request->POL_name,
+                'status' => $status,
+                'updated_at' => Carbon::now()
+            ]);
+            return redirect()->to('/backend/price/POL')->with('success', 'Save Data Success');
+        }
     }
 
     /**
@@ -104,6 +119,6 @@ class PricesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        PricesPortOfLoadingModel::find($id)->delete();
     }
 }

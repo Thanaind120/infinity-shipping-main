@@ -20,7 +20,7 @@
                                     <h1 class="fw-bold text-navy">Instant Quote</h1>
                                     <div class="lineR-left"></div>
                                     <ul class="timeline">
-                                        <li class="timeline-item">
+                                        {{-- <li class="timeline-item">
                                             <div class="timeline-marker dot-none"><i
                                                     class='bx-sm bx bx-plus-circle text-navy'></i></div>
                                             <div class="timeline-content">
@@ -40,7 +40,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </li> --}}
                                         <li class="timeline-item">
                                             <div class="timeline-marker dot-none"><i
                                                     class='bx-xs bx bxs-circle text-red'></i></div>
@@ -49,11 +49,19 @@
                                                     <div class="col-md-6 col-lg-4">
                                                         <label for="" class="form-label text-navy">Port of
                                                             loading</label>
-                                                        <div class="box-location">
-                                                            <input type="text" class="form-control borderR-6 filter"
-                                                                placeholder="Location" id="POL" name="POL" />
-                                                            <span class="icon-input bx bx-anchor text-navy"></span>
-                                                        </div>
+                                                        {{-- <div class="box-location"> --}}
+                                                        {{-- <input type="text" class="form-control borderR-6 filter"
+                                                                placeholder="Location" id="POL" name="POL" /> --}}
+                                                        <select class="form-select borderR-6 filter"
+                                                            placeholder="Location" aria-label="Default select example"
+                                                            id="POL" name="POL">
+                                                            <option value="" selected>Open this select POL</option>
+                                                            @foreach ($POL as $key => $val)
+                                                            <option value="{{ $val->POL_name }}">{{ $val->POL_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        {{-- <span class="icon-input bx bx-anchor text-navy"></span> --}}
+                                                        {{-- </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -67,8 +75,11 @@
                                                     <div class="col-md-6 col-lg-4">
                                                         <label for="" class="form-label text-navy">Vessal Departure
                                                             from</label>
-                                                        <input type="date" class="form-control borderR-6 filter"
-                                                            id="ETD" name="ETD" />
+                                                        <div class="box-location">
+                                                            <input type="text" class="form-control borderR-6 filter"
+                                                                id="datepicker" name="ETD" />
+                                                            <span class="icon-input fa fa-calendar text-navy"></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,11 +92,19 @@
                                                     <div class="col-md-6 col-lg-4">
                                                         <label for="" class="form-label text-navy">Port of
                                                             discharge</label>
-                                                        <div class="box-location">
-                                                            <input type="text" class="form-control borderR-6 filter"
-                                                                placeholder="Location" id="POD" name="POD" />
-                                                            <span class="icon-input bx bx-anchor text-navy"></span>
-                                                        </div>
+                                                        {{-- <div class="box-location"> --}}
+                                                        {{-- <input type="text" class="form-control borderR-6 filter"
+                                                                placeholder="Location" id="POD" name="POD" /> --}}
+                                                        <select class="form-select borderR-6 filter"
+                                                            aria-label="Default select example" placeholder="Location"
+                                                            id="POD" name="POD">
+                                                            <option value="" selected>Open this select POD</option>
+                                                            @foreach ($POD as $key => $val)
+                                                            <option value="{{ $val->POD_name }}">{{ $val->POD_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        {{-- <span class="icon-input bx bx-anchor text-navy"></span> --}}
+                                                        {{-- </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -102,9 +121,9 @@
                                                 aria-label="Default select example" id="equipment_type"
                                                 name="equipment_type">
                                                 <option value="" selected>Open this select menu</option>
-                                                <option value="1">20' Dry Standard</option>
-                                                <option value="2">20' Dry Hight Cube</option>
-                                                <option value="3">40' Dry Hight Cube</option>
+                                                @foreach ($EquipmentType as $key => $val)
+                                                <option value="{{ $val->device_name }}">{{ $val->device_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-lg-4">
@@ -129,8 +148,10 @@
                                             <select class="form-select borderR-6 filter" id="commodity"
                                                 name="commodity">
                                                 <option value="" hidden>Select Commodity</option>
-                                                <option value="value 1">value 1</option>
-                                                <option value="value 2">value 2</option>
+                                                @foreach ($Commodity as $key => $val)
+                                                <option value="{{ $val->commodity_name }}">
+                                                    {{ $val->commodity_name }}</option>
+                                                @endforeach
                                                 <option value="other">Other</option>
                                             </select>
                                             <div id="boxOther" class="other box mt-3">
@@ -141,7 +162,7 @@
                                     </div>
                                     <br>
                                     <div class="text-center">
-                                        @if(Auth::user() != '' || Auth::user() != NULL)
+                                        @if(isset(Auth::user()->id))
                                         {{-- data-bs-toggle="modal" data-bs-target="#finishQuoteModal" --}}
                                         <button type="button" class="btn btn-navy rounded-pill px-4 mb-3"
                                             id="submitBtn_quote">Get a
@@ -184,6 +205,17 @@
     </form>
     @include('layouts.frontend.inc_footer')
     <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                minDate: "today",
+                maxDate: "+20d",
+                setDate: "+1d"
+            });
+        });
+
+    </script>
+    <script>
         $('#linkMenuTop .nav-item').eq(3).addClass('active');
 
     </script>
@@ -211,13 +243,29 @@
         $("#submitBtn_quote").on("click", function () {
 
             if ($('#equipment_type').val() == '' || $('#equipment_type').val() == null) {
-                alert('กรุณาเลือก ประเภทอุปกรณ์ให้ครบถ้วน');
+                Swal.fire(
+                    'Please select!',
+                    'Equipment type.',
+                    'warning'
+                )
             } else if ($('#weight').val() == '' || $('#weight').val() == null) {
-                alert('กรุณากรอก น้ำหนักสุทธิสูงสุด(KGM) ให้ครบถ้วน');
-            } else if ($('#productQty').val() == '' || $('#productQty').val() == null) {
-                alert('กรุณาเลือก จำนวนคอนเทนเนอร์ให้ครบถ้วน');
+                Swal.fire(
+                    'Please fill out!',
+                    'Maximum net weight (KGM).',
+                    'warning'
+                )
+            } else if ($('#productQty').val() == '0' || $('#productQty').val() == null) {
+                Swal.fire(
+                    'Please fill out!',
+                    'Number of container (s).',
+                    'warning'
+                )
             } else if ($('#commodity').val() == '' || $('#commodity').val() == null) {
-                alert('กรุณาเลือก สินค้าให้ครบถ้วน');
+                Swal.fire(
+                    'Please select!',
+                    'Commodity.',
+                    'warning'
+                )
             } else {
                 $('#finishQuoteModal').modal('show');
             }
@@ -227,13 +275,29 @@
         $("#submitBtn_quotes").on("click", function () {
 
             if ($('#equipment_type').val() == '' || $('#equipment_type').val() == null) {
-                alert('กรุณาเลือก ประเภทอุปกรณ์ให้ครบถ้วน');
+                Swal.fire(
+                    'Please select!',
+                    'Equipment type.',
+                    'warning'
+                )
             } else if ($('#weight').val() == '' || $('#weight').val() == null) {
-                alert('กรุณากรอก น้ำหนักสุทธิสูงสุด(KGM) ให้ครบถ้วน');
-            } else if ($('#productQty').val() == '' || $('#productQty').val() == null) {
-                alert('กรุณาเลือก จำนวนคอนเทนเนอร์ให้ครบถ้วน');
+                Swal.fire(
+                    'Please fill out!',
+                    'Maximum net weight (KGM).',
+                    'warning'
+                )
+            } else if ($('#productQty').val() == '0' || $('#productQty').val() == null) {
+                Swal.fire(
+                    'Please fill out!',
+                    'Number of container (s).',
+                    'warning'
+                )
             } else if ($('#commodity').val() == '' || $('#commodity').val() == null) {
-                alert('กรุณาเลือก สินค้าให้ครบถ้วน');
+                Swal.fire(
+                    'Please select!',
+                    'Commodity.',
+                    'warning'
+                )
             } else {
                 window.location.href = "{{ url('/login') }}"
             }
