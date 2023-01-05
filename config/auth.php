@@ -40,19 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
-        ],
         'Member' => [
             'driver' => 'session',
             'provider' => 'member_auth'
         ],
-        'member_auth' => [
-            'driver' => 'session',
-            'model' => App\Loginmember::class,
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
         ],
     ],
 
