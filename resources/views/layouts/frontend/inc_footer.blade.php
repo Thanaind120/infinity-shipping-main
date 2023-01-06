@@ -8,7 +8,7 @@
                         Bangkok 10500.</p>
                     <p class="text-navy ps-xl-2">
                         TEL : 02 634 0610<br>
-                        Fax :+662 6340617<br>
+                        Fax : +662 6340617<br>
                         EMAIL : sales5@infinity.co.th
                     </p>
                 </div>
@@ -52,3 +52,7 @@
         </div>
     </div>
 </div>
+
+<!--sweetalert2-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@include('sweetalert')

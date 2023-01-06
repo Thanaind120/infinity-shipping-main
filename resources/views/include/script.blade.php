@@ -21,6 +21,7 @@
 <!-- Sweetalert -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @include('sweetalert')
+
 <!-- Data Tables -->
 <script src="{{asset('backend/assets/datatables/dataTables.min.js')}}"></script>
 <script src="{{asset('backend/assets/datatables/dataTables.bootstrap.min.js')}}"></script>

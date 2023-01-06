@@ -28,9 +28,9 @@ class LoginController extends Controller
      */
     public function in_progress(Request $request)
     {
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])){
+        if (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])){
             // dd('success');
-            return redirect()->to('/backend/home/banner')->with('success','Save Data Success');
+            return redirect()->to('/backend/home/banner')->with('login','Log In Success');
         }else{
             // dd('error');
             return redirect("backend/login");
@@ -45,7 +45,8 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::logout();$request->session()->invalidate();
+        Auth::guard('web')->logout();
+        // $request->session()->invalidate();
         return redirect("backend/login");
     }
 

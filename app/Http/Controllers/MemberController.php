@@ -14,7 +14,6 @@ class MemberController extends Controller
 
     public function in_progress(Request $request)
     {
-
         $username = $request->email;
         $password = $request->password;
         // dd($username, $password);
@@ -26,7 +25,7 @@ class MemberController extends Controller
                 return redirect()->to('/login')->with('error', 'User Email has been disabled.');
             }
             // dd('เท่า');
-            return redirect()->to('/')->with('success', 'Login Success');
+            return redirect()->to('/')->with('login', 'Log In Success');
         } else {
             return redirect()->to('/login')->with('error', 'Email or Password is incorrect');
         }
@@ -41,7 +40,7 @@ class MemberController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('Member')->logout();
-        $request->session()->invalidate();
+        // $request->session()->invalidate();
         return redirect("/login");
     }
 
@@ -68,7 +67,6 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-
         // Validator เช็คคำ
         $validator = Validator::make(
             $request->all(),
@@ -83,7 +81,6 @@ class MemberController extends Controller
                 'confirm_password' => 'required|same:password',
             ],
             [
-
                 // 'first_name.required' => 'กรุณากรอกรหัสผ่าน.',
                 // 'last_name.required' => 'กรุณากรอกรหัสผ่าน.',
                 // 'phone_number.required' => 'กรุณากรอกรหัสผ่าน.',
@@ -95,14 +92,13 @@ class MemberController extends Controller
             ]
         );
         if (!$validator->passes()) {
-
             return response()->json(['status' => 0, 'oldpass' => 3, 'error' => $validator->errors()->toArray()]);
         } else {
             // dd($request->all());
-
             try {
                 DB::beginTransaction();
                 $member = new Member();
+                $member->member_code = 'M'.date('YmdHis');
                 $member->email = $request->email;
                 $member->password = bcrypt($request->password);
                 $member->first_name = $request->first_name;

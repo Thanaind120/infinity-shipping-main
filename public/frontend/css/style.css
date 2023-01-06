@@ -306,9 +306,6 @@ ol.listNo li ol li ol li:before {
 .badge.bg-success {
   background-color: #4bc013 !important;
 }
-.badge.bg-danger {
-  background-color: #e6262a !important;
-}
 
 #historyBook td,
 #historyBook th {
@@ -440,17 +437,41 @@ div.dataTables_wrapper div.dataTables_length select {
 /*-----------------------------------------
     Form style
 -------------------------------------------*/
+#share-icon .nav-item {
+  margin-left: 5px;
+}
+#share-icon .nav-item .nav-link {
+  display: flex;
+  border: 2px solid #001e48;
+  color: #001e48;
+  padding: 2px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+#share-icon .nav-item .nav-link:hover {
+  background-color: #001e48;
+  color: #fff;
+}
+
 .box-location {
   position: relative;
 }
 .box-location input[type=text] {
   padding-left: 35px;
 }
+.box-location select.form-select {
+  padding-left: 35px;
+}
 .box-location .icon-input {
   float: left;
   margin-left: 10px;
-  margin-top: -28px;
-  position: relative;
+  margin-top: 0px;
+  position: absolute;
+  top: 9px;
+  left: 0px;
   z-index: 2;
   font-size: 1.3rem;
   color: #012d6b;
@@ -725,8 +746,87 @@ div.dataTables_wrapper div.dataTables_length select {
   }
 }
 /*===================================
+  other style
+===================================*/
+/*===================================
   Animate style
 ===================================*/
+.scrollDown {
+  position: absolute;
+  bottom: 6px;
+  left: 10%;
+  width: 8px;
+  height: 8px;
+  transform: rotate(135deg);
+}
+
+.scrollDown span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-bottom: 2px solid #000;
+  border-right: 2px solid #000;
+  -webkit-animation: animate 1.5s linear infinite;
+          animation: animate 1.5s linear infinite;
+  opacity: 0;
+}
+
+.scrollDown span:nth-child(1) {
+  transform: translate(-5px, -5px);
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+
+.scrollDown span:nth-child(2) {
+  transform: translate(0px, 0px);
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.scrollDown span:nth-child(3) {
+  transform: translate(5px, 5px);
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+}
+
+@-webkit-keyframes animate {
+  0% {
+    top: -5px;
+    left: -5px;
+    opacity: 0;
+  }
+  25% {
+    top: 0px;
+    left: 0px;
+    opacity: 1;
+  }
+  50%, 100% {
+    top: 5px;
+    left: 5px;
+    opacity: 1;
+  }
+}
+
+@keyframes animate {
+  0% {
+    top: -5px;
+    left: -5px;
+    opacity: 0;
+  }
+  25% {
+    top: 0px;
+    left: 0px;
+    opacity: 1;
+  }
+  50%, 100% {
+    top: 5px;
+    left: 5px;
+    opacity: 1;
+  }
+}
 .animation-wrapper {
   position: relative;
   height: 100px;

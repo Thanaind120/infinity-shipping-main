@@ -10,10 +10,12 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="shortcut icon" type="image/x-icon" href="{{ asset('backend/assets/img/ico/fav-icon.png') }}">
 <link rel="shortcut icon" type="image/png" href="{{ asset('backend/assets/img/ico/fav-icon.png') }}">
+
 <!-- Template CSS -->
 <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
-<link rel="stylesheet" href="sweetalert2.min.css">
+{{-- <link rel="stylesheet" href="sweetalert2.min.css"> --}}
+
 <!-- Data table -->
 <link rel="stylesheet" href="{{ asset('backend/assets/datatables/dataTables.bs4.css') }}" />
 <link rel="stylesheet" href="{{ asset('backend/assets/datatables/dataTables.bs4-custom.css') }}" />
