@@ -25,7 +25,7 @@
                     <div class="section-body">
                         <div class="card col-8">
                             <div class="card-body p-0">
-                                <form action="{{ url('backend/price/add-detail/' . $price->id_quote) }}"
+                                <form action="{{ url('backend/price/add-detail/update/' . $price->id_quote) }}"
                                     enctype="multipart/form-data" method="POST">
                                     @csrf
                                     @method('PUT')

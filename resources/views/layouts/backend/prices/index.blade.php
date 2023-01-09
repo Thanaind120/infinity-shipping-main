@@ -54,17 +54,21 @@
                                                 <td class="text-center">{{ $i }}</td>
                                                 <td class="text-center">{{ $val->POL }}</td>
                                                 <td class="text-center">
+                                                    @if($val->VDF != '')
                                                     <?php 
                                                     $date = date_create($val->VDF);
                                                     echo date_format($date,"d/m/Y");
                                                     ?>
+                                                    @endif
                                                 </td>
                                                 <td class="text-center">{{ $val->POD }}</td>
                                                 <td class="text-center">
+                                                    @if($val->VDT != '')
                                                     <?php 
                                                     $date = date_create($val->VDT);
                                                     echo date_format($date,"d/m/Y");
                                                     ?>
+                                                    @endif
                                                 </td>
                                                 <td class="text-center">
                                                     @if($val->status == 1)
@@ -108,7 +112,7 @@
                     </div>
                 </section>
             </div>
-            
+
             @include('include.footer')
         </div>
     </div>

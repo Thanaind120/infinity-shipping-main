@@ -12,10 +12,10 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Infinity Shipping</a>
+            <a href="{{ url('/') }}">Infinity Shipping</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">IS</a>
+            <a href="{{ url('/') }}">IS</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Home</li>
@@ -57,6 +57,10 @@
             </li>
 
             <li class="menu-header">Prices</li>
+            <li class="<?php echo isset($active[14]) ? $active[14] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/price') }}"><i class="fas fa-credit-card"></i>
+                    <span>Instant Quote</span></a>
+            </li>
             <li class="<?php echo isset($active[10]) ? $active[10] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/price/POL') }}"><i class="fas fa-location-arrow"></i>
                     <span>Port of loading</span></a>
@@ -74,6 +78,16 @@
                     <span>Commodity</span></a>
             </li>
 
+            <li class="menu-header">Booking</li>
+            {{-- <li class="<?php echo isset($active[15]) ? $active[15] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/booking') }}"><i class="fas fa-book"></i>
+            <span>Booking</span></a>
+            </li> --}}
+            <li class="<?php echo isset($active[16]) ? $active[16] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/booking/term') }}"><i class="fas fa-clipboard"></i>
+                    <span>Term</span></a>
+            </li>
+
             <li class="menu-header">Contact US</li>
             <li class="<?php echo isset($active[7]) ? $active[7] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/contact/edit/' . 1) }}"><i class="fas fa-phone"></i>
@@ -86,8 +100,6 @@
                     <span>Members </span>
                 </a>
             </li>
-
         </ul>
     </aside>
-
 </div>
