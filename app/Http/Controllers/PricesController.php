@@ -21,7 +21,11 @@ class PricesController extends Controller
      */
     public function index()
     {
-        //
+        $price = PricesModel::orderBy('id_quote', 'DESC')->where('status', 1)->orwhere('status', 0)->get();
+        $data = array(
+            'price' => $price,
+        );
+        return view('layouts/backend/prices/index', $data);
     }
 
     /**
@@ -42,24 +46,7 @@ class PricesController extends Controller
      */
     public function store(Request $request)
     {
-        PricesModel::create([
-            'id_quote' => $request->id_quote,
-            'location' => $request->location,
-            'POL' => $request->POL,
-            'ETD' => $request->ETD,
-            'POD' => $request->POD,
-            'equipment_type' => $request->equipment_type,
-            'weight' => $request->weight,
-            'productQty' => $request->productQty,
-            'commodity' => $request->commodity,
-            'other' => $request->other,
-            'status' => 1,
-            'created_id' => Auth::user()->id,
-            'created_by' => Auth::user()->first_name.' '.Auth::user()->last_name,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-        return redirect()->to('/price');
+        //
     }
 
     /**
@@ -70,7 +57,11 @@ class PricesController extends Controller
      */
     public function show($id)
     {
-        //
+        $price = PricesModel::find($id);
+        $data = array(
+            'price' => $price,
+        );
+        return view('layouts/backend/prices/form', $data);
     }
 
     /**
@@ -81,7 +72,11 @@ class PricesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $price = PricesModel::find($id);
+        $data = array(
+            'price' => $price,
+        );
+        return view('layouts/backend/prices/form2', $data);
     }
 
     /**
@@ -93,7 +88,22 @@ class PricesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $date = $request->VDT;
+        $newDate = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+        if (isset($request->privilege)) {
+            $privilege = 1;
+        } else {
+            $privilege = 0;
+        }
+        PricesModel::find($id)->update([
+            'VDT' => $newDate,
+            'rate' => $request->rate,
+            'privilege' => $privilege,
+            'special_rate' => $request->special_rate,
+            'status' => 1,
+            'updated_at' => Carbon::now()
+        ]);
+        return redirect()->to('/backend/price')->with('success', 'Save Data Success');
     }
 
     /**
@@ -102,8 +112,12 @@ class PricesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function reject($id)
     {
-        //
+        PricesModel::find($id)->update([
+            'status' => 2,
+            'updated_at' => Carbon::now()
+        ]);
+        return redirect()->to('/backend/price')->with('success', 'Save Data Success');
     }
 }
