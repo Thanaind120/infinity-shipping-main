@@ -21,7 +21,7 @@ class PricesController extends Controller
      */
     public function index()
     {
-        $price = PricesModel::orderBy('id_quote', 'DESC')->where('status', 1)->orwhere('status', 0)->get();
+        $price = PricesModel::where('status', 1)->orwhere('status', 0)->orderBy(DB::raw('case when status = 0 then 1 when status = 1 then 2 end'))->get();
         $data = array(
             'price' => $price,
         );
