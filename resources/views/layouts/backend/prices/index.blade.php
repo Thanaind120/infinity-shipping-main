@@ -38,9 +38,9 @@
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Member
                                                 </th>
-                                                <th scope="col" class="text-center"> More Details</th>
+                                                <th scope="col" class="text-center" width="12%"> More Details</th>
                                                 <th scope="col" class="text-center"> Reject</th>
-                                                <th scope="col" class="text-center" width="14%"><i
+                                                <th scope="col" class="text-center" width="11%"><i
                                                         class="fa fa-cog"></i> Tools</th>
                                             </tr>
                                         </thead>
