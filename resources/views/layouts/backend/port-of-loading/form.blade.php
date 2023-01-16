@@ -45,7 +45,7 @@
                                         <!-- form insert -->
                                         @if(!isset($POL))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="POL_name" class="col-md-2 col-form-label">Port of loading :</label>
+                                            <label for="" class="col-md-2 col-form-label">Port of loading :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="POL_name" name="POL_name"
                                                     value="">
@@ -55,7 +55,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="POL_name" class="col-md-2 col-form-label">Port of loading :</label>
+                                            <label for="" class="col-md-2 col-form-label">Port of loading :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="POL_name" name="POL_name"
                                                     value="{{ $POL->POL_name }}">

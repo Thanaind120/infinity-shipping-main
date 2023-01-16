@@ -21,14 +21,6 @@
 
                     <div class="section-body">
                         <div class="card">
-                            {{-- <div class="card-header">
-                                <!-- add user button -->
-                                <div class="text-right">
-                                    <a class="btn btn-success" href="#" onclick="create_about()"><i class="fa fa-plus"
-                                            title="Create"></i> Add</a>
-                                </div><br>
-                            </div> --}}
-
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">
@@ -37,9 +29,6 @@
                                                 <th scope="col" class="text-center">#</th>
                                                 <th scope="col" class="text-center"><i class="far fa-image"></i> Images
                                                 </th>
-                                                {{-- <th scope="col" class="text-center"><i class="far fa-user"></i> Company
-                                                    Nane
-                                                </th> --}}
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i>
                                                     Status
                                                 </th>
@@ -59,7 +48,6 @@
                                                     <img src="{{ $val->img_about != '' ? asset('backend/assets/img/about/' . $val->img_about) : asset('backend/assets/img/about/nopic.jpg') }}"
                                                         class="img-slide" width="100">
                                                 </td>
-                                                {{-- <td class="text-center">{{ $val->company_name }}</td> --}}
                                                 <td class="text-center">
                                                     @if ($val->status == 1)
                                                     <span class="text-success">Active</span>
@@ -72,10 +60,6 @@
                                                         onclick="update_about({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
-                                                    {{-- <button class="btn btn-danger"
-                                                        onclick="delete_about({{ $val->id }})">
-                                                        <i class="fa fa-trash" title="Delete"></i> Delete
-                                                    </button> --}}
                                                 </td>
                                             </tr>
                                             <?php

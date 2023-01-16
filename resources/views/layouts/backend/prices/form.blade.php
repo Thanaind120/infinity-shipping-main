@@ -26,13 +26,12 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1 class="font-large-1">Edit Instant Quote</h1>
+                        <h1 class="font-large-1">Instant Quote</h1>
                     </div>
                     <div class="section-body">
                         <div class="card col-8">
                             <div class="card-body p-0">
                                 <input type="hidden" name="id_quote" value="{{ $price->id_quote }}">
-                                <input type="hidden" name="type" value="2">
                                 <!-- form update -->
                                 <div class="form-group row ml-4 mt-5">
                                     <label for="" class="col-md-1 col-form-label">POL:</label>

@@ -45,7 +45,7 @@
                                         <!-- form insert -->
                                         @if(!isset($main_services))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="service_name" class="col-md-2 col-form-label">Service Name :</label>
+                                            <label for="" class="col-md-2 col-form-label">Service Name :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="service_name" name="service_name"
                                                     value="">
@@ -55,7 +55,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="service_name" class="col-md-2 col-form-label">Service Name :</label>
+                                            <label for="" class="col-md-2 col-form-label">Service Name :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="service_name" name="service_name"
                                                     value="{{ $main_services->service_name }}">

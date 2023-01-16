@@ -45,7 +45,7 @@
                                         <!-- form insert -->
                                         @if(!isset($Term))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="term" class="col-md-2 col-form-label">Term :</label>
+                                            <label for="" class="col-md-2 col-form-label">Term :</label>
                                             <div class="col-md-5">
                                                 <input type="text" class="form-control" id="term" name="term"
                                                     value="" required>
@@ -55,7 +55,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="term" class="col-md-2 col-form-label">Term :</label>
+                                            <label for="" class="col-md-2 col-form-label">Term :</label>
                                             <div class="col-md-5">
                                                 <input type="text" class="form-control" id="term" name="term"
                                                     value="{{ $Term->term }}">

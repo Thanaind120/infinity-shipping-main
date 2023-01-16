@@ -45,24 +45,15 @@
                                         <!-- form insert -->
                                         @if (!isset($about))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="img_about" class="col-md-2 col-form-label">Images :</label>
+                                            <label for="" class="col-md-2 col-form-label">Images :</label>
                                             <div class="col-md-8">
                                                 <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                     class="form-control" id="img_about" name="img_about" required>
                                             </div>
                                         </div>
 
-                                        {{-- <div class="form-group row ml-4 mt-5">
-                                            <label for="company_name" class="col-md-2 col-form-label">Company Name
-                                            </label>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" id="company_name"
-                                                    name="company_name" value="">
-                                            </div>
-                                        </div> --}}
-
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="description" class="col-md-2 col-form-label">Description :</label>
+                                            <label for="" class="col-md-2 col-form-label">Description :</label>
                                             <div class="col-md-10">
                                                 <textarea type="text" id="description" name="description" class="mx-3" cols="68"
                                                     rows="10"></textarea>
@@ -72,7 +63,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="img_about" class="col-md-2 col-form-label">Images :</label>
+                                            <label for="" class="col-md-2 col-form-label">Images :</label>
                                             <div class="col-md-8">
                                                 <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                     class="form-control" id="img_about" name="img_about">
@@ -85,17 +76,8 @@
                                             </div>
                                         </div>
 
-                                        {{-- <div class="form-group row ml-4 mt-5">
-                                            <label for="company_name" class="col-md-2 col-form-label">Company Name
-                                            </label>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" id="company_name"
-                                                    name="company_name" value="{{ $about->company_name }}">
-                                            </div>
-                                        </div> --}}
-
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="description" class="col-md-2 col-form-label">Description :</label>
+                                            <label for="" class="col-md-2 col-form-label">Description :</label>
                                             <div class="col-md-10">
                                                 <textarea type="text" id="description" name="description" class="mx-3" cols="68"
                                                     rows="10">{!! $about->description !!}</textarea>

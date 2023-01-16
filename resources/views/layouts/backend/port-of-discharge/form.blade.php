@@ -45,7 +45,7 @@
                                         <!-- form insert -->
                                         @if(!isset($POD))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="POD_name" class="col-md-2 col-form-label">Port of discharge</label>
+                                            <label for="" class="col-md-2 col-form-label">Port of discharge</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="POD_name" name="POD_name"
                                                     value="">
@@ -55,7 +55,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="POD_name" class="col-md-2 col-form-label">Port of discharge</label>
+                                            <label for="" class="col-md-2 col-form-label">Port of discharge</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="POD_name" name="POD_name"
                                                     value="{{ $POD->POD_name }}">

@@ -45,7 +45,7 @@
                                         <!-- form insert -->
                                         @if(!isset($Commodity))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="commodity_name" class="col-md-2 col-form-label">Commodity :</label>
+                                            <label for="" class="col-md-2 col-form-label">Commodity :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="commodity_name" name="commodity_name"
                                                     value="">
@@ -55,7 +55,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="commodity_name" class="col-md-2 col-form-label">Commodity :</label>
+                                            <label for="" class="col-md-2 col-form-label">Commodity :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="commodity_name" name="commodity_name"
                                                     value="{{ $Commodity->commodity_name }}">

@@ -21,14 +21,6 @@
 
                     <div class="section-body">
                         <div class="card">
-                            {{-- <div class="card-header">
-                                <!-- add user button -->
-                                <div class="text-right">
-                                    <a class="btn btn-success" href="#" onclick="create_members()"><i
-                                            class="fa fa-plus" title="Create"></i> Add</a>
-                                </div><br>
-                            </div> --}}
-
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">

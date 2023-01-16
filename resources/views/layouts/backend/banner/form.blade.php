@@ -44,7 +44,7 @@
                                         <!-- form insert -->
                                         @if (!isset($banner))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="img_banner" class="col-md-2 col-form-label">Banner :</label>
+                                            <label for="" class="col-md-2 col-form-label">Banner :</label>
                                             <div class="col-md-8">
                                                 <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                     class="form-control" id="img_banner" name="img_banner[]" multiple
@@ -55,7 +55,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="img_banner" class="col-md-2 col-form-label">Banner :</label>
+                                            <label for="" class="col-md-2 col-form-label">Banner :</label>
                                             <div class="col-md-8">
                                                 <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                     class="form-control" id="img_banner" name="img_banner">

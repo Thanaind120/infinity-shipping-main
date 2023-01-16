@@ -21,13 +21,6 @@
 
                     <div class="section-body">
                         <div class="card">
-                            {{-- <div class="card-header">
-                                <!-- add user button -->
-                                <div class="text-right">
-                                    <a class="btn btn-success" href="#" onclick="create_topics()"><i class="fa fa-plus"
-                                            title="Create"></i> Add</a>
-                                </div><br>
-                            </div> --}}
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">
@@ -65,10 +58,6 @@
                                                         onclick="update_content({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
-                                                    {{-- <button class="btn btn-danger"
-                                                        onclick="delete_topics({{ $val->id }})">
-                                                    <i class="fa fa-trash" title="Delete"></i> Delete
-                                                    </button> --}}
                                                 </td>
                                             </tr>
                                             <?php

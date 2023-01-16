@@ -45,14 +45,14 @@
                                         <!-- form insert -->
                                         @if(!isset($logistics_service_topics))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="topic" class="col-md-2 col-form-label">Topic :</label>
+                                            <label for="" class="col-md-2 col-form-label">Topic :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="topic" name="topic"
                                                     value="">
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="content" class="col-md-2 col-form-label">Content :</label>
+                                            <label for="" class="col-md-2 col-form-label">Content :</label>
                                             <div class="col-md-9">
                                                 <textarea type="text" id="content" name="content" class="mx-3" cols="62"
                                                     rows="5"></textarea>
@@ -62,14 +62,14 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="topic" class="col-md-2 col-form-label">Topic :</label>
+                                            <label for="" class="col-md-2 col-form-label">Topic :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="topic" name="topic"
                                                     value="{{ $logistics_service_topics->topic }}">
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="content" class="col-md-2 col-form-label">Content :</label>
+                                            <label for="" class="col-md-2 col-form-label">Content :</label>
                                             <div class="col-md-9">
                                                 <textarea type="text" id="content" name="content" class="mx-3" cols="62"
                                                     rows="5">{{ $logistics_service_topics->content }}</textarea>

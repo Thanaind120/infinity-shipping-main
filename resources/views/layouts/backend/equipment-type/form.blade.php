@@ -45,7 +45,7 @@
                                         <!-- form insert -->
                                         @if(!isset($EquipmentType))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="device_name" class="col-md-2 col-form-label">Equipment type :</label>
+                                            <label for="" class="col-md-2 col-form-label">Equipment type :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="device_name" name="device_name"
                                                     value="">
@@ -55,7 +55,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="device_name" class="col-md-2 col-form-label">Equipment type :</label>
+                                            <label for="" class="col-md-2 col-form-label">Equipment type :</label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" id="device_name" name="device_name"
                                                     value="{{ $EquipmentType->device_name }}">

@@ -44,7 +44,7 @@
                                         <!-- form insert -->
                                         @if (!isset($logo))
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="img_logo" class="col-md-2 col-form-label">Logo :</label>
+                                            <label for="" class="col-md-2 col-form-label">Logo :</label>
                                             <div class="col-md-8">
                                                 <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                     class="form-control" id="img_logo" name="img_logo[]" multiple
@@ -55,7 +55,7 @@
                                         <!-- End : form insert -->
                                         <!-- form update -->
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="img_logo" class="col-md-2 col-form-label">Logo :</label>
+                                            <label for="" class="col-md-2 col-form-label">Logo :</label>
                                             <div class="col-md-8">
                                                 <input type="file" accept="image/jpeg, image/png, image/jpg"
                                                     class="form-control" id="img_logo" name="img_logo">
