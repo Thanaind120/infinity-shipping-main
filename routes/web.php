@@ -61,7 +61,8 @@ Route::get('/account', 'HomeController@account');
 
 //** BOOKING **//
 Route::get('/booking', 'HomeController@booking');
-Route::get('/booking-info/quote={id_quote}&rate={rate}', 'HomeController@booking_info');
+Route::get('/booking-info/{id_quote}', 'HomeController@booking_info');
+Route::post('/booking-info/store/{id_quote}', 'HomeController@booking_store');
 //** END BOOKING **//
 
 //** BULKLOGISTICS **//
@@ -231,18 +232,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     ////////////////////<!** BOOKING **!>////////////////////
     //** BOOKING **//
-    Route::get('/backend/booking', 'BookingController@index'); // get all Booking data
-    Route::get('/backend/booking/edit/{id}', 'BookingController@edit');   // edit Booking view
-    Route::put('/backend/booking/update/{id}', 'BookingController@update'); // update Booking data
+    Route::get('/backend/booking', 'Backend\BookingController@index'); // get all Booking data
+    Route::get('/backend/booking/view/{id}', 'Backend\BookingController@show');   // View More Booking view
     //** END BOOKING **//
-    //** STANDARD RATE **//
-    Route::get('/backend/booking/standard-rate', 'Backend\BookingStandardRateController@index'); // get all Standard Rate data
-    Route::get('/backend/booking/standard-rate/create', 'Backend\BookingStandardRateController@create');  // create Standard Rate view
-    Route::post('/backend/booking/standard-rate/store', 'Backend\BookingStandardRateController@store')->name('rate.store'); // store Standard Rate data
-    Route::get('/backend/booking/standard-rate/edit/{id}', 'Backend\BookingStandardRateController@edit');   // edit Standard Rate view
-    Route::put('/backend/booking/standard-rate/update/{id}', 'Backend\BookingStandardRateController@update'); // update Standard Rate data
-    Route::delete('/backend/booking/standard-rate/delete/{id}', 'Backend\BookingStandardRateController@destroy'); // delete Standard Rate data
-    //** END STANDARD RATE **//
     //** TERM **//
     Route::get('/backend/booking/term', 'Backend\BookingTermController@index'); // get all Term data
     Route::get('/backend/booking/term/create', 'Backend\BookingTermController@create');  // create Term view
