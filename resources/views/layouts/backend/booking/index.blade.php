@@ -119,7 +119,7 @@
 
         function view_booking(id) {
             var _url = "{{ url('backend/booking/view') }}" + '/' + id;
-            indow.location.href = _url;
+            window.location.href = _url;
         };
 
         $(document).on('change', '.select_data', function () {
