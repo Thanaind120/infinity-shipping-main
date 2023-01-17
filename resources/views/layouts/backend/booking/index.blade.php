@@ -56,18 +56,37 @@
                                                 <td class="text-center">{{ $val->booking_party }}</td>
                                                 <td class="text-center">{{ $val->actual_shipper }}</td>
                                                 <td class="text-center">
-                                                    @if($val->status == 5)
-                                                    <span class="text-success">Booking Complete</span>
-                                                    @elseif($val->status == 4)
-                                                    <span class="text-info">SI Processing</span>
-                                                    @elseif($val->status == 3)
-                                                    <span class="text-primary">Final SI issued</span>
-                                                    @elseif($val->status == 2)
-                                                    <span class="text-primary">Submit SI</span>
-                                                    @elseif($val->status == 1)
-                                                    <span class="text-primary">Draft BL</span>
-                                                    @elseif($val->status == 0)
+                                                    @if ($val->status == 0)
                                                     <span class="text-danger">Cancel</span>
+                                                    @elseif ($val->status == 5)
+                                                    <span class="text-success">Booking Complete</span>
+                                                    @else
+                                                    <form id="FormStatus">
+                                                        <input type="hidden" class="form-control id_booking"
+                                                            name="id_booking" id="id_booking"
+                                                            value="{{ $val->id_booking }}">
+                                                        <select class="form-control select_data" name="status"
+                                                            id="status">
+                                                            <option style="color: #4b7cc1"
+                                                                {{ ($val->status == 1) ? 'selected' : '' }} value="1">
+                                                                Draft BL</option>
+                                                            <option style="color: #4b7cc1"
+                                                                {{ ($val->status == 2) ? 'selected' : '' }} value="2">
+                                                                Submit SI</option>
+                                                            <option style="color: #4b7cc1"
+                                                                {{ ($val->status == 3) ? 'selected' : '' }} value="3">SI
+                                                                Processing</option>
+                                                            <option style="color: #4b7cc1"
+                                                                {{ ($val->status == 4) ? 'selected' : '' }} value="4">
+                                                                Final SI issued</option>
+                                                            <option style="color: #4bc013"
+                                                                {{ ($val->status == 5) ? 'selected' : '' }} value="5">
+                                                                Booking Complete</option>
+                                                            <option style="color: #dc3545"
+                                                                {{ ($val->status == 0) ? 'selected' : '' }} value="0">
+                                                                Cancel</option>
+                                                        </select>
+                                                    </form>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">{{ $val->created_by }}</td>
@@ -89,7 +108,6 @@
                     </div>
                 </section>
             </div>
-
             @include('include.footer')
         </div>
     </div>
@@ -101,10 +119,45 @@
 
         function view_booking(id) {
             var _url = "{{ url('backend/booking/view') }}" + '/' + id;
-            window.location.href = _url;
+            indow.location.href = _url;
         };
 
+        $(document).on('change', '.select_data', function () {
+            var form_tr = $(this).closest('#FormStatus');
+            var status = form_tr.find('.select_data').val();
+            var id = form_tr.find('.id_booking').val();
+            // console.log({
+            //     status: status,
+            //     id: id,
+            // })
+            $.ajax({
+                url: "{!! url('/backend/booking/update/" + id + "') !!}",
+                method: "POST",
+                type: "PUT",
+                data: {
+                    status: status,
+                    id: id,
+                    '_token': "{{ csrf_token() }}",
+                    '_method': "PUT",
+                },
+                success: function (response) {
+                    Swal.fire({
+                        position: 'left-end',
+                        icon: 'success',
+                        title: 'Your status has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(function () {
+                        // console.log($data);
+                        window.location.reload();
+                    });
+                }
+            });
+
+        });
+
     </script>
+
 </body>
 
 </html>

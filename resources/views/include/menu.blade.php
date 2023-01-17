@@ -81,11 +81,17 @@
             <li class="menu-header">Booking</li>
             <li class="<?php echo isset($active[15]) ? $active[15] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/booking') }}"><i class="fas fa-book"></i>
-            <span>Booking</span></a>
+                    <span>Booking</span></a>
             </li>
             <li class="<?php echo isset($active[16]) ? $active[16] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/booking/term') }}"><i class="fas fa-clipboard"></i>
                     <span>Term</span></a>
+            </li>
+
+            <li class="menu-header">Schedules</li>
+            <li class="<?php echo isset($active[17]) ? $active[17] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/schedules') }}"><i class="fas fa-calendar"></i>
+                    <span>Schedules</span></a>
             </li>
 
             <li class="menu-header">Contact US</li>

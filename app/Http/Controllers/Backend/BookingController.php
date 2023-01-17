@@ -22,7 +22,7 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $Book = BookingModel::orderBy('id_booking', 'DESC')->get();
+        $Book = BookingModel::orderBy(DB::raw('case when status = 1 then 1 when status = 2 then 2 when status = 3 then 3 when status = 4 then 4 when status = 5 then 5 when status = 0 then 6 end'))->orderBy('id_booking', 'DESC')->get();
         $data = array(
             'Book' => $Book,
         );
@@ -85,7 +85,11 @@ class BookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        BookingModel::find($id)->update([
+            'status' => $request->status,
+            'updated_at' => Carbon::now()
+        ]);
+        return redirect()->to('/backend/booking')->with('success', 'Save Data Success');
     }
 
     /**
