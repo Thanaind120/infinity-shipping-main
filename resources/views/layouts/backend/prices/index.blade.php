@@ -26,15 +26,19 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="text-center">#</th>
+                                                <th scope="col" class="text-center" width="10%">Quote Code</th>
                                                 <th scope="col" class="text-center"><i class="fa fa-location-arrow"></i>
                                                     POL</th>
-                                                <th scope="col" class="text-center"><i class="fa fa-calendar"></i>
+                                                <th scope="col" class="text-center" width="10%"><i
+                                                        class="fa fa-calendar"></i>
                                                     POL Date</th>
                                                 <th scope="col" class="text-center"><i class="fa fa-map-marker"></i> POD
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-calendar"></i>
+                                                <th scope="col" class="text-center" width="10%"><i
+                                                        class="fa fa-calendar"></i>
                                                     POD Date</th>
-                                                <th scope="col" class="text-center"><i class="fa fa-check"></i> Status
+                                                <th scope="col" class="text-center" width="8%"><i
+                                                        class="fa fa-check"></i> Status
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Member
                                                 </th>
@@ -52,6 +56,7 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
+                                                <td class="text-center">{{ $val->quote_code }}</td>
                                                 <td class="text-center">{{ $val->POL }}</td>
                                                 <td class="text-center">
                                                     @if($val->VDF != '')
@@ -128,9 +133,21 @@
         };
 
         function reject_prices(id) {
-            var _url = "{{ url('backend/price/reject') }}" + '/' + id;
-            window.location.href = _url;
-        };
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to reject this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var _url = "{{ url('backend/price/reject') }}" + '/' + id;
+                    window.location.href = _url;
+                }
+            });
+        }
 
         function view_prices(id) {
             var _url = "{{ url('backend/price/view') }}" + '/' + id;

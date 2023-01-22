@@ -100,6 +100,7 @@ class PricesController extends Controller
             'rate' => $request->rate,
             'privilege' => $privilege,
             'special_rate' => $request->special_rate,
+            'save_datetime' => Carbon::now(),
             'status' => 1,
             'updated_at' => Carbon::now()
         ]);
