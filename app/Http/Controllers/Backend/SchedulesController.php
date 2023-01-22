@@ -92,25 +92,38 @@ class SchedulesController extends Controller
                     if($request->transport_status == 'ESTIMATE ARRIVAL'){
                         BookingModel::find($Book->id_booking)->update([
                             'EVV' => $request->ship_code,
+                            'place_of_arrival' => $request->location,
                             'arrival' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ]);
                     }else if($request->transport_status == 'GATE OUT'){
                         BookingModel::find($Book->id_booking)->update([
                             'EVV' => $request->ship_code,
+                            'place_of_departure' => $request->location,
                             'departure' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }else{
+                        BookingModel::find($Book->id_booking)->update([
+                            'EVV' => $request->ship_code,
                             'updated_at' => Carbon::now()
                         ]);
                     }
                 }else{
                     if($request->transport_status == 'ESTIMATE ARRIVAL'){
                         BookingModel::find($Book->id_booking)->update([
+                            'place_of_arrival' => $request->location,
                             'arrival' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ]);
                     }else if($request->transport_status == 'GATE OUT'){
                         BookingModel::find($Book->id_booking)->update([
+                            'place_of_departure' => $request->location,
                             'departure' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }else{
+                        BookingModel::find($Book->id_booking)->update([
                             'updated_at' => Carbon::now()
                         ]);
                     }
@@ -137,25 +150,38 @@ class SchedulesController extends Controller
                     if($request->transport_status == 'ESTIMATE ARRIVAL'){
                         BookingModel::find($Book->id_booking)->update([
                             'EVV' => $request->ship_code,
+                            'place_of_arrival' => $request->location,
                             'arrival' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ]);
                     }else if($request->transport_status == 'GATE OUT'){
                         BookingModel::find($Book->id_booking)->update([
                             'EVV' => $request->ship_code,
+                            'place_of_departure' => $request->location,
                             'departure' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }else{
+                        BookingModel::find($Book->id_booking)->update([
+                            'EVV' => $request->ship_code,
                             'updated_at' => Carbon::now()
                         ]);
                     }
                 }else{
                     if($request->transport_status == 'ESTIMATE ARRIVAL'){
                         BookingModel::find($Book->id_booking)->update([
+                            'place_of_arrival' => $request->location,
                             'arrival' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ]);
                     }else if($request->transport_status == 'GATE OUT'){
                         BookingModel::find($Book->id_booking)->update([
+                            'place_of_departure' => $request->location,
                             'departure' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }else{
+                        BookingModel::find($Book->id_booking)->update([
                             'updated_at' => Carbon::now()
                         ]);
                     }
