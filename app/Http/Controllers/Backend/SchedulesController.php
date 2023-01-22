@@ -87,6 +87,34 @@ class SchedulesController extends Controller
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
+
+                if($request->ship_code != ''){
+                    if($request->transport_status == 'ESTIMATE ARRIVAL'){
+                        BookingModel::find($Book->id_booking)->update([
+                            'EVV' => $request->ship_code,
+                            'arrival' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }else if($request->transport_status == 'GATE OUT'){
+                        BookingModel::find($Book->id_booking)->update([
+                            'EVV' => $request->ship_code,
+                            'departure' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }
+                }else{
+                    if($request->transport_status == 'ESTIMATE ARRIVAL'){
+                        BookingModel::find($Book->id_booking)->update([
+                            'arrival' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }else if($request->transport_status == 'GATE OUT'){
+                        BookingModel::find($Book->id_booking)->update([
+                            'departure' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }
+                }
             }else{
                 SchedulesModel::create([
                     'id_schedules' => $request->id_schedules,
@@ -104,6 +132,34 @@ class SchedulesController extends Controller
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
+
+                if($request->ship_code != ''){
+                    if($request->transport_status == 'ESTIMATE ARRIVAL'){
+                        BookingModel::find($Book->id_booking)->update([
+                            'EVV' => $request->ship_code,
+                            'arrival' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }else if($request->transport_status == 'GATE OUT'){
+                        BookingModel::find($Book->id_booking)->update([
+                            'EVV' => $request->ship_code,
+                            'departure' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }
+                }else{
+                    if($request->transport_status == 'ESTIMATE ARRIVAL'){
+                        BookingModel::find($Book->id_booking)->update([
+                            'arrival' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }else if($request->transport_status == 'GATE OUT'){
+                        BookingModel::find($Book->id_booking)->update([
+                            'departure' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                    }
+                }
             }
             return redirect()->to('/backend/schedules/add-detail/'.$Book->id_booking)->with('success', 'Save Data Success');
         }
