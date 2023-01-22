@@ -45,9 +45,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/owlcarousel/css/owl.theme.default.min.css') }}">
     <script src="{{ asset('frontend/owlcarousel/js/owl.carousel.min.js') }}"></script>
 
-    <!--sweetalert2-->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <!--datepicker-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -60,3 +57,53 @@
         new WOW().init();
 
     </script>
+
+    <style>
+        .dropdowns {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdowns .dropbtn {
+            font-size: 12px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 8px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover,
+        .dropdowns:hover .dropbtn {
+            /* background-color: red; */
+        }
+
+        .dropdowns-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdowns-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdowns-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdowns:hover .dropdowns-content {
+            display: block;
+        }
+
+    </style>

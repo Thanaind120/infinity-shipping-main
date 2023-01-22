@@ -4,12 +4,45 @@
 <head>
     <title>Prices - Infinity Shipping (Thailand)Co.,Ltd.</title>
     @include('layouts.frontend.inc_header')
+    <style>
+        .autocomplete {
+            position: relative;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+
+    </style>
 </head>
 
 <body>
     @include('layouts.frontend.inc_navbar')
-    <form action="{{ route('quote.store') }}" enctype="multipart/form-data" method="POST">
-        @csrf
+    <form id="formQuote" action="{{ route('quote.get') }}" enctype="multipart/form-data" method="GET"
+        autocomplete="off">
         <div class="bg-light">
             <div class="container py-5">
                 <div class="row">
@@ -20,27 +53,6 @@
                                     <h1 class="fw-bold text-navy">Instant Quote</h1>
                                     <div class="lineR-left"></div>
                                     <ul class="timeline">
-                                        {{-- <li class="timeline-item">
-                                            <div class="timeline-marker dot-none"><i
-                                                    class='bx-sm bx bx-plus-circle text-navy'></i></div>
-                                            <div class="timeline-content">
-                                                <a class="text-navy" data-bs-toggle="collapse" href="#collapseExample"
-                                                    role="button" aria-expanded="false"
-                                                    aria-controls="collapseExample">Add a place of Receipt</a>
-                                                <div class="collapse mt-2" id="collapseExample">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="box-location">
-                                                                <input type="text" class="form-control borderR-6 filter"
-                                                                    placeholder="Location" id="location"
-                                                                    name="location" />
-                                                                <span class="icon-input bx bxs-map text-navy"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li> --}}
                                         <li class="timeline-item">
                                             <div class="timeline-marker dot-none"><i
                                                     class='bx-xs bx bxs-circle text-red'></i></div>
@@ -49,19 +61,14 @@
                                                     <div class="col-md-6 col-lg-4">
                                                         <label for="" class="form-label text-navy">Port of
                                                             loading</label>
-                                                        {{-- <div class="box-location"> --}}
-                                                        {{-- <input type="text" class="form-control borderR-6 filter"
-                                                                placeholder="Location" id="POL" name="POL" /> --}}
-                                                        <select class="form-select borderR-6 filter"
-                                                            placeholder="Location" aria-label="Default select example"
-                                                            id="POL" name="POL">
-                                                            <option value="" selected>Open this select POL</option>
-                                                            @foreach ($POL as $key => $val)
-                                                            <option value="{{ $val->POL_name }}">{{ $val->POL_name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        {{-- <span class="icon-input bx bx-anchor text-navy"></span> --}}
-                                                        {{-- </div> --}}
+                                                        <div class="box-location">
+                                                            <div class="autocomplete">
+                                                                <input type="text" class="form-control borderR-6 filter"
+                                                                    placeholder="Location" id="POL" name="POL"
+                                                                    value="" />
+                                                                <span class="icon-input bx bx-anchor text-navy"></span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,7 +84,7 @@
                                                             from</label>
                                                         <div class="box-location">
                                                             <input type="text" class="form-control borderR-6 filter"
-                                                                id="datepicker" name="ETD" />
+                                                                id="datepicker" name="VDF" value="" />
                                                             <span class="icon-input fa fa-calendar text-navy"></span>
                                                         </div>
                                                     </div>
@@ -92,19 +99,14 @@
                                                     <div class="col-md-6 col-lg-4">
                                                         <label for="" class="form-label text-navy">Port of
                                                             discharge</label>
-                                                        {{-- <div class="box-location"> --}}
-                                                        {{-- <input type="text" class="form-control borderR-6 filter"
-                                                                placeholder="Location" id="POD" name="POD" /> --}}
-                                                        <select class="form-select borderR-6 filter"
-                                                            aria-label="Default select example" placeholder="Location"
-                                                            id="POD" name="POD">
-                                                            <option value="" selected>Open this select POD</option>
-                                                            @foreach ($POD as $key => $val)
-                                                            <option value="{{ $val->POD_name }}">{{ $val->POD_name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        {{-- <span class="icon-input bx bx-anchor text-navy"></span> --}}
-                                                        {{-- </div> --}}
+                                                        <div class="box-location">
+                                                            <div class="autocomplete">
+                                                                <input type="text" class="form-control borderR-6 filter"
+                                                                    placeholder="Location" id="POD" name="POD"
+                                                                    value="" />
+                                                                <span class="icon-input bx bx-anchor text-navy"></span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -155,25 +157,26 @@
                                                 <option value="other">Other</option>
                                             </select>
                                             <div id="boxOther" class="other box mt-3">
-                                                <input type="text" class="form-control" id="other" name="other"
-                                                    placeholder="Enter text...">
+                                                <input type="text" class="form-control filter" id="other" name="other"
+                                                    placeholder="Enter text..." value="">
                                             </div>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="text-center">
-                                        @if(isset(Auth::user()->id))
-                                        {{-- data-bs-toggle="modal" data-bs-target="#finishQuoteModal" --}}
+                                        @if(isset(Auth::guard('Member')->user()->id))
                                         <button type="button" class="btn btn-navy rounded-pill px-4 mb-3"
                                             id="submitBtn_quote">Get a
-                                            quote</button>
-                                        @else
-                                        <a class="btn btn-navy rounded-pill px-4 mb-3" id="submitBtn_quotes">Get a
                                             quote
-                                        </a>
+                                        </button>
+                                        <button type="submit" class="btn btn-navy rounded-pill px-4 mb-3"
+                                            id="submitBtn_Quote" style="display: none">Get a
+                                            quote
+                                        </button>
                                         @endif
                                         <button type="button" class="btn btn-outline-navy rounded-pill px-4 mb-3"
-                                            onclick="clear_filter()">Reset</button>
+                                            onclick="clear_filter()">Reset
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -205,6 +208,14 @@
     </form>
     @include('layouts.frontend.inc_footer')
     <script>
+        $('#linkMenuTop .nav-item').eq(3).addClass('active');
+
+        const clear_filter = () => {
+            $('.filter').val('');
+            $('.filters').val('0');
+            $('#other').hide();
+        }
+
         $(function () {
             $("#datepicker").datepicker({
                 dateFormat: 'dd/mm/yy',
@@ -213,10 +224,6 @@
                 setDate: "+1d"
             });
         });
-
-    </script>
-    <script>
-        $('#linkMenuTop .nav-item').eq(3).addClass('active');
 
     </script>
     <script>
@@ -235,10 +242,96 @@
             $button.closest('.plusminus').find("input.numQty").val(newVal);
         });
 
-        const clear_filter = () => {
-            $('.filter').val('');
-            $('.filters').val('0');
-        }
+        $(document).ready(function () {
+
+            $('#POL').on('change', function () {
+
+                if ($('#VDF').val() != '' && $('#POD').val() != '' && $('#equipment_type').val() !=
+                    '' && $(
+                        '#weight').val() != '' && $('#productQty').val() != '' && $('#commodity')
+                    .val() != '') {
+
+                    $('#submitBtn_Quote').show();
+                    $('#submitBtn_quote').hide();
+
+                }
+
+            });
+
+            $('#VDF').on('change', function () {
+
+                if ($('#POL').val() != '' && $('#POD').val() != '' && $('#equipment_type').val() !=
+                    '' && $(
+                        '#weight').val() != '' && $('#productQty').val() != '' && $('#commodity')
+                    .val() != '') {
+
+                    $('#submitBtn_Quote').show();
+                    $('#submitBtn_quote').hide();
+
+                }
+
+            });
+
+            $('#equipment_type').on('change', function () {
+
+                if ($('#POL').val() != '' && $('#POD').val() != '' && $('#VDF').val() !=
+                    '' && $(
+                        '#weight').val() != '' && $('#productQty').val() != '' && $('#commodity')
+                    .val() != '') {
+
+                    $('#submitBtn_Quote').show();
+                    $('#submitBtn_quote').hide();
+
+                }
+
+            });
+
+            $('#weight').on('change', function () {
+
+                if ($('#POL').val() != '' && $('#POD').val() != '' && $('#VDF').val() !=
+                    '' && $(
+                        '#equipment_type').val() != '' && $('#productQty').val() != '' && $(
+                        '#commodity')
+                    .val() != '') {
+
+                    $('#submitBtn_Quote').show();
+                    $('#submitBtn_quote').hide();
+
+                }
+
+            });
+
+            $('#productQty').on('change', function () {
+
+                if ($('#POL').val() != '' && $('#POD').val() != '' && $('#VDF').val() !=
+                    '' && $(
+                        '#equipment_type').val() != '' && $('#weight').val() != '' && $(
+                        '#commodity')
+                    .val() != '') {
+
+                    $('#submitBtn_Quote').show();
+                    $('#submitBtn_quote').hide();
+
+                }
+
+            });
+
+            $('#commodity').on('change', function () {
+
+                if ($('#POL').val() != '' && $('#POD').val() != '' && $('#VDF').val() !=
+                    '' && $(
+                        '#equipment_type').val() != '' && $('#weight').val() != '' && $(
+                        '#productQty')
+                    .val() != '') {
+
+                    $('#submitBtn_Quote').show();
+                    $('#submitBtn_quote').hide();
+
+                }
+
+            });
+
+        });
 
         $("#submitBtn_quote").on("click", function () {
 
@@ -266,42 +359,30 @@
                     'Commodity.',
                     'warning'
                 )
-            } else {
-                $('#finishQuoteModal').modal('show');
-            }
-
-        });
-
-        $("#submitBtn_quotes").on("click", function () {
-
-            if ($('#equipment_type').val() == '' || $('#equipment_type').val() == null) {
-                Swal.fire(
-                    'Please select!',
-                    'Equipment type.',
-                    'warning'
-                )
-            } else if ($('#weight').val() == '' || $('#weight').val() == null) {
+            } else if ($('#POL').val() == '' || $('#POL').val() == null) {
                 Swal.fire(
                     'Please fill out!',
-                    'Maximum net weight (KGM).',
+                    'Port of loading.',
                     'warning'
                 )
-            } else if ($('#productQty').val() == '0' || $('#productQty').val() == null) {
+            } else if ($('#VDF').val() == '' || $('#VDF').val() == null) {
                 Swal.fire(
                     'Please fill out!',
-                    'Number of container (s).',
+                    'Vessal Departure from.',
                     'warning'
                 )
-            } else if ($('#commodity').val() == '' || $('#commodity').val() == null) {
+            } else if ($('#POD').val() == '' || $('#POD').val() == null) {
                 Swal.fire(
-                    'Please select!',
-                    'Commodity.',
+                    'Please fill out!',
+                    'Port of discharge.',
                     'warning'
                 )
             } else {
-                window.location.href = "{{ url('/login') }}"
+                // $('#finishQuoteModal').modal('show');
+                // document.getElementById("formQuote").submit();
+                $('#submitBtn_Quote').show();
+                $('#submitBtn_quote').hide();
             }
-
         });
 
     </script>
@@ -318,7 +399,129 @@
                     }
                 });
             }).change();
+
+            $("#commodity").on("change", function () {
+                var val = $('#commodity').val();
+                if (val == 'other') {
+                    $('#other').show();
+                }
+            });
         });
+
+    </script>
+    <script>
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) {
+                    return false;
+                }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        /*An array containing all the country names in the world:*/
+        var POL = {!! json_encode($result1->toArray()) !!};
+        var POD = {!! json_encode($result2->toArray()) !!};
+
+        var activePOL = POL;
+        var activePOD = POD;
+
+        /*initiate the autocomplete function on the "POL" element, and pass along the countries array as possible autocomplete values:*/
+        autocomplete(document.getElementById("POL"), activePOL);
+        autocomplete(document.getElementById("POD"), activePOD);
 
     </script>
 </body>
