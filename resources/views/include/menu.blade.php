@@ -102,10 +102,20 @@
 
             <li class="menu-header">MANAGEMENT</li>
             <li class="<?php echo isset($active[9]) ? $active[9] : ''; ?>"><a class="nav-link"
-                    href="{{ url('/backend/member') }}"><i class="fas fa-user"></i>
+                    href="{{ url('/backend/member') }}"><i class="fas fa-users"></i>
                     <span>Members </span>
                 </a>
             </li>
+            <li class="<?php echo isset($active[18]) ? $active[18] : ''; ?>"><a class="nav-link"
+                href="{{ url('/backend/user-role') }}"><i class="fas fa-user"></i>
+                <span>User Role </span>
+            </a>
+        </li>
+        <li class="<?php echo isset($active[19]) ? $active[19] : ''; ?>"><a class="nav-link"
+                href="{{ url('/backend/user-management') }}"><i class="fas fa-user"></i>
+                <span>User Management </span>
+            </a>
+        </li>
         </ul>
     </aside>
 </div>
