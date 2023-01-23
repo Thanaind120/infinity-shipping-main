@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-1 col-form-label">POD :</label>
+                                    <label for="" class="col-md-2 col-form-label">POD :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="POD" name="POD"
                                             value="{{ $price->POD }}" readonly>
@@ -61,7 +61,7 @@
                                 </div>
                                 @if(isset($price->rate))
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-1 col-form-label">Price :</label>
+                                    <label for="" class="col-md-2 col-form-label">Price :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="rate" name="rate"
                                             value="{{ $price->rate }}" readonly>
@@ -94,7 +94,7 @@
                                     <h3>Container Details</h3>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Equipment
+                                    <label for="" class="col-md-3 col-form-label">Equipment
                                         type :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="equipment_type"

@@ -91,10 +91,17 @@
                                                 </td>
                                                 <td class="text-center">{{ $val->created_by }}</td>
                                                 <td class="text-center">
+                                                    @if($val->deadlines != '')
                                                     <button class="btn btn-info"
                                                         onclick="view_booking({{ $val->id_booking }})">
                                                         View More
                                                     </button>
+                                                    @else
+                                                    <button class="btn btn-warning"
+                                                        onclick="update_booking({{ $val->id_booking }})">
+                                                        <i class="fa fa-edit" title="Edit"></i> Edit
+                                                    </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <?php
@@ -119,6 +126,11 @@
 
         function view_booking(id) {
             var _url = "{{ url('backend/booking/view') }}" + '/' + id;
+            window.location.href = _url;
+        };
+
+        function update_booking(id) {
+            var _url = "{{ url('backend/booking/edit') }}" + '/' + id;
             window.location.href = _url;
         };
 

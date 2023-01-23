@@ -29,9 +29,9 @@
                 <section class="section">
                     <div class="section-header">
                         @if (!isset($members))
-                            <h1 class="font-large-1">Create Services</h1>
+                            <h1 class="font-large-1">Create Members</h1>
                         @else
-                            <h1 class="font-large-1">Edit Services</h1>
+                            <h1 class="font-large-1">Edit Members</h1>
                         @endif
                     </div>
 
@@ -61,7 +61,7 @@
                                         <div class="row ml-2">
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Email <span
-                                                        class="text-danger">*</span></label>
+                                                        class="text-danger">*</span> :</label>
                                                 <input type="email" class="form-control borderR-6" name="email"
                                                     id="" placeholder="Email" value="{{ $members->email }}"
                                                     readonly>
@@ -73,8 +73,8 @@
                                         <h6 class="text-navy fw-semibold mt-3">User Information</h6>
                                         <div class="row ml-2">
                                             <div class="col-md-6">
-                                                <label for="" class="form-label">First name <span
-                                                        class="text-danger">*</span></label>
+                                                <label for="" class="form-label">First name<span
+                                                        class="text-danger">*</span> :</label>
                                                 <input type="text" class="form-control borderR-6" name="first_name"
                                                     id="" placeholder="Enter your first name"
                                                     value="{{ $members->first_name }}">
@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Last name <span
-                                                        class="text-danger">*</span></label>
+                                                        class="text-danger">*</span> :</label>
                                                 <input type="text" class="form-control borderR-6" name="last_name"
                                                     id="" placeholder="Enter your last name"
                                                     value="{{ $members->last_name }}">
@@ -90,7 +90,7 @@
                                             </div>
                                             <div class="col-md-6 mt-2">
                                                 <label for="" class="form-label">Phone number <span
-                                                        class="text-danger">*</span></label>
+                                                        class="text-danger">*</span> :</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1">02 -</span>
                                                     <input type="text" class="form-control" name="phone_number"
@@ -105,13 +105,13 @@
                                         <h6 class="text-navy fw-semibold">Company Information</h6>
                                         <div class="row ml-2">
                                             <div class="col-md-6">
-                                                <label for="" class="form-label">Company name</label>
+                                                <label for="" class="form-label">Company name :</label>
                                                 <input type="text" class="form-control borderR-6" name="company_name"
                                                     id="" placeholder="Enter Company name "
                                                     value="{{ $members->company_name }}">
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="" class="form-label">Company Type</label>
+                                                <label for="" class="form-label">Company Type :</label>
                                                 <select class="form-control mb-3" aria-label="Default select example"
                                                     id="selectCompanyT" name="company_type">
                                                     <option selected>Choose company type</option>
@@ -134,33 +134,33 @@
 
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <label for="" class="form-label">Address</label>
+                                                <label for="" class="form-label">Address :</label>
                                                 <input type="text" class="form-control borderR-6" name="address"
                                                     id="" placeholder="Enter Address"
                                                     value="{{ $members->address }}">
                                             </div>
                                             <div class="col-md-6 mt-2">
                                                 <label for="" class="form-label">For more information <i
-                                                        class="text-muted fw-light">(Optional)</i></label>
+                                                        class="text-muted fw-light">(Optional)</i> :</label>
                                                 <input type="text" class="form-control borderR-6"
                                                     name="address_more" id=""
                                                     placeholder="Enter more address"
                                                     value="{{ $members->address_more }}">
                                             </div>
                                             <div class="col-md-4 mt-2">
-                                                <label for="" class="form-label">City</label>
+                                                <label for="" class="form-label">City :</label>
                                                 <input type="text" class="form-control borderR-6" name="city"
                                                     id="" placeholder="Enter City"
                                                     value="{{ $members->city }}">
                                             </div>
                                             <div class="col-md-4 mt-2">
-                                                <label for="" class="form-label">Zip code</label>
+                                                <label for="" class="form-label">Zip code :</label>
                                                 <input type="text" class="form-control borderR-6" name="zip_code"
                                                     id="" placeholder="Enter zip code"
                                                     value="{{ $members->zip_code }}">
                                             </div>
                                             <div class="col-md-4 mt-2">
-                                                <label for="" class="form-label">Country / Region</label>
+                                                <label for="" class="form-label">Country / Region :</label>
                                                 <input type="text" class="form-control borderR-6"
                                                     name="address_more" id="" placeholder="Country / Region"
                                                     value="{{ $members->address_more }}">

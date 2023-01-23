@@ -106,7 +106,7 @@
                                                 <input type="hidden" name="contact_sales_id[]"
                                                     value="{{ $item->id }}">
                                                 <label for="" class="ml-3 col-form-label">Sales
-                                                    Name:</label>
+                                                    Name :</label>
                                                 <input type="text" class="form-control ml-3 mt-2"
                                                     name="sales_name_old[]" id=""
                                                     value="{{ $item->sales_name }}" required>
@@ -203,7 +203,7 @@
                         `                
                      <div class="row mr-2" id="sales${count}">
                         <div class="col-md-5">
-                            <label for="" class="ml-3 col-form-label">Sales Name:</label>
+                            <label for="" class="ml-3 col-form-label">Sales Name :</label>
                             <input type="text" class="form-control ml-3 mt-2" name="sales_name[]"
                                 id="" required>
                         </div>

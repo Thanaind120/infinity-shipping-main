@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="" class="col-md-2 col-form-label">Transport Status :</label>
+                                            <label for="" class="col-md-3 col-form-label">Transport Status :</label>
                                             <div class="col-md-4">
                                                 <select class="form-control" name="transport_status"
                                                     id="transport_status">
@@ -95,7 +95,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="" class="col-md-2 col-form-label">Transport Status :</label>
+                                            <label for="" class="col-md-3 col-form-label">Transport Status :</label>
                                             <div class="col-md-4">
                                                 <select class="form-control" name="transport_status"
                                                     id="transport_status">

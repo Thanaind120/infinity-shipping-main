@@ -73,7 +73,11 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Book = BookingModel::find($id);
+        $data = array(
+            'Book' => $Book,
+        );
+        return view('layouts/backend/booking/form2', $data);
     }
 
     /**
@@ -87,6 +91,15 @@ class BookingController extends Controller
     {
         BookingModel::find($id)->update([
             'status' => $request->status,
+            'updated_at' => Carbon::now()
+        ]);
+        return redirect()->to('/backend/booking')->with('success', 'Save Data Success');
+    }
+
+    public function updates(Request $request, $id)
+    {
+        BookingModel::find($id)->update([
+            'deadlines' => $request->deadlines,
             'updated_at' => Carbon::now()
         ]);
         return redirect()->to('/backend/booking')->with('success', 'Save Data Success');

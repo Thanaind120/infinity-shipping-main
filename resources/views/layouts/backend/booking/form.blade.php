@@ -34,96 +34,106 @@
                                 <input type="hidden" name="id_booking" value="{{ $Book->id_booking }}">
                                 <!-- form update -->
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Company</label>
+                                    <label for="" class="col-form-label">Company Name :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="company_name" name="company_name"
                                             value="{{ $Book->company_name }}" readonly>
                                     </div>
-                                    <label for="" class="col-md-2 col-form-label">Customer name</label>
+                                    <label for="" class="col-form-label">Customer name :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="customer_name" name="customer_name"
                                             value="{{ $Book->customer_name }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Booking Party</label>
+                                    <label for="" class="col-form-label">Booking Party :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="booking_party" name="booking_party"
                                             value="{{ $Book->booking_party }}" readonly>
                                     </div>
-                                    <label for="" class="col-md-2 col-form-label">Actual Shipper</label>
+                                    <label for="" class="col-form-label">Actual Shipper :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="actual_shipper"
                                             name="actual_shipper" value="{{ $Book->actual_shipper }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-1 col-form-label">POL</label>
+                                    <label for="" class="col-md-1 col-form-label">POL :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="POL" name="POL"
                                             value="{{ $Book->POL }}" readonly>
                                     </div>
-                                    <label for="" class="col-md-1 col-form-label">POD</label>
+                                    <label for="" class="col-form-label">POD :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="POD" name="POD"
                                             value="{{ $Book->POD }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Commodity</label>
+                                    <label for="" class="col-md-2 col-form-label">Commodity :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="commodity" name="commodity"
                                             value="{{ $Book->commodity }}" readonly>
                                     </div>
-                                    <label for="" class="col-md-1 col-form-label">Other</label>
+                                    <label for="" class="col-form-label">Other :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="other" name="other"
                                             value="{{ $Book->other }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-1 col-form-label">ETD</label>
+                                    <label for="" class="col-md-1 col-form-label">ETD :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="ETD" name="ETD"
                                             value="{{ $Book->ETD }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Pick up date</label>
+                                    <label for="" class="col-md-2 col-form-label">Pick up date :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="pickup_date" name="pickup_date"
                                             value="{{ $Book->pickup_date }}" readonly>
                                     </div>
-                                    <label for="" class="col-md-2 col-form-label">Return date</label>
+                                    <label for="" class="col-md-2 col-form-label">Return date :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="return_date" name="return_date"
                                             value="{{ $Book->return_date }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Term</label>
+                                    <label for="" class="col-md-2 col-form-label">Term :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="term" name="term"
                                             value="{{ $Book->term }}" readonly>
                                     </div>
-                                    <label for="" class="col-md-2 col-form-label">Type/Size</label>
+                                    <label for="" class="col-md-2 col-form-label">Type/Size :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="container_type"
                                             name="container_type" value="{{ $Book->container_type }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Gross Weight</label>
+                                    <label for="" class="col-md-2 col-form-label">Gross Weight :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="gross_weight" name="gross_weight"
                                             value="{{ $Book->gross_weight }}" readonly>
                                     </div>
-                                    <label for="" class="col-md-2 col-form-label">Ocean Freight</label>
+                                    <label for="" class="col-md-2 col-form-label">Ocean Freight :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="ocean_freight" name="ocean_freight"
                                             value="{{ $Book->ocean_freight }}" readonly>
                                     </div>
                                 </div>
+                                @if(isset($Book->deadlines))
+                                <div class="form-group row ml-4 mt-5">
+                                    <label for="" class="col-form-label">Deadlines</label>&nbsp;&nbsp;
+                                    <label for="" class="col-form-label">(PORT CUT-OFF) :</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="deadlines" name="deadlines"
+                                            value="{{ $Book->deadlines }}" readonly>
+                                    </div>
+                                </div>
+                                @endif
                                 <!-- End : form update -->
                                 <div class="form-group mb-0 row">
                                     <div class="col-md-6">
