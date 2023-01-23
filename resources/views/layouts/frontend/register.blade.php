@@ -29,7 +29,7 @@
                                                 <label for="" class="form-label">Email <span
                                                         class="text-danger">*</span></label>
                                                 <input type="email" class="form-control borderR-6" name="email" id=""
-                                                    placeholder="Email">
+                                                    placeholder="Email" value="">
                                                 <span class="text-danger error-text email_error"></span>
                                             </div>
                                             <div class="col-md-6"></div>
@@ -65,14 +65,14 @@
                                                 <label for="" class="form-label">First name <span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control borderR-6" name="first_name"
-                                                    id="" placeholder="Enter your first name">
+                                                    id="" placeholder="Enter your first name" value="">
                                                 <span class="text-danger error-text first_name_error"></span>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Last name <span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control borderR-6" name="last_name" id=""
-                                                    placeholder="Enter your last name">
+                                                    placeholder="Enter your last name" value="">
                                                 <span class="text-danger error-text last_name_error"></span>
                                             </div>
                                             <div class="col-md-6">
@@ -82,7 +82,7 @@
                                                     <span class="input-group-text" id="basic-addon1">02 -</span>
                                                     <input type="text" class="form-control" name="phone_number"
                                                         placeholder="xxxxxxx" aria-label="Username"
-                                                        aria-describedby="basic-addon1">
+                                                        aria-describedby="basic-addon1" value="">
                                                 </div>
                                                 <span class="text-danger error-text phone_number_error"></span>
                                             </div>
@@ -93,42 +93,42 @@
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Company name</label>
                                                 <input type="text" class="form-control borderR-6" name="company_name"
-                                                    id="" placeholder="Enter Company name">
+                                                    id="" placeholder="Enter Company name" value="">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Company Type</label>
                                                 <select class="form-select mb-3" aria-label="Default select example"
                                                     id="selectCompanyT" name="company_type">
-                                                    <option selected>Choose company type</option>
+                                                    <option value="" selected>Choose company type</option>
                                                     <option value="1">Supplier / Explorter</option>
                                                     <option value="2">Freight Forwarder</option>
                                                     <option value="3">Other</option>
                                                 </select>
                                                 <div id="boxOther" class="3 box">
                                                     <input type="text" class="form-control" placeholder="Enter text..."
-                                                        name="company_type_other">
+                                                        name="company_type_other" value="">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Address</label>
                                                 <input type="text" class="form-control borderR-6" name="address" id=""
-                                                    placeholder="Enter Address">
+                                                    placeholder="Enter Address" value="">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">For more information <i
                                                         class="text-muted fw-light">(Optional)</i></label>
                                                 <input type="text" class="form-control borderR-6" name="address_more"
-                                                    id="" placeholder="Enter more address">
+                                                    id="" placeholder="Enter more address" value="">
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="form-label">City</label>
                                                 <input type="text" class="form-control borderR-6" name="city" id=""
-                                                    placeholder="Enter City">
+                                                    placeholder="Enter City" value="">
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="form-label">Zip code</label>
                                                 <input type="text" class="form-control borderR-6" name="zip_code" id=""
-                                                    placeholder="Enter zip code">
+                                                    placeholder="Enter zip code" value="">
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="form-label">Country / Region</label>
@@ -148,7 +148,7 @@
                                                         class="text-muted fw-light">(Optional)</i></label>
                                                 <input type="text" name="colleague_email"
                                                     class="form-control borderR-6 mb-3" id=""
-                                                    placeholder="Enter his/her email address or booking reference">
+                                                    placeholder="Enter his/her email address or booking reference" value="">
                                                 <div class="alert alert-warning" role="alert">
                                                     <div class="d-flex">
                                                         <div class="flex-shrink-0">
