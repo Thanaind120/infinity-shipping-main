@@ -69,7 +69,7 @@
                                     <font color="blue">USD/CONTAINER</font>
                                 </div>
                                 @endif
-                                @if(isset($price->privilege))
+                                @if($price->privilege == 1)
                                 <div class="form-group row ml-1 mt-5">
                                     <label for="" class="col-form-label">Privilege :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
