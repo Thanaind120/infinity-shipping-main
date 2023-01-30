@@ -49,7 +49,7 @@
                                             <?php
                                                 $i = 0;
                                                 foreach ($Book as $key=>$val){
-                                                $i++
+                                                $i++     
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
@@ -62,24 +62,28 @@
                                                     @if ($val->status == 0)
                                                     <span style="color:#dc3545">Cancel</span>
                                                     @elseif ($val->status == 5)
-                                                    <span style="color:#4bc013">Booking Complete</span>
+                                                    <span style="color:#4bc013">Draft BL</span>
+                                                    @elseif ($val->status == 6)
+                                                    <span style="color:#ffa426">Pending Cancel</span>
                                                     @elseif ($val->status == 1)
-                                                    <span style="color:#4b7cc1">Draft BL</span>
+                                                    <span style="color:#4b7cc1">Booking Complete</span>
                                                     @elseif ($val->status == 2)
                                                     <span style="color:#4b7cc1">Submit SI</span>
                                                     @elseif ($val->status == 3)
-                                                    <span style="color:#4b7cc1">SI Processing</span>
-                                                    @elseif ($val->status == 4)
                                                     <span style="color:#4b7cc1">Final SI issued</span>
+                                                    @elseif ($val->status == 4)
+                                                    <span style="color:#4b7cc1">SI Processing</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-left">{{ $val->created_by }}</td>
                                                 @if($check->schedules_create == 1)
                                                 <td class="text-center">
+                                                    @if ($val->ref_transport_status != 'ESTIMATE ARRIVAL')
                                                     <button class="btn btn-success"
                                                         onclick="add_transport({{ $val->id_booking }})">
                                                         Add Transport
                                                     </button>
+                                                    @endif
                                                 </td>
                                                 @endif
                                             </tr>

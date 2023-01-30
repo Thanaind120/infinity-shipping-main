@@ -64,12 +64,23 @@
             </li>
             @endif
 
+            <?php $total_quote = DB::table('prices_quote')->select(DB::raw('SUM(amount) as total_quote'))->where('status', 0)->get(); ?>
             @if($check->price_view == 1)
             <li class="menu-header">Prices</li>
+            @foreach($total_quote as $key=>$val)
+            @if($val->total_quote != '')
+            <li class="<?php echo isset($active[14]) ? $active[14] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/price') }}"><i class="fas fa-credit-card" style="color:#dc3545"></i>
+                    <span style="color:#dc3545">Instant Quote ({{ $val->total_quote }})</span></a>
+            </li>
+            @else
             <li class="<?php echo isset($active[14]) ? $active[14] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/price') }}"><i class="fas fa-credit-card"></i>
                     <span>Instant Quote</span></a>
             </li>
+            @endif
+            @endforeach
+
             <li class="<?php echo isset($active[10]) ? $active[10] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/price/POL') }}"><i class="fas fa-location-arrow"></i>
                     <span>Port of loading</span></a>
@@ -88,24 +99,44 @@
             </li>
             @endif
 
+            <?php $total_booking = DB::table('booking')->select(DB::raw('SUM(amount) as total_booking'))->where('status', 1)->orwhere('status', 2)->orwhere('status', 3)->orwhere('status', 4)->orwhere('status', 6)->get(); ?>
             @if($check->booking_view == 1)
             <li class="menu-header">Booking</li>
+            @foreach($total_booking as $key=>$val)
+            @if($val->total_booking != '')
+            <li class="<?php echo isset($active[15]) ? $active[15] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/booking') }}"><i class="fas fa-book" style="color:#dc3545"></i>
+                    <span style="color:#dc3545">Booking ({{ $val->total_booking }})</span></a>
+            </li>
+            @else
             <li class="<?php echo isset($active[15]) ? $active[15] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/booking') }}"><i class="fas fa-book"></i>
                     <span>Booking</span></a>
             </li>
+            @endif
+            @endforeach
             <li class="<?php echo isset($active[16]) ? $active[16] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/booking/term') }}"><i class="fas fa-clipboard"></i>
                     <span>Term</span></a>
             </li>
             @endif
 
+            <?php $total_schedules = DB::table('booking')->select(DB::raw('SUM(amount) as total_schedules'))->where('ref_transport_status', NULL)->get(); ?>
             @if($check->schedules_view == 1)
             <li class="menu-header">Schedules</li>
+            @foreach($total_schedules as $key=>$val)
+            @if($val->total_schedules != '')
+            <li class="<?php echo isset($active[17]) ? $active[17] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/schedules') }}"><i class="fas fa-calendar" style="color:#dc3545"></i>
+                    <span style="color:#dc3545">Schedules ({{ $val->total_schedules }})</span></a>
+            </li>
+            @else
             <li class="<?php echo isset($active[17]) ? $active[17] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/schedules') }}"><i class="fas fa-calendar"></i>
                     <span>Schedules</span></a>
             </li>
+            @endif
+            @endforeach
             @endif
 
             @if($check->contactus_view == 1)

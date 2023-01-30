@@ -64,7 +64,7 @@
                                                     @if ($val->status == 0)
                                                     <span class="text-danger">Cancel</span>
                                                     @elseif ($val->status == 5)
-                                                    <span class="text-success">Booking Complete</span>
+                                                    <span class="text-success">Draft BL</span>
                                                     @else
                                                     <form id="FormStatus">
                                                         <input type="hidden" class="form-control id_booking"
@@ -74,19 +74,24 @@
                                                             id="status">
                                                             <option style="color: #4b7cc1"
                                                                 {{ ($val->status == 1) ? 'selected' : '' }} value="1">
-                                                                Draft BL</option>
+                                                                Booking Complete</option>
                                                             <option style="color: #4b7cc1"
                                                                 {{ ($val->status == 2) ? 'selected' : '' }} value="2">
                                                                 Submit SI</option>
                                                             <option style="color: #4b7cc1"
-                                                                {{ ($val->status == 3) ? 'selected' : '' }} value="3">SI
-                                                                Processing</option>
-                                                            <option style="color: #4b7cc1"
-                                                                {{ ($val->status == 4) ? 'selected' : '' }} value="4">
+                                                                {{ ($val->status == 3) ? 'selected' : '' }} value="3">
                                                                 Final SI issued</option>
+                                                            <option style="color: #4b7cc1"
+                                                                {{ ($val->status == 4) ? 'selected' : '' }} value="4">SI
+                                                                Processing</option>
                                                             <option style="color: #4bc013"
                                                                 {{ ($val->status == 5) ? 'selected' : '' }} value="5">
-                                                                Booking Complete</option>
+                                                                Draft BL
+                                                            </option>
+                                                            <option style="color: #ffa426"
+                                                                {{ ($val->status == 6) ? 'selected' : '' }} value="6">
+                                                                Pending Cancel
+                                                            </option>
                                                             <option style="color: #dc3545"
                                                                 {{ ($val->status == 0) ? 'selected' : '' }} value="0">
                                                                 Cancel</option>

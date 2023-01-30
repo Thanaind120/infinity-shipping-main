@@ -23,7 +23,7 @@ class SchedulesController extends Controller
      */
     public function index()
     {
-        $Book = BookingModel::orderBy(DB::raw('case when status = 1 then 1 when status = 2 then 2 when status = 3 then 3 when status = 4 then 4 when status = 5 then 5 when status = 0 then 6 end'))->orderBy('id_booking', 'DESC')->get();
+        $Book = BookingModel::orderBy(DB::raw('case when status = 6 then 1 when status = 1 then 2 when status = 2 then 3 when status = 3 then 4 when status = 4 then 5 when status = 5 then 6 when status = 0 then 7 end'))->orderBy('id_booking', 'DESC')->get();
         $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'Book' => $Book,
@@ -75,7 +75,7 @@ class SchedulesController extends Controller
                 }
                 SchedulesModel::create([
                     'id_schedules' => $request->id_schedules,
-                    'transport_code' => 'D'.$randomString,
+                    'transport_code' => 'S'.date('Y').$randomString,
                     'ref_id_booking' => $Book->id_booking,
                     'ref_shipment_code' => $Book->shipment_code,
                     'city_name' => $request->city_name,
@@ -84,8 +84,8 @@ class SchedulesController extends Controller
                     'ship_code' => $request->ship_code,
                     'save_datetime' => Carbon::now(),
                     'status' => 1,
-                    'created_id' => Auth::guard('Member')->user()->id,
-                    'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+                    'created_id' => Auth::guard('web')->user()->id,
+                    'created_by' => Auth::guard('web')->user()->name,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
@@ -95,6 +95,7 @@ class SchedulesController extends Controller
                         BookingModel::find($Book->id_booking)->update([
                             'EVV' => $request->ship_code,
                             'place_of_arrival' => $request->location,
+                            'ref_transport_status' => $request->transport_status,
                             'arrival' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ]);
@@ -115,6 +116,7 @@ class SchedulesController extends Controller
                     if($request->transport_status == 'ESTIMATE ARRIVAL'){
                         BookingModel::find($Book->id_booking)->update([
                             'place_of_arrival' => $request->location,
+                            'ref_transport_status' => $request->transport_status,
                             'arrival' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ]);
@@ -133,7 +135,7 @@ class SchedulesController extends Controller
             }else{
                 SchedulesModel::create([
                     'id_schedules' => $request->id_schedules,
-                    'transport_code' => 'D'.$randomStrings,
+                    'transport_code' => 'S'.date('Y').$randomStrings,
                     'ref_id_booking' => $Book->id_booking,
                     'ref_shipment_code' => $Book->shipment_code,
                     'city_name' => $request->city_name,
@@ -142,8 +144,8 @@ class SchedulesController extends Controller
                     'ship_code' => $request->ship_code,
                     'save_datetime' => Carbon::now(),
                     'status' => 1,
-                    'created_id' => Auth::guard('Member')->user()->id,
-                    'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+                    'created_id' => Auth::guard('web')->user()->id,
+                    'created_by' => Auth::guard('web')->user()->name,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
@@ -153,6 +155,7 @@ class SchedulesController extends Controller
                         BookingModel::find($Book->id_booking)->update([
                             'EVV' => $request->ship_code,
                             'place_of_arrival' => $request->location,
+                            'ref_transport_status' => $request->transport_status,
                             'arrival' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ]);
@@ -173,6 +176,7 @@ class SchedulesController extends Controller
                     if($request->transport_status == 'ESTIMATE ARRIVAL'){
                         BookingModel::find($Book->id_booking)->update([
                             'place_of_arrival' => $request->location,
+                            'ref_transport_status' => $request->transport_status,
                             'arrival' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ]);
