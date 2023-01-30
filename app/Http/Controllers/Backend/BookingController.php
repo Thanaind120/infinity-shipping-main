@@ -23,8 +23,10 @@ class BookingController extends Controller
     public function index()
     {
         $Book = BookingModel::orderBy(DB::raw('case when status = 1 then 1 when status = 2 then 2 when status = 3 then 3 when status = 4 then 4 when status = 5 then 5 when status = 0 then 6 end'))->orderBy('id_booking', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'Book' => $Book,
+            'check' => $check,
         );
         return view('layouts/backend/booking/index', $data);
     }

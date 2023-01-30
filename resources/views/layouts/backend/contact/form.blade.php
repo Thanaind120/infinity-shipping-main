@@ -95,8 +95,8 @@
                                         </div>
 
                                     </div>
-                                    <h6 class="ml-3 mt-3"> SALES & MARKETING TEAM <input id=""
-                                            class="btn btn-primary contact_add_sales" type="button" value="+">
+                                    <h6 class="ml-3 mt-3"> SALES & MARKETING TEAM @if($check->contactus_create == 1) <input id=""
+                                            class="btn btn-primary contact_add_sales" type="button" value="+"> @endif
                                     </h6>
 
                                     <input type="hidden" name="sales_old_delete" id="sales_old_delete">
@@ -118,12 +118,14 @@
                                                     class="form-control ml-3 mt-2" name="tel_old[]" id=""
                                                     required>
                                             </div>
+                                            @if($check->contactus_delete == 1)
                                             <div class="col-md-2">
                                                 <br>
                                                 <input id="" class="mt-4 btn btn-danger"
                                                     onclick="delete_sales_old({{ $item->id }})" type="button"
                                                     value="X">
                                             </div>
+                                            @endif
                                         </div>
                                     @endforeach
                                     <div id="output">
@@ -137,6 +139,7 @@
                                         <input type="text" name="link_map" class="form-control"
                                             value="{{ $contact->link_map }}">
                                     </div>
+                                    @if($check->contactus_edit == 1)
                                     <div class="form-group row ml-4 mt-5">
                                         <label class="col-md-2 col-form-label">Status :</label>
                                         <div class="col-md-10 mt-2">
@@ -154,26 +157,29 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                 @endif
                                 <!-- End : form update -->
 
                                 <div class="form-group mb-0 row mt-5">
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <a class="btn btn-secondary btn-sm waves-effect"
                                             href="{{ url('/backend/services') }}">
                                             <i class="fa fa-reply font-size-16 align-middle mr-1"></i> Return
                                         </a>
-                                    </div>
+                                    </div> --}}
+                                    @if($check->contactus_edit == 1)
                                     <div class="col-md-6 text-right">
                                         <button type="submit" class="btn btn-success btn-sm waves-effect">
                                             <i class="fa fa-save font-size-16 align-middle mr-1"></i>
                                             @if (!isset($contact))
                                                 Save
                                             @else
-                                                Update
+                                             Update 
                                             @endif
                                         </button>
                                     </div>
+                                    @endif
                                 </div><br>
                                 @if (!isset($contact))
                                     </form>

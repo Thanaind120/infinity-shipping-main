@@ -23,8 +23,10 @@ class PricesEquipmentTypeController extends Controller
     public function index()
     {
         $EquipmentType = PricesEquipmentTypeModel::orderBy('id', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'EquipmentType' => $EquipmentType,
+            'check' => $check,
         );
         return view('layouts/backend/equipment-type/index', $data);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Services;
 use Carbon\Carbon;
@@ -19,8 +20,10 @@ class ServicesController extends Controller
     {
         // dd('test');
         $services = Services::orderBy('id', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         return view("layouts/backend/services/index", [
             'services' =>  $services,
+            'check' =>  $check,
         ]);
     }
 

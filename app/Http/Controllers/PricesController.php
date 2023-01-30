@@ -22,8 +22,10 @@ class PricesController extends Controller
     public function index()
     {
         $price = PricesModel::where('status', 1)->orwhere('status', 0)->orderBy(DB::raw('case when status = 0 then 1 when status = 1 then 2 end'))->orderBy('id_quote', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'price' => $price,
+            'check' => $check,
         );
         return view('layouts/backend/prices/index', $data);
     }

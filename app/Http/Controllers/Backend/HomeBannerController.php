@@ -23,8 +23,10 @@ class HomeBannerController extends Controller
     public function index()
     {
         $banner = HomeBannerModel::orderBy('id', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'banner' => $banner,
+            'check' => $check,
         );
         return view('layouts/backend/banner/index', $data);
     }

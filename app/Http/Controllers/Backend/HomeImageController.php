@@ -23,8 +23,10 @@ class HomeImageController extends Controller
     public function index()
     {
         $image = HomeImageModel::orderBy('id', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'image' => $image,
+            'check' => $check,
         );
         return view('layouts/backend/image/index', $data);
     }

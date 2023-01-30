@@ -42,10 +42,19 @@
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Member
                                                 </th>
+                                                @if($check->price_view == 1 || $check->price_create == 1 ||
+                                                $check->price_delete == 1)
+                                                @if($check->price_create == 1)
                                                 <th scope="col" class="text-center" width="12%"> More Details</th>
+                                                @endif
+                                                @if($check->price_delete == 1)
                                                 <th scope="col" class="text-center"> Reject</th>
+                                                @endif
+                                                @if($check->price_view == 1)
                                                 <th scope="col" class="text-center" width="11%"><i
                                                         class="fa fa-cog"></i> Tools</th>
+                                                @endif
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -56,8 +65,8 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->quote_code }}</td>
-                                                <td class="text-center">{{ $val->POL }}</td>
+                                                <td class="text-left">{{ $val->quote_code }}</td>
+                                                <td class="text-left">{{ $val->POL }}</td>
                                                 <td class="text-center">
                                                     @if($val->VDF != '')
                                                     <?php 
@@ -66,7 +75,7 @@
                                                     ?>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">{{ $val->POD }}</td>
+                                                <td class="text-left">{{ $val->POD }}</td>
                                                 <td class="text-center">
                                                     @if($val->VDT != '')
                                                     <?php 
@@ -82,7 +91,10 @@
                                                     <span class="text-danger">Pending</span>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">{{ $val->created_by }}</td>
+                                                <td class="text-left">{{ $val->created_by }}</td>
+                                                @if($check->price_view == 1 || $check->price_create == 1 ||
+                                                $check->price_delete == 1)
+                                                @if($check->price_create == 1)
                                                 <td class="text-center">
                                                     @if($val->status == 0)
                                                     <button class="btn btn-success"
@@ -91,6 +103,8 @@
                                                     </button>
                                                     @endif
                                                 </td>
+                                                @endif
+                                                @if($check->price_delete == 1)
                                                 <td class="text-center">
                                                     @if($val->status == 0)
                                                     <button class="btn btn-danger"
@@ -99,12 +113,16 @@
                                                     </button>
                                                     @endif
                                                 </td>
+                                                @endif
+                                                @if($check->price_view == 1)
                                                 <td class="text-center">
                                                     <button class="btn btn-info"
                                                         onclick="view_prices({{ $val->id_quote }})">
                                                         View More
                                                     </button>
                                                 </td>
+                                                @endif
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

@@ -23,8 +23,10 @@ class HomeLogisticsServiceTopicsController extends Controller
     public function index()
     {
         $logistics_service_topics = HomeLogisticsServiceTopicsModel::orderBy('id', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'logistics_service_topics' => $logistics_service_topics,
+            'check' => $check,
         );
         return view('layouts/backend/logistics-service/index', $data);
     }

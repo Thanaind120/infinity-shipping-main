@@ -21,6 +21,7 @@
 
                     <div class="section-body">
                         <div class="card">
+                            @if($check->home_create == 1)
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
@@ -28,6 +29,7 @@
                                             class="fa fa-plus" title="Create"></i> Add</a>
                                 </div><br>
                             </div>
+                            @endif
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">
@@ -39,7 +41,9 @@
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i> Status
                                                 </th>
+                                                @if($check->home_edit == 1 || $check->home_delete == 1)
                                                 <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -50,7 +54,7 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->service_name }}</td>
+                                                <td class="text-left">{{ $val->service_name }}</td>
                                                 <td class="text-center">
                                                     @if($val->status == 1)
                                                     <span class="text-success">Active</span>
@@ -58,16 +62,22 @@
                                                     <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
+                                                @if($check->home_edit == 1 || $check->home_delete == 1)
                                                 <td class="text-center">
+                                                    @if($check->home_edit == 1)
                                                     <button class="btn btn-warning"
                                                         onclick="update_services({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @endif
+                                                    @if($check->home_delete == 1)
                                                     <button class="btn btn-danger"
                                                         onclick="delete_services({{ $val->id }})">
                                                     <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

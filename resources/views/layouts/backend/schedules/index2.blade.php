@@ -26,6 +26,7 @@
                     </div>
                     <div class="section-body">
                         <div class="card">
+                            @if($check->schedules_create == 1)
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
@@ -34,6 +35,7 @@
                                             class="fa fa-plus" title="Create"></i> Add</a>
                                 </div><br>
                             </div>
+                            @endif
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">
@@ -49,8 +51,10 @@
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Member
                                                 </th>
+                                                @if($check->schedules_edit == 1 || $check->schedules_delete == 1)
                                                 <th scope="col" class="text-center" width="15%"><i
                                                         class="fa fa-cog"></i> Tools</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -61,10 +65,10 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->city_name }}</td>
-                                                <td class="text-center">{{ $val->location }}</td>
+                                                <td class="text-left">{{ $val->city_name }}</td>
+                                                <td class="text-left">{{ $val->location }}</td>
                                                 <td class="text-center">{{ $val->transport_status }}</td>
-                                                <td class="text-center">{{ $val->ship_code }}</td>
+                                                <td class="text-left">{{ $val->ship_code }}</td>
                                                 <td class="text-center">
                                                     @if ($val->status == 1)
                                                     <span class="text-success">Active</span>
@@ -72,17 +76,23 @@
                                                     <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">{{ $val->created_by }}</td>
+                                                <td class="text-left">{{ $val->created_by }}</td>
+                                                @if($check->schedules_edit == 1 || $check->schedules_delete == 1)
                                                 <td class="text-center">
+                                                    @if($check->schedules_edit == 1)
                                                     <a href="{{ url('/backend/schedules/add-detail/edit/'.$Book->id_booking.'/'.$val->id_schedules) }}"
                                                         class="btn btn-warning button1"><i class="fa fa-edit"
                                                             title="Edit"></i> Edit
                                                     </a>
+                                                    @endif
+                                                    @if($check->schedules_delete == 1)
                                                     <button class="btn btn-danger"
                                                         onclick="delete_transport({{ $val->id_schedules }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

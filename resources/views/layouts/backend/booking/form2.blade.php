@@ -33,7 +33,7 @@
                                     <!-- form update -->
                                     <div class="form-group row ml-4 mt-5">
                                         <label for="" class="col-form-label">Deadlines</label>&nbsp;&nbsp;
-                                        <label for="" class="col-form-label">(PORT CUT-OFF) :</label>
+                                        <label for="" class="col-form-label">(PORT CUT-OFF) :</label>&nbsp;&nbsp;
                                         <div class="col-md-4">
                                             <input type="date" class="form-control" id="deadlines" name="deadlines"
                                                 value="{{ $Book->deadlines }}">

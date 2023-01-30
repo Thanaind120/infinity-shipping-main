@@ -21,6 +21,7 @@
 
                     <div class="section-body">
                         <div class="card">
+                            @if($check->booking_create == 1)
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
@@ -28,6 +29,7 @@
                                             class="fa fa-plus" title="Create"></i> Add</a>
                                 </div><br>
                             </div>
+                            @endif
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">
@@ -37,7 +39,9 @@
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Term</th>
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i> Status
                                                 </th>
+                                                @if($check->booking_edit == 1 || $check->booking_delete == 1)
                                                 <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -48,7 +52,7 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->term }}</td>
+                                                <td class="text-left">{{ $val->term }}</td>
                                                 <td class="text-center">
                                                     @if($val->status == 1)
                                                     <span class="text-success">Active</span>
@@ -56,16 +60,22 @@
                                                     <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
+                                                @if($check->booking_edit == 1 || $check->booking_delete == 1)
                                                 <td class="text-center">
+                                                    @if($check->booking_edit == 1)
                                                     <button class="btn btn-warning"
                                                         onclick="update_term({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @endif
+                                                    @if($check->booking_delete == 1)
                                                     <button class="btn btn-danger"
                                                         onclick="delete_term({{ $val->id }})">
                                                     <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

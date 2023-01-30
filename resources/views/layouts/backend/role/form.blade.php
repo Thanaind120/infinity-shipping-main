@@ -304,7 +304,7 @@
                                                 :</label>
                                             <div class="col-md-5">
                                                 <input type="text" class="form-control" id="position_name"
-                                                    name="position_name" value="" required>
+                                                    name="position_name" value="{{ $roles->position_name }}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
@@ -612,23 +612,6 @@
                                                         name="management_delete"
                                                         {{ ( @$role_permission->management_delete == '1')? 'checked' : '' }}
                                                         value="1">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row ml-4 mt-5">
-                                            <label class="col-md-2 col-form-label">Status :</label>
-                                            <div class="col-md-10 mt-2">
-                                                <div class="custom-control custom-switch">
-                                                    @if (empty($roles))
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="customSwitch" name="status" value="1" checked>
-                                                    @else
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="customSwitch" name="status" value="1"
-                                                        {{ @$roles->status == '1' ? 'checked' : '' }}>
-                                                    @endif
-                                                    <label class="custom-control-label" for="customSwitch"> Active /
-                                                        Deactive</label>
                                                 </div>
                                             </div>
                                         </div>

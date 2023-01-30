@@ -39,8 +39,10 @@
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Member
                                                 </th>
+                                                @if($check->schedules_create == 1)
                                                 <th scope="col" class="text-center" width="12%"><i
                                                         class="fa fa-cog"></i> More Details</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -51,11 +53,11 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->shipment_code }}</td>
-                                                <td class="text-center">{{ $val->company_name }}</td>
-                                                <td class="text-center">{{ $val->customer_name }}</td>
-                                                <td class="text-center">{{ $val->booking_party }}</td>
-                                                <td class="text-center">{{ $val->actual_shipper }}</td>
+                                                <td class="text-left">{{ $val->shipment_code }}</td>
+                                                <td class="text-left">{{ $val->company_name }}</td>
+                                                <td class="text-left">{{ $val->customer_name }}</td>
+                                                <td class="text-left">{{ $val->booking_party }}</td>
+                                                <td class="text-left">{{ $val->actual_shipper }}</td>
                                                 <td class="text-center">
                                                     @if ($val->status == 0)
                                                     <span style="color:#dc3545">Cancel</span>
@@ -71,13 +73,15 @@
                                                     <span style="color:#4b7cc1">Final SI issued</span>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">{{ $val->created_by }}</td>
+                                                <td class="text-left">{{ $val->created_by }}</td>
+                                                @if($check->schedules_create == 1)
                                                 <td class="text-center">
                                                     <button class="btn btn-success"
                                                         onclick="add_transport({{ $val->id_booking }})">
                                                         Add Transport
                                                     </button>
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

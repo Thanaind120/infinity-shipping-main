@@ -50,11 +50,11 @@
                                     <div class="form-group row ml-4 mt-5">
                                         <label for="" class="col-md-2 col-form-label">Privilege :</label>
                                         <div class="col-md-4">
-                                            <input type="checkbox" id="privilege" name="privilege" value="1">
+                                            <input type="checkbox" id="privilege" name="privilege" onclick="checkBoxButton()" value="1">
                                             Valid : 24Hrs & Mega Sale
                                         </div>
                                     </div>
-                                    <div class="form-group row ml-4 mt-5">
+                                    <div id="special" class="form-group row ml-4 mt-5" style="display: none">
                                         <label for="" class="col-md-2 col-form-label">Special Price
                                             :</label>
                                         <div class="col-md-3">
@@ -99,6 +99,15 @@
                 setDate: "+1d"
             });
         });
+
+        function checkBoxButton() {
+            var checkBox = document.getElementById("privilege");
+            if (checkBox.checked == true) {
+                $('#special').show();
+            } else {
+                $('#special').hide();
+            }
+        }
 
     </script>
 </body>

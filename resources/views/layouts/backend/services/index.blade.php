@@ -21,6 +21,7 @@
 
                     <div class="section-body">
                         <div class="card">
+                            @if($check->service_create == 1)
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
@@ -28,7 +29,7 @@
                                             class="fa fa-plus" title="Create"></i> Add</a>
                                 </div><br>
                             </div>
-
+                            @endif
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">
@@ -49,9 +50,11 @@
                                                         class="fa fa-check"></i>
                                                     Status
                                                 </th>
+                                                @if($check->service_edit == 1 || $check->service_delete == 1)
                                                 <th scope="col" class="text-center" width="25%"><i
                                                         class="fa fa-cog"></i> Tools
                                                 </th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -62,8 +65,8 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->service_name }}</td>
-                                                <td class="text-center"> {{ Str::limit($val->service_description, 50) }}
+                                                <td class="text-left">{{ $val->service_name }}</td>
+                                                <td class="text-left"> {{ Str::limit($val->service_description, 50) }}
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="{{ $val->service_images1 != '' ? asset('backend/assets/img/services/' . $val->service_images1) : asset('backend/assets/img/services/nopic.jpg') }}"
@@ -78,16 +81,22 @@
                                                         <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
+                                                @if($check->service_edit == 1 || $check->service_delete == 1)
                                                 <td class="text-center">
+                                                    @if($check->service_edit == 1)
                                                     <button class="btn btn-warning"
                                                         onclick="update_services({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @endif
+                                                    @if($check->service_delete == 1)
                                                     <button class="btn btn-danger"
                                                         onclick="delete_services({{ $val->id }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

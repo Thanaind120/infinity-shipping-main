@@ -140,14 +140,8 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         if($request->type == 2){ 
-            if(isset($request->status)){
-                $status = 1;
-            }else{
-                $status = 0;
-            }
             RoleModel::find($id)->update([
                 'position_name' => $request->position_name,
-                'status' => $status,
                 'updated_at' => Carbon::now()
             ]);
             RolePermissionModel::where('ref_role',$id)->update([

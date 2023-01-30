@@ -34,25 +34,25 @@
                                 <input type="hidden" name="id_quote" value="{{ $price->id_quote }}">
                                 <!-- form update -->
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-1 col-form-label">POL :</label>
+                                    <label for="" class="col-form-label">POL :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="POL" name="POL"
                                             value="{{ $price->POL }}" readonly>
-                                    </div>
-                                    <label for="" class="col-md-2 col-form-label">POL Date :</label>
+                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label for="" class="col-form-label">POL Date :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="VDF" name="VDF"
                                             value="{{ $price->VDF }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">POD :</label>
+                                    <label for="" class="col-form-label">POD :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="POD" name="POD"
                                             value="{{ $price->POD }}" readonly>
-                                    </div>
+                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     @if(isset($price->VDT))
-                                    <label for="" class="col-md-2 col-form-label">POD Date :</label>
+                                    <label for="" class="col-form-label">POD Date :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="VDT" name="VDT"
                                             value="{{ $price->VDT }}" readonly>
@@ -61,7 +61,7 @@
                                 </div>
                                 @if(isset($price->rate))
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Price :</label>
+                                    <label for="" class="col-form-label">Price :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="rate" name="rate"
                                             value="{{ $price->rate }}" readonly>
@@ -71,7 +71,7 @@
                                 @endif
                                 @if(isset($price->privilege))
                                 <div class="form-group row ml-1 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Privilege :</label>
+                                    <label for="" class="col-form-label">Privilege :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="checkbox" id="privilege" name="privilege"
                                             value="{{ $price->privilege }}"
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="form-group row ml-1 mt-5">
                                     @if(isset($price->special_rate))
-                                    <label for="" class="col-md-2 col-form-label">Special Price :</label>
+                                    <label for="" class="col-form-label">Special Price :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="special_rate" name="special_rate"
                                             value="{{ $price->special_rate }}" readonly>
@@ -90,40 +90,42 @@
                                     @endif
                                 </div>
                                 @endif
+                                <br>
+                                <hr>
                                 <div class="form-group row ml-4 mt-5">
                                     <h3>Container Details</h3>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-3 col-form-label">Equipment
-                                        type :</label>
+                                    <label for="" class="col-form-label">Equipment
+                                        type :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="equipment_type"
                                             name="equipment_type" value="{{ $price->equipment_type }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-3 col-form-label">Max Net weight
-                                        (KGM) :</label>
+                                    <label for="" class="col-form-label">Max Net weight
+                                        (KGM) :</label>&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="weight" name="weight"
                                             value="{{ $price->weight }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-3 col-form-label">Number of
-                                        container(s) :</label>
+                                    <label for="" class="col-form-label">Number of
+                                        container(s) :</label>&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="productQty" name="productQty"
                                             value="{{ $price->productQty }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Commodity :</label>
+                                    <label for="" class="col-md-2 col-form-label">Commodity :</label>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="commodity" name="commodity"
                                             value="{{ $price->commodity }}" readonly>
-                                    </div>
-                                    <label for="" class="col-md-2 col-form-label">Other Details :</label>
+                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label for="" class="col-form-label">Other Details :</label>
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="other" name="other"
                                             value="{{ $price->other }}" readonly>

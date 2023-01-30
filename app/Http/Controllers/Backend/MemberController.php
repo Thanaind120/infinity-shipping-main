@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
 use App\Models\Services;
@@ -20,8 +21,10 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::orderBy('id', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         return view("layouts/backend/member/index", [
             'members' =>  $members,
+            'check' =>  $check,
         ]);
     }
 
@@ -43,15 +46,19 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-    }
-    public function show(Member $member)
-    {
         //
+    }
+    public function show(request $request, $id)
+    {
+        $members = Member::find($id);
+        // $services = Services::find($id);
+        return view("layouts/backend/member/form2", [
+            'members' =>  $members,
+        ]);
     }
 
     public function edit($id)
     {
-
         $members = Member::find($id);
         $services = Services::find($id);
         return view("layouts/backend/member/form", [

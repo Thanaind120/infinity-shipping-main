@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\ContactSales;
@@ -63,10 +64,12 @@ class ContactController extends Controller
     {
         $contact = Contact::find(1);
         $contactsales = ContactSales::all();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         // dd($services);
         return view("layouts/backend/contact/form", [
             'contact' =>  $contact,
             'contactsales' =>  $contactsales,
+            'check' =>  $check,
         ]);
     }
 

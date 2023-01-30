@@ -32,50 +32,56 @@
                         <div class="card col-8">
                             <div class="card-body p-0">
                                 <input type="hidden" name="id_booking" value="{{ $Book->id_booking }}">
-                                <!-- form update -->
+                                <!-- form View -->
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-form-label">Company Name :</label>
+                                    <label for="" class="col-form-label">Company Name
+                                        :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="company_name" name="company_name"
                                             value="{{ $Book->company_name }}" readonly>
-                                    </div>
-                                    <label for="" class="col-form-label">Customer name :</label>
+                                    </div>&nbsp;&nbsp;
+                                    <label for="" class="col-form-label">Customer name
+                                        :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="customer_name" name="customer_name"
                                             value="{{ $Book->customer_name }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-form-label">Booking Party :</label>
+                                    <label for="" class="col-form-label">Booking Party
+                                        :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="booking_party" name="booking_party"
                                             value="{{ $Book->booking_party }}" readonly>
-                                    </div>
-                                    <label for="" class="col-form-label">Actual Shipper :</label>
+                                    </div>&nbsp;&nbsp;
+                                    <label for="" class="col-form-label">Actual Shipper
+                                        :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="actual_shipper"
                                             name="actual_shipper" value="{{ $Book->actual_shipper }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-1 col-form-label">POL :</label>
+                                    <label for="" class="col-md-1 col-form-label">POL
+                                        :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="POL" name="POL"
                                             value="{{ $Book->POL }}" readonly>
-                                    </div>
-                                    <label for="" class="col-form-label">POD :</label>
+                                    </div>&nbsp;&nbsp;
+                                    <label for="" class="col-form-label">POD
+                                        :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="POD" name="POD"
                                             value="{{ $Book->POD }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row ml-4 mt-5">
-                                    <label for="" class="col-md-2 col-form-label">Commodity :</label>
+                                    <label for="" class="col-form-label">Commodity :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="commodity" name="commodity"
                                             value="{{ $Book->commodity }}" readonly>
-                                    </div>
-                                    <label for="" class="col-form-label">Other :</label>
+                                    </div>&nbsp;&nbsp;
+                                    <label for="" class="col-form-label">Other :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" id="other" name="other"
                                             value="{{ $Book->other }}" readonly>

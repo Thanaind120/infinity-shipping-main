@@ -23,8 +23,10 @@ class HomeInfinityContentController extends Controller
     public function index()
     {
         $infinity_content = HomeInfinityContentModel::orderBy('id', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'infinity_content' => $infinity_content,
+            'check' => $check,
         );
         return view('layouts/backend/infinity-content/index', $data);
     }

@@ -62,7 +62,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
-                                            <label class="col-md-2 col-form-label">Status :</label>
+                                            <label class="col-form-label">Status :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <div class="col-md-10 mt-2">
                                                 <div class="custom-control custom-switch">
                                                     @if(empty($EquipmentType))

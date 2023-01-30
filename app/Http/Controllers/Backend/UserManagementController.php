@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\UserManagementModel;
+use App\Models\RoleModel;
 
 class UserManagementController extends Controller
 {
@@ -22,9 +23,11 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        $users = UserManagementModel::get();
+        $users = UserManagementModel::leftJoin('role', 'users.position', '=', 'role.id')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'users' => $users,
+            'check' => $check,
         );
         return view('layouts/backend/user-management/index', $data);
     }
@@ -36,7 +39,11 @@ class UserManagementController extends Controller
      */
     public function create()
     {
-        return view('layouts/backend/user-management/form');
+        $roles = RoleModel::get();
+        $data = array(
+            'roles' => $roles,
+        );
+        return view('layouts/backend/user-management/form', $data);
     }
 
     /**
@@ -88,8 +95,10 @@ class UserManagementController extends Controller
     public function edit($id)
     {
         $users = UserManagementModel::find($id);
+        $roles = RoleModel::get();
         $data = array(
             'users' => $users,
+            'roles' => $roles,
         );
         return view('layouts/backend/user-management/form', $data);
     }

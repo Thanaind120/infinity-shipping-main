@@ -27,26 +27,23 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="text-center">#</th>
-                                                <th scope="col" class="text-center" width="15%"><i
-                                                        class="fa fa-mail"></i>
+                                                <th scope="col" class="text-center"><i class="fa fa-mail"></i>
                                                     Email
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-"></i>
-                                                    First name
-                                                </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-"></i>
-                                                    Last name
-                                                </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-"></i>
-                                                    Phone number
-                                                </th>
-                                                <th scope="col" class="text-center" width="15%"><i
+                                                <th scope="col" class="text-center">Full Name</th>
+                                                <th scope="col" class="text-center">Phone Number</th>
+                                                <th scope="col" class="text-center" width="9%"><i
                                                         class="fa fa-check"></i>
                                                     Status
                                                 </th>
-                                                <th scope="col" class="text-center" width="25%"><i
+                                                @if($check->management_view == 1)
+                                                <th scope="col" class="text-center" width="12%"> More Details</th>
+                                                @endif
+                                                @if($check->management_edit == 1 || $check->management_delete == 1)
+                                                <th scope="col" class="text-center" width="15%"><i
                                                         class="fa fa-cog"></i> Tools
                                                 </th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -57,34 +54,45 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->email }}</td>
-                                                <td class="text-center"> {{ $val->first_name }}
+                                                <td class="text-left">{{ $val->email }}</td>
+                                                <td class="text-left"> {{ $val->first_name }} {{ $val->last_name }}
                                                 </td>
-                                                <td class="text-center">
-                                                    {{ $val->last_name }}
-                                                </td>
-                                                <td class="text-center">
+                                                <td class="text-left">
                                                     {{ $val->phone_number }}
                                                 </td>
                                                 <td class="text-center">
-                                                    @if ($val->status == 1)
-                                                        <span class="text-success">Active</span>
-                                                    @elseif($val->status == 0)
-                                                        <span class="text-danger">Deactive</span>
+                                                    @if ($val->status == 0)
+                                                    <span class="text-danger">Deactive</span>
+                                                    @elseif($val->status == 1)
+                                                    <span class="text-success">Active</span>
                                                     @elseif($val->status == 2)
-                                                        <span class="text-warning">Pending </span>
+                                                    <span class="text-warning">Pending </span>
                                                     @endif
                                                 </td>
+                                                @if($check->management_view == 1)
                                                 <td class="text-center">
+                                                    <button class="btn btn-info"
+                                                    onclick="view_member({{ $val->id }})">
+                                                    View More
+                                                </button>
+                                                </td>
+                                                @endif
+                                                @if($check->management_edit == 1 || $check->management_delete == 1)
+                                                <td class="text-center">
+                                                    @if($check->management_edit == 1)
                                                     <button class="btn btn-warning"
                                                         onclick="update_members({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @endif
+                                                    @if($check->management_delete == 1)
                                                     <button class="btn btn-danger"
                                                         onclick="delete_members({{ $val->id }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }
@@ -105,6 +113,11 @@
 
     <script>
         $('#simpletable').dataTable();
+
+        function view_member(id) {
+            var _url = "{{ url('backend/member/view') }}" + '/' + id;
+            window.location.href = _url;
+        };
 
         function create_members() {
             var _url = "{{ url('backend/member/create') }}";
@@ -133,7 +146,7 @@
                         data: {
                             '_token': "{{ csrf_token() }}"
                         },
-                        success: function(data) {
+                        success: function (data) {
                             console.log(data);
                             location.reload();
                         }
@@ -141,6 +154,7 @@
                 }
             });
         }
+
     </script>
 </body>
 

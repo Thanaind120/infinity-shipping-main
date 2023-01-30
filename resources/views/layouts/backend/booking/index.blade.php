@@ -34,12 +34,16 @@
                                                     Booking Party
                                                 </th>
                                                 <th scope="col" class="text-center">Actual Shipper</th>
+                                                @if($check->booking_edit == 1)
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i> Status
                                                 </th>
+                                                @endif
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Member
                                                 </th>
+                                                @if($check->booking_edit == 1 || $check->booking_view == 1)
                                                 <th scope="col" class="text-center" width="11%"><i
                                                         class="fa fa-cog"></i> Tools</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -50,11 +54,12 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->shipment_code }}</td>
-                                                <td class="text-center">{{ $val->company_name }}</td>
-                                                <td class="text-center">{{ $val->customer_name }}</td>
-                                                <td class="text-center">{{ $val->booking_party }}</td>
-                                                <td class="text-center">{{ $val->actual_shipper }}</td>
+                                                <td class="text-left">{{ $val->shipment_code }}</td>
+                                                <td class="text-left">{{ $val->company_name }}</td>
+                                                <td class="text-left">{{ $val->customer_name }}</td>
+                                                <td class="text-left">{{ $val->booking_party }}</td>
+                                                <td class="text-left">{{ $val->actual_shipper }}</td>
+                                                @if($check->booking_edit == 1)
                                                 <td class="text-center">
                                                     @if ($val->status == 0)
                                                     <span class="text-danger">Cancel</span>
@@ -89,20 +94,27 @@
                                                     </form>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">{{ $val->created_by }}</td>
+                                                @endif
+                                                <td class="text-left">{{ $val->created_by }}</td>
+                                                @if($check->booking_edit == 1 || $check->booking_view == 1)
                                                 <td class="text-center">
                                                     @if($val->deadlines != '')
+                                                    @if($check->booking_view == 1)
                                                     <button class="btn btn-info"
                                                         onclick="view_booking({{ $val->id_booking }})">
                                                         View More
                                                     </button>
+                                                    @endif
                                                     @else
+                                                    @if($check->booking_edit == 1)
                                                     <button class="btn btn-warning"
                                                         onclick="update_booking({{ $val->id_booking }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
                                                     @endif
+                                                    @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

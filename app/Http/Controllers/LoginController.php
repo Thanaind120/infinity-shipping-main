@@ -28,7 +28,7 @@ class LoginController extends Controller
      */
     public function in_progress(Request $request)
     {
-        if (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])){
+        if (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password]) && Auth::guard('web')->user()->status == 1){
             // dd('success');
             return redirect()->to('/backend/home/banner')->with('login','Log In Success');
         }else{

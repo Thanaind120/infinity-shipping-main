@@ -21,6 +21,7 @@
 
                     <div class="section-body">
                         <div class="card">
+                            @if($check->management_create == 1)
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
@@ -28,7 +29,7 @@
                                             title="Create"></i> Add</a>
                                 </div><br>
                             </div>
-
+                            @endif
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">
@@ -37,11 +38,10 @@
                                                 <th scope="col" class="text-center">#</th>
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Position
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-check"></i>
-                                                    Status
-                                                </th>
+                                                @if($check->management_edit == 1 || $check->management_delete == 1)
                                                 <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools
                                                 </th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -52,24 +52,23 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->position_name }}</td>
+                                                <td class="text-left">{{ $val->position_name }}</td>
+                                                @if($check->management_edit == 1 || $check->management_delete == 1)
                                                 <td class="text-center">
-                                                    @if ($val->status == 1)
-                                                    <span class="text-success">Active</span>
-                                                    @else
-                                                    <span class="text-danger">Deactive</span>
-                                                    @endif
-                                                </td>
-                                                <td class="text-center">
+                                                    @if($check->management_edit == 1)
                                                     <button class="btn btn-warning"
                                                         onclick="update_role({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @endif
+                                                    @if($check->management_delete == 1)
                                                     <button class="btn btn-danger"
                                                         onclick="delete_role({{ $val->id }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

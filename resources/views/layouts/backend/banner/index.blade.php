@@ -21,6 +21,7 @@
 
                     <div class="section-body">
                         <div class="card">
+                            @if($check->home_create == 1)
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
@@ -28,7 +29,7 @@
                                             title="Create"></i> Add</a>
                                 </div><br>
                             </div>
-
+                            @endif
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">
@@ -40,8 +41,10 @@
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i>
                                                     Status
                                                 </th>
+                                                @if($check->home_edit == 1 || $check->home_delete == 1)
                                                 <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools
                                                 </th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -63,16 +66,22 @@
                                                     <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
+                                                @if($check->home_edit == 1 || $check->home_delete == 1)
                                                 <td class="text-center">
+                                                    @if($check->home_edit == 1)
                                                     <button class="btn btn-warning"
                                                         onclick="update_banner({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @endif
+                                                    @if($check->home_delete == 1)
                                                     <button class="btn btn-danger"
                                                         onclick="delete_banner({{ $val->id }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

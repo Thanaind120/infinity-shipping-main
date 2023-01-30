@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="" class="col-md-2 col-form-label">Content :</label>
+                                            <label for="" class="col-form-label">Content :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <div class="col-md-9">
                                                 <textarea type="text" id="content" name="content" class="mx-3" cols="62"
                                                     rows="5"></textarea>
@@ -70,7 +70,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
-                                            <label for="" class="col-md-2 col-form-label">Content :</label>
+                                            <label for="" class="col-form-label">Content :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <div class="col-md-9">
                                                 <textarea type="text" id="content" name="content" class="mx-3" cols="62"
                                                     rows="5">{{ $infinity_content->content }}</textarea>

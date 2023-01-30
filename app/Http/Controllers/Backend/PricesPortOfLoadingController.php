@@ -23,8 +23,10 @@ class PricesPortOfLoadingController extends Controller
     public function index()
     {
         $POL = PricesPortOfLoadingModel::orderBy('id', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'POL' => $POL,
+            'check' => $check,
         );
         return view('layouts/backend/port-of-loading/index', $data);
     }

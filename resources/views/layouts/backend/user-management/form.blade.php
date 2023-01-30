@@ -62,7 +62,7 @@
                                             <label for="" class="col-md-2 col-form-label">E-mail :</label>
                                             <div class="col-md-5">
                                                 <input type="text" class="form-control" id="email" name="email"
-                                                    value="">
+                                                    value="" required>
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
@@ -70,9 +70,11 @@
                                             <div class="col-md-5">
                                                 <select class="form-control col-md-8" id="position" name="position"
                                                     required>
-                                                    <option value="" disabled>Select</option>
-                                                    <option value="1">Super Admin</option>
-                                                    <option value="2">Admin</option>
+                                                    <option value="" disabled>Please Select Role</option>
+                                                    @foreach ($roles as $key => $val)
+                                                    <option value="{{ $val->id }}">
+                                                        {{ $val->position_name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -98,21 +100,21 @@
                                             <label for="" class="col-md-2 col-form-label">Username :</label>
                                             <div class="col-md-4">
                                                 <input type="text" class="form-control" id="username" name="username"
-                                                    value="{{ $users->username }}">
+                                                    value="{{ $users->username }}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
                                             <label for="" class="col-md-2 col-form-label">Name :</label>
                                             <div class="col-md-5">
                                                 <input type="text" class="form-control" id="name" name="name"
-                                                    value="{{ $users->name }}">
+                                                    value="{{ $users->name }}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
                                             <label for="" class="col-md-2 col-form-label">E-mail :</label>
                                             <div class="col-md-5">
                                                 <input type="text" class="form-control" id="email" name="email"
-                                                    value="{{ $users->email }}">
+                                                    value="{{ $users->email }}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row ml-4 mt-5">
@@ -120,11 +122,12 @@
                                             <div class="col-md-5">
                                                 <select class="form-control col-md-8" id="position" name="position"
                                                     required>
-                                                    <option value="" disabled>Select</option>
-                                                    <option {{ ($users->position == "1")?'selected':'' }} value="1">
-                                                        Super Admin</option>
-                                                    <option {{ ($users->position == "2")?'selected':'' }} value="2">
-                                                        Admin</option>
+                                                    <option value="" disabled>Please Select Role</option>
+                                                    @foreach ($roles as $key => $val)
+                                                    <option {{ ($val->id == $users->position)? 'selected':'' }}
+                                                        value="{{ $val->id }}">
+                                                        {{ $val->position_name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>

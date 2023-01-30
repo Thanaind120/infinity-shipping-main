@@ -23,8 +23,10 @@ class HomeMainServicesController extends Controller
     public function index()
     {
         $main_services = HomeMainServicesModel::orderBy('id', 'DESC')->get();
+        $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first();
         $data = array(
             'main_services' => $main_services,
+            'check' => $check,
         );
         return view('layouts/backend/main-services/index', $data);
     }

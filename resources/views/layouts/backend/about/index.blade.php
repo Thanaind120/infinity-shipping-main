@@ -32,8 +32,10 @@
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i>
                                                     Status
                                                 </th>
+                                                @if($check->aboutus_edit == 1)
                                                 <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools
                                                 </th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -55,12 +57,14 @@
                                                     <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
+                                                @if($check->aboutus_edit == 1)
                                                 <td class="text-center">
                                                     <button class="btn btn-warning"
                                                         onclick="update_about({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }

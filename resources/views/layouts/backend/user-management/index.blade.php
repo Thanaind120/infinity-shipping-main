@@ -21,6 +21,7 @@
 
                     <div class="section-body">
                         <div class="card">
+                            @if($check->management_create == 1)
                             <div class="card-header">
                                 <!-- add user button -->
                                 <div class="text-right">
@@ -28,7 +29,7 @@
                                             title="Create"></i> Add</a>
                                 </div><br>
                             </div>
-
+                            @endif
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="simpletable" class="table table-bordered">
@@ -45,10 +46,14 @@
                                                 <th scope="col" class="text-center"><i class="fa fa-check"></i>
                                                     Status
                                                 </th>
+                                                @if($check->management_edit == 1)
                                                 <th scope="col" class="text-center"><i class="fa fa-key"></i> Password
                                                 </th>
+                                                @endif
+                                                @if($check->management_edit == 1 || $check->management_delete == 1)
                                                 <th scope="col" class="text-center"><i class="fa fa-cog"></i> Tools
                                                 </th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,16 +64,10 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">{{ $i }}</td>
-                                                <td class="text-center">{{ $val->username }}</td>
-                                                <td class="text-center">{{ $val->name }}</td>
-                                                <td class="text-center">{{ $val->email }}</td>
-                                                <td class="text-center">
-                                                    @if($val->position == 2)
-                                                    Admin
-                                                    @elseif($val->position == 1)
-                                                    Super Admin
-                                                    @endif
-                                                </td>
+                                                <td class="text-left">{{ $val->username }}</td>
+                                                <td class="text-left">{{ $val->name }}</td>
+                                                <td class="text-left">{{ $val->email }}</td>
+                                                <td class="text-center">{{ $val->position_name }}</td>
                                                 <td class="text-center">
                                                     @if ($val->status == 1)
                                                     <span class="text-success">Active</span>
@@ -76,20 +75,30 @@
                                                     <span class="text-danger">Deactive</span>
                                                     @endif
                                                 </td>
+                                                @if($check->management_edit == 1)
                                                 <td class="text-center">
                                                     <button class="btn btn-primary"
                                                         onclick="confirm_reset('{{ $val->id }}')">Reset</button>
                                                 </td>
+                                                @endif
+                                                @if($check->management_edit == 1 || $check->management_delete == 1)
                                                 <td class="text-center">
+                                                    @if($check->management_edit == 1)
                                                     <button class="btn btn-warning"
                                                         onclick="update_user({{ $val->id }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @endif
+                                                    @if($check->management_delete == 1)
+                                                    @if($val->username != 'infinity')
                                                     <button class="btn btn-danger"
                                                         onclick="delete_user({{ $val->id }})">
                                                         <i class="fa fa-trash" title="Delete"></i> Delete
                                                     </button>
+                                                    @endif
+                                                    @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             <?php
                                                 }
@@ -125,7 +134,6 @@
                 confirmButtonText: 'Confirm'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    //   $('#form_del').attr('action',get_path);
                     $('#id_reset').val(id);
                     $('#reset_password').submit();
                 }

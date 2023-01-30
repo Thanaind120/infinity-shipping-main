@@ -18,6 +18,9 @@
             <a href="{{ url('/') }}">IS</a>
         </div>
         <ul class="sidebar-menu">
+
+            <?php $check = DB::table('role_permission')->leftJoin('role', 'role_permission.ref_role', '=', 'role.id')->where('role_permission.ref_role', Auth::guard('web')->user()->position)->first(); ?>
+            @if($check->home_view == 1)
             <li class="menu-header">Home</li>
             <li class="<?php echo isset($active[0]) ? $active[0] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/home/banner') }}"><i class="fas fa-bullhorn"></i> <span>Slide
@@ -43,19 +46,25 @@
                     href="{{ url('/backend/home/our-clients') }}"><i class="fas fa-image"></i> <span>Our
                         Clients</span></a>
             </li>
+            @endif
 
+            @if($check->aboutus_view == 1)
             <li class="menu-header">About Us</li>
             <li class="<?php echo isset($active[8]) ? $active[8] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/about') }}"><i class="fas fa-copy"></i>
                     <span>About US</span></a>
             </li>
+            @endif
 
+            @if($check->service_view == 1)
             <li class="menu-header">Service</li>
             <li class="<?php echo isset($active[6]) ? $active[6] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/services') }}"><i class="fas fa-wrench"></i>
                     <span>Service </span></a>
             </li>
+            @endif
 
+            @if($check->price_view == 1)
             <li class="menu-header">Prices</li>
             <li class="<?php echo isset($active[14]) ? $active[14] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/price') }}"><i class="fas fa-credit-card"></i>
@@ -77,7 +86,9 @@
                     href="{{ url('/backend/price/commodity') }}"><i class="fas fa-clipboard"></i>
                     <span>Commodity</span></a>
             </li>
+            @endif
 
+            @if($check->booking_view == 1)
             <li class="menu-header">Booking</li>
             <li class="<?php echo isset($active[15]) ? $active[15] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/booking') }}"><i class="fas fa-book"></i>
@@ -87,19 +98,25 @@
                     href="{{ url('/backend/booking/term') }}"><i class="fas fa-clipboard"></i>
                     <span>Term</span></a>
             </li>
+            @endif
 
+            @if($check->schedules_view == 1)
             <li class="menu-header">Schedules</li>
             <li class="<?php echo isset($active[17]) ? $active[17] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/schedules') }}"><i class="fas fa-calendar"></i>
                     <span>Schedules</span></a>
             </li>
+            @endif
 
+            @if($check->contactus_view == 1)
             <li class="menu-header">Contact US</li>
             <li class="<?php echo isset($active[7]) ? $active[7] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/contact/edit/' . 1) }}"><i class="fas fa-phone"></i>
                     <span>Contact US </span></a>
             </li>
+            @endif
 
+            @if($check->management_view == 1)
             <li class="menu-header">MANAGEMENT</li>
             <li class="<?php echo isset($active[9]) ? $active[9] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/member') }}"><i class="fas fa-users"></i>
@@ -107,15 +124,16 @@
                 </a>
             </li>
             <li class="<?php echo isset($active[18]) ? $active[18] : ''; ?>"><a class="nav-link"
-                href="{{ url('/backend/user-role') }}"><i class="fas fa-user"></i>
-                <span>User Role </span>
-            </a>
-        </li>
-        <li class="<?php echo isset($active[19]) ? $active[19] : ''; ?>"><a class="nav-link"
-                href="{{ url('/backend/user-management') }}"><i class="fas fa-user"></i>
-                <span>User Management </span>
-            </a>
-        </li>
+                    href="{{ url('/backend/user-role') }}"><i class="fas fa-user"></i>
+                    <span>User Role </span>
+                </a>
+            </li>
+            <li class="<?php echo isset($active[19]) ? $active[19] : ''; ?>"><a class="nav-link"
+                    href="{{ url('/backend/user-management') }}"><i class="fas fa-user"></i>
+                    <span>User Management </span>
+                </a>
+            </li>
+            @endif
         </ul>
     </aside>
 </div>
