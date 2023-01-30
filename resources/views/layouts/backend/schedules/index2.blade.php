@@ -49,7 +49,7 @@
                                                 <th scope="col" class="text-center"><i
                                                         class="fa fa-check"></i> Status
                                                 </th>
-                                                <th scope="col" class="text-center"><i class="fa fa-user"></i> Member
+                                                <th scope="col" class="text-center"><i class="fa fa-user"></i> Admin
                                                 </th>
                                                 @if($check->schedules_edit == 1 || $check->schedules_delete == 1)
                                                 <th scope="col" class="text-center" width="15%"><i
