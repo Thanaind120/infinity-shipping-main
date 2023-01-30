@@ -1,3 +1,4 @@
+@if(isset(Auth::guard('Member')->user()->id))
 <!doctype html>
 <html lang="th">
 
@@ -169,7 +170,7 @@
                                             id="submitBtn_quote">Get a
                                             quote
                                         </button>
-                                        <button type="submit" class="btn btn-navy rounded-pill px-4 mb-3"
+                                        <button type="button" class="btn btn-navy rounded-pill px-4 mb-3"
                                             id="submitBtn_Quote" style="display: none">Get a
                                             quote
                                         </button>
@@ -385,6 +386,19 @@
             }
         });
 
+        $("#submitBtn_Quote").on("click", function () {
+            
+            swal.fire({
+                icon:'success',
+                title:'Success!',
+                text:"Save Data Success",
+                type:'success'
+            }).then((value) => {
+                document.getElementById("formQuote").submit();
+
+            }).catch(swal.noop);
+
+        });
     </script>
     <script>
         $(document).ready(function () {
@@ -527,3 +541,10 @@
 </body>
 
 </html>
+@else
+<script>
+    var _url = "{{ url('/login') }}";
+    window.location.href = _url;
+
+</script>
+@endif
