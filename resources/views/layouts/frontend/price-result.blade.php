@@ -102,6 +102,7 @@
                                                 <div class="fs-12 text-uppercase text-navy"><b>USD</b><br>/Container
                                                 </div>
                                             </div>
+                                            <p class="fs-12 text-muted mb-0">Rate for general cargo <font color="red">(Non-DG)</font></p>
                                         </div>
                                         <div class="col-sm-3 text-center">
                                             @if($val->privilege == 1)
@@ -129,6 +130,7 @@
                                                 <div class="fs-12 text-uppercase text-navy"><b>USD</b><br>/Container
                                                 </div>
                                             </div>
+                                            <p class="fs-12 text-muted mb-0">Rate for general cargo <font color="red">(Non-DG)</font></p>
                                         </div>
                                         <div class="col-sm-3 text-center">
                                             <a type="button" class="btn btn-navy rounded-pill px-5"
