@@ -89,7 +89,7 @@
                                                                 Draft BL
                                                             </option>
                                                             <option style="color: #ffa426"
-                                                                {{ ($val->status == 6) ? 'selected' : '' }} value="6">
+                                                                {{ ($val->status == 6) ? 'selected' : '' }} value="6" disabled>
                                                                 Pending Cancel
                                                             </option>
                                                             <option style="color: #dc3545"

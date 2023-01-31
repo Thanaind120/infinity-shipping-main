@@ -34,7 +34,7 @@
                                                     Booking Party
                                                 </th>
                                                 <th scope="col" class="text-center">Actual Shipper</th>
-                                                <th scope="col" class="text-center" width="11%"><i
+                                                <th scope="col" class="text-center" width="12%"><i
                                                         class="fa fa-check"></i> Status
                                                 </th>
                                                 <th scope="col" class="text-center"><i class="fa fa-user"></i> Member
