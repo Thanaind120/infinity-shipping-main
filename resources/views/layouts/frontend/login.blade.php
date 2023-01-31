@@ -31,20 +31,23 @@
                                         @csrf
                                         <div class="col-md-12">
                                             <label for="" class="form-label">Email</label>
-                                            <input type="email" class="form-control borderR-6" id=""
-                                                placeholder="Email" name="email">
+                                            <input type="email" class="form-control borderR-6" id="" placeholder="Email"
+                                                name="email" @if(Cookie::has('email'))
+                                                value="{{ Cookie::get('email') }}" @endif>
                                         </div>
                                         <div class="col-md-12">
                                             <label for="" class="form-label">Password</label>
                                             <input type="password" class="form-control borderR-6" id=""
-                                                placeholder="Password" name="password">
+                                                placeholder="Password" name="password" @if(Cookie::has('password'))
+                                                value="{{ Cookie::get('password') }}" @endif>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    Remember Me
+                                                <input class="form-check-input" type="checkbox" name="remember"
+                                                    id="remember" {{ (Cookie::get('email')) ? 'checked' : '' }}
+                                                    value="">
+                                                <label class="form-check-label" for="remember">
+                                                    {{ __('Remember Me') }}
                                                 </label>
                                             </div>
                                         </div>
@@ -72,14 +75,17 @@
                 <div class="modal-body">
                     <h5 class="modal-title fw-bold" id="forgotModalLabel">Forgot your password?</h5>
                     <p class="small">Please enter the email you use to sign in to Infinity shipping</p>
-                    <label for="" class="form-label">Your email</label>
-                    <input type="email" class="form-control borderR-6" id="" placeholder="Email">
-                    <div class="text-center pt-4">
-                        <button type="button" class="btn btn-navy rounded-pill px-4">Request password
-                            reset</button><br>
-                        <button type="button" class="btn btn-link text-navy" data-bs-dismiss="modal">Back to
-                            login</button>
-                    </div>
+                    <form class="row g-3" action="{{ route('forgotpassword.mail') }}" method="POST">
+                        @csrf
+                        <label for="" class="form-label">Your email</label>
+                        <input type="email" class="form-control borderR-6" id="email" name="email" placeholder="Email">
+                        <div class="text-center pt-4">
+                            <button type="submit" class="btn btn-navy rounded-pill px-4">Request password
+                                reset</button><br>
+                            <button type="button" class="btn btn-link text-navy" data-bs-dismiss="modal">Back to
+                                login</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -87,6 +93,7 @@
     @include('layouts.frontend.inc_footer')
     <script>
         $('#linkMenuTop .nav-item').eq(0).addClass('active');
+
     </script>
 </body>
 

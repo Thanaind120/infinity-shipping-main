@@ -13,7 +13,7 @@ class Loginmember extends Authenticatable
     protected $table = "members";
 
     protected $fillable = [
-        'email', 'password'
+        'email', 'password', 'status', 'remember_token'
     ];
     /*     protected $hidden = [
         'password', 'remember_token',

@@ -31,6 +31,21 @@
 
 @endif
 
+@if ($message = Session::get('email'))
+<script type="text/javascript">
+    swal.fire({
+        icon:'success',
+        title:'Success!',
+        text:"{{Session::get('email')}}",
+        // timer:2500,
+        type:'success'
+    }).then((value) => {
+        // window.location.reload();
+    }).catch(swal.noop);
+</script>
+
+@endif
+
 @if ($message = Session::get('error'))
 <script type="text/javascript">
     swal.fire({
