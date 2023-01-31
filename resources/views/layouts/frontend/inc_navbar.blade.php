@@ -30,7 +30,7 @@
                                         <i class="fa fa-caret-down"></i>
                                     </button>
                                     <div class="dropdowns-content">
-                                        <a href="{{ url('/account/'.Auth::guard('Member')->user()->id) }}"><i class="fas fa-user-circle"></i>&nbsp;
+                                        <a href="{{ url('/account') }}"><i class="fas fa-user-circle"></i>&nbsp;
                                             Account</a>
                                         <a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i>&nbsp; Log out</a>
                                     </div>
