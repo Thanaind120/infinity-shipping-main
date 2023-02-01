@@ -99,7 +99,7 @@
             </li>
             @endif
 
-            <?php $total_booking = DB::table('booking')->select(DB::raw('SUM(amount) as total_booking'))->where('status', 1)->orwhere('status', 2)->orwhere('status', 3)->orwhere('status', 4)->orwhere('status', 6)->get(); ?>
+            <?php $total_booking = DB::table('booking')->select(DB::raw('SUM(amount) as total_booking'))->where('status', 1)->orwhere('status', 2)->orwhere('status', 3)->orwhere('status', 4)->get(); ?>
             @if($check->booking_view == 1)
             <li class="menu-header">Booking</li>
             @foreach($total_booking as $key=>$val)
