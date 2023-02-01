@@ -32,7 +32,7 @@ class MemberMail extends Mailable
         $this->subject('Password confirmation email')
         ->from('smtp.mailer2022@gmail.com') 
         ->to($this->data['email'])
-       ->markdown('emails.MemberMail')->with([
+        ->markdown('emails.MemberMail')->with([
             'id' => $this->data['id'],
             'member_code' => $this->data['member_code'],
             'email' => $this->data['email'],

@@ -1,6 +1,6 @@
 <html>
     <body>
-        <b># ติดต่อ {{$first_name}} {{$last_name}} </b>
+        <b>Dear {{$first_name}} {{$last_name}},</b>
         <br>
         คุณได้ทำการแจ้งลืมรหัสผ่านมายังอีเมลนี้
        <br> 
