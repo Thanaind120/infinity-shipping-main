@@ -79,10 +79,12 @@
                                                 @if($check->schedules_create == 1)
                                                 <td class="text-center">
                                                     @if ($val->ref_transport_status != 'ESTIMATE ARRIVAL')
+                                                    @if ($val->status == 1 || $val->status == 2 || $val->status == 3 || $val->status == 4)
                                                     <button class="btn btn-success"
                                                         onclick="add_transport({{ $val->id_booking }})">
                                                         Add Transport
                                                     </button>
+                                                    @endif
                                                     @endif
                                                 </td>
                                                 @endif

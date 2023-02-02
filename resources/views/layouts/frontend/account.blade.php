@@ -108,13 +108,15 @@
                                         <span class="badge rounded-pill bg-primary fw-light">SI Processing</span>
                                         @elseif($val->status == 5)
                                         <span class="badge rounded-pill bg-success fw-light">Draft BL</span>
-                                        @elseif($val->status == 0 || $val->status == 6)
+                                        @elseif($val->status == 0)
                                         <span class="badge rounded-pill bg-danger fw-light">Cancel</span>
+                                        @elseif($val->status == 6)
+                                        <span class="badge rounded-pill bg-warning fw-light">Pending Cancel</span>
                                         @endif
                                     </td>
                                     <td>
                                         @if($val->status == 1 || $val->status == 2 || $val->status == 3 || $val->status
-                                        == 4)
+                                        == 4 || $val->status == 5 || $val->status == 6)
                                         <div class="dropdown">
                                             <button class="btn btn-outline-dark dropdown-toggle" type="button"
                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"

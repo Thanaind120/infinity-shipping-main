@@ -121,7 +121,7 @@
             </li>
             @endif
 
-            <?php $total_schedules = DB::table('booking')->select(DB::raw('SUM(amount) as total_schedules'))->where('ref_transport_status', NULL)->get(); ?>
+            <?php $total_schedules = DB::table('booking')->select(DB::raw('SUM(amount) as total_schedules'))->where('ref_transport_status', NULL)->where('status', 1)->orwhere('status', 2)->orwhere('status', 3)->orwhere('status', 4)->get(); ?>
             @if($check->schedules_view == 1)
             <li class="menu-header">Schedules</li>
             @foreach($total_schedules as $key=>$val)
