@@ -108,6 +108,13 @@ class MemberController extends Controller
         } else {
             // dd($request->all());
             try {
+                if($request->company_type == 1){
+                    $companytype = 'Supplier / Explorter';
+                }else if($request->company_type == 2){
+                    $companytype = 'Freight Forwarder';
+                }else if($request->company_type == 3){
+                    $companytype = 'Other';
+                }
                 DB::beginTransaction();
                 $member = new Member();
                 $member->member_code = 'M'.date('YmdHis');
@@ -118,7 +125,7 @@ class MemberController extends Controller
                 $member->phone_number = $request->phone_number;
 
                 $member->company_name = $request->company_name;
-                $member->company_type = $request->company_type;
+                $member->company_type = $companytype;
                 $member->company_type_other = $request->company_type_other;
                 $member->address = $request->address;
                 $member->address_more = $request->address_more;

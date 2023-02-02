@@ -89,7 +89,8 @@
                                                                 Draft BL
                                                             </option>
                                                             <option style="color: #ffa426"
-                                                                {{ ($val->status == 6) ? 'selected' : '' }} value="6" disabled>
+                                                                {{ ($val->status == 6) ? 'selected' : '' }} value="6"
+                                                                disabled>
                                                                 Pending Cancel
                                                             </option>
                                                             <option style="color: #dc3545"
@@ -111,11 +112,23 @@
                                                     </button>
                                                     @endif
                                                     @else
+                                                    @if($val->status != 5)
+                                                    @if($val->status == 1 || $val->status == 2 || $val->status == 3 ||
+                                                    $val->status == 4 || $val->status == 6)
                                                     @if($check->booking_edit == 1)
                                                     <button class="btn btn-warning"
                                                         onclick="update_booking({{ $val->id_booking }})">
                                                         <i class="fa fa-edit" title="Edit"></i> Edit
                                                     </button>
+                                                    @endif
+                                                    @endif
+                                                    @else
+                                                    @if($check->booking_view == 1)
+                                                    <button class="btn btn-info"
+                                                        onclick="view_booking({{ $val->id_booking }})">
+                                                        View More
+                                                    </button>
+                                                    @endif
                                                     @endif
                                                     @endif
                                                 </td>
@@ -155,10 +168,6 @@
             var form_tr = $(this).closest('#FormStatus');
             var status = form_tr.find('.select_data').val();
             var id = form_tr.find('.id_booking').val();
-            // console.log({
-            //     status: status,
-            //     id: id,
-            // })
             $.ajax({
                 url: "{!! url('/backend/booking/update/" + id + "') !!}",
                 method: "POST",
@@ -177,7 +186,6 @@
                         showConfirmButton: false,
                         timer: 1500
                     }).then(function () {
-                        // console.log($data);
                         window.location.reload();
                     });
                 }
