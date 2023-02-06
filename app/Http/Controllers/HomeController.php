@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Cookie;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\App;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\AboutModel;
@@ -27,6 +30,9 @@ use App\Models\PricesPortOfLoadingModel;
 use App\Models\PricesPortOfDischargeModel;
 use App\Models\PricesEquipmentTypeModel;
 use App\Models\PricesCommodityModel;
+use App\Models\MemberModel;
+use App\Mail\BookingMail;
+use App\Mail\BookingMail2;
 
 class HomeController extends Controller
 {
@@ -92,14 +98,72 @@ class HomeController extends Controller
 
     public function account()
     {
-        return view('layouts/frontend/account');
+        $Book = BookingModel::orderBy('id_booking', 'DESC')->get();
+        $data = array(
+            'Book' => $Book,
+        );
+        return view('layouts/frontend/account', $data);
+    }
+
+    public function account_update(Request $request, $id)
+    {
+        $password = $request->new_password;
+        if($request->new_password == $request->confirm_password && $request->new_password != ""){
+            $varible = Hash::make($request->new_password);
+            Cookie::queue('newpassword',$password,time()+(10*365*60*60));
+            MemberModel::find($id)->update([
+                'password' => $varible,
+                'updated_at' => Carbon::now()
+            ]);
+            return redirect()->to('/account')->with('success', 'Save Data Success');
+        }else{
+            return redirect()->to('/account')->with('success', 'Save Data Success');
+        }
+    }
+
+    public function allaccount_update(Request $request, $id)
+    {
+        if($request->company_type == 1){
+            $companytype = 'Supplier / Explorter';
+        }else if($request->company_type == 2){
+            $companytype = 'Freight Forwarder';
+        }else if($request->company_type == 3){
+            $companytype = 'Other';
+        }
+        MemberModel::find($id)->update([
+            'email' => $request->email,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
+            'company_name' => $request->company_name,
+            'company_type' => $companytype,
+            'company_type_other' => $request->company_type_other,
+            'address' => $request->address,
+            'address_more' => $request->address_more,
+            'city' => $request->city,
+            'zip_code' => $request->zip_code,
+            'country_region' => $request->country_region,
+            'colleague_email' => $request->colleague_email,
+            'updated_at' => Carbon::now()
+        ]);
+        return redirect()->to('/account')->with('success', 'Save Data Success');
+    }
+
+    public function updates(Request $request, $id)
+    {
+        BookingModel::find($id)->update([
+            'status' => 6,
+            'updated_at' => Carbon::now()
+        ]);
+        return redirect()->to('/account')->with('success', 'Save Data Success');
     }
 
     public function booking()
     {
         if(isset(Auth::guard('Member')->user()->id)){
             $Quote = PricesModel::where('status', 1)->where('created_id', Auth::guard('Member')->user()->id)->orderBy('id_quote', 'DESC')->paginate(5);
-        }else{}
+            $Quotes = PricesModel::select(DB::raw('SUM(amount) as total_quote'))->where('status', 1)->where('created_id', Auth::guard('Member')->user()->id)->get();
+        }
         $POL = PricesPortOfLoadingModel::where('status', 1)->orderBy('id', 'ASC')->get();
         $POD = PricesPortOfDischargeModel::where('status', 1)->orderBy('id', 'ASC')->get();
         $pluck = $POL->pluck('POL_name');  
@@ -111,6 +175,7 @@ class HomeController extends Controller
                 'result1' => $result1,
                 'result2' => $result2,
                 'Quote' => $Quote,
+                'Quotes' => $Quotes,
             );
         }else{
             $data = array(
@@ -121,9 +186,63 @@ class HomeController extends Controller
         return view('layouts/frontend/booking', $data);
     }
 
-    public function booking_info($id_quote)
+    public function booking_search(request $request)
     {
-        $Quote = PricesModel::find($id_quote);
+        // Result
+        $POL_form = $request->POL;
+	 	if($POL_form == ''){
+            $POLS = NULL;
+	 	}else{
+            $POLS = $POL_form;
+		}
+	 	$POD_form = $request->POD;
+	 	if($POD_form == ''){
+            $PODS =  NULL;
+	 	}else{
+			$PODS = $POD_form;
+		}
+        $date_form = $request->date;
+	 	if($date_form == ''){
+            $date =  '01-'.date('m-Y');
+	 	}else{
+			$date = $date_form;
+		}
+        $week_form = $request->week;
+	 	if($week_form == ''){
+            $week =  NULL;
+	 	}else if($week_form == 1){
+            $week = date('Y-m-d', strtotime($date_form . ' +1 week'));
+		}else if($week_form == 2){
+			$week = date('Y-m-d', strtotime($date_form . ' +2 week'));
+		}else if($week_form == 3){
+			$week = date('Y-m-d', strtotime($date_form . ' +3 week'));
+		}else if($week_form == 4){
+            $week = date('Y-m-d', strtotime($date_form . ' +4 week'));
+        }
+        $POL = PricesPortOfLoadingModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $POD = PricesPortOfDischargeModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $pluck = $POL->pluck('POL_name');  
+        $pluck2 = $POD->pluck('POD_name');
+        $result1 = $pluck;
+        $result2 = $pluck2;
+        $Quote = PricesModel::where('status', 1)->where('created_id', Auth::guard('Member')->user()->id)->where('POL', $POLS)->where('POD', $PODS)->where('VDF','>=', $date)->where('VDF','<=', $week)->orderBy('id_quote', 'DESC')->paginate(5);
+        $Quotes = PricesModel::select(DB::raw('SUM(amount) as total_quote'))->where('status', 1)->where('created_id', Auth::guard('Member')->user()->id)->where('POL', $POLS)->where('POD', $PODS)->where('VDF','>=', $date)->where('VDF','<=', $week)->get();
+        $data = array(
+            'Quote' => $Quote,
+            'Quotes' => $Quotes,
+            'POLS' => $POLS,
+            'PODS' => $PODS,
+            'date' => $date,
+            'week_form' => $week_form,
+            'result1' => $result1,
+            'result2' => $result2,
+        );
+        return view('layouts/frontend/booking', $data);
+    }
+
+    public function booking_info($quote_code)
+    {
+        $Quote = PricesModel::where('quote_code',$quote_code)->first();
         $Term = BookingTermModel::where('status', 1)->orderBy('id', 'DESC')->get();
         $Commodity = PricesCommodityModel::where('status', 1)->orderBy('id', 'ASC')->get();
         $data = array(
@@ -134,40 +253,151 @@ class HomeController extends Controller
         return view('layouts/frontend/booking-info', $data);
     }
 
-    public function booking_store(Request $request, $id_quote)
+    public function booking_store(Request $request, $quote_code)
     {
-        $price = PricesModel::find($id_quote);
         // Create
+        $price = PricesModel::where('quote_code',$quote_code)->first();
         $date = $request->ETD;
         $newDate = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
-        BookingModel::create([
-            'id_booking' => $request->id_booking,
-            'ref_id_quote' => $price->id_quote,
-            'shipment_code' => 'Q' . date('Yds'),
-            'company_name' => $request->company_name,
-            'customer_name' => $request->customer_name,
-            'booking_party' => $request->booking_party,
-            'actual_shipper' => $request->actual_shipper,
-            'POL' => $request->POL,
-            'POD' => $request->POD,
-            'ETD' => $newDate,
-            'ETA' => $price->VDT,
-            'commodity' => $request->commodity,
-            'other' => $request->other,
-            'rate' => $price->rate,
-            'pickup_date' => $request->pickup_date,
-            'return_date' => $request->return_date,
-            'term' => $request->term,
-            'container_type' => $request->container_type,
-            'gross_weight' => $request->gross_weight,
-            'ocean_freight' => $request->ocean_freight,
-            'status' => 1,
-            'created_id' => Auth::guard('Member')->user()->id,
-            'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-        return redirect()->to('/booking-info/'.$price->id_quote)->with('success', 'Save Data Success');
+        $dates = date('Y-m-d H:i:s');
+        $day = $price->save_datetime;
+        $stop_date = date('Y-m-d H:i:s', strtotime($day . ' +1 day')); 
+        if($stop_date >= $dates){
+            if($price->privilege == 1){
+                $rate = $price->special_rate;
+            }else{
+                $rate = $price->rate;
+            }
+        }else{
+            $rate = $price->rate;
+        }
+        $length = 5;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomStrings = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomStrings .= $characters[rand(0, $charactersLength - 1)];
+        }
+        $p = BookingModel::where('shipment_code',$randomStrings)->first();
+        if($p != null){
+            $length = 5;
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            $data_Adminmail = [
+                'company_name' => $request->company_name,
+                'customer_name' => $request->customer_name,
+                'booking_party' => $request->booking_party,
+                'actual_shipper' => $request->actual_shipper,
+                'POL' => $request->POL,
+                'POD' => $request->POD,
+                'ETD' => $newDate,
+                'commodity' => $request->commodity,
+                'other' => $request->other,
+                'rate' => $rate,
+                'pickup_date' => $request->pickup_date,
+                'return_date' => $request->return_date,
+                'term' => $request->term,
+                'container_type' => $request->container_type,
+                'gross_weight' => $request->gross_weight,
+                'ocean_freight' => $request->ocean_freight,
+                'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+            ];
+            Mail::send(new BookingMail($data_Adminmail));
+            $data_Membermail = [
+                'email' => Auth::guard('Member')->user()->email,
+                'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+            ];
+            Mail::send(new BookingMail2($data_Membermail));
+            BookingModel::create([
+                'id_booking' => $request->id_booking,
+                'shipment_code' => 'B'.date('Y').$randomString,
+                'ref_id_quote' => $price->id_quote,
+                'ref_quote_code' => $price->quote_code,
+                'company_name' => $request->company_name,
+                'customer_name' => $request->customer_name,
+                'booking_party' => $request->booking_party,
+                'actual_shipper' => $request->actual_shipper,
+                'POL' => $request->POL,
+                'POD' => $request->POD,
+                'ETD' => $newDate,
+                'ETA' => $price->VDT,
+                'commodity' => $request->commodity,
+                'other' => $request->other,
+                'rate' => $rate,
+                'pickup_date' => $request->pickup_date,
+                'return_date' => $request->return_date,
+                'term' => $request->term,
+                'container_type' => $request->container_type,
+                'gross_weight' => $request->gross_weight,
+                'ocean_freight' => $request->ocean_freight,
+                'status' => 1,
+                'amount' => 1,
+                'created_id' => Auth::guard('Member')->user()->id,
+                'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }else{
+            $data_Adminmail = [
+                'company_name' => $request->company_name,
+                'customer_name' => $request->customer_name,
+                'booking_party' => $request->booking_party,
+                'actual_shipper' => $request->actual_shipper,
+                'POL' => $request->POL,
+                'POD' => $request->POD,
+                'ETD' => $newDate,
+                'commodity' => $request->commodity,
+                'other' => $request->other,
+                'rate' => $rate,
+                'pickup_date' => $request->pickup_date,
+                'return_date' => $request->return_date,
+                'term' => $request->term,
+                'container_type' => $request->container_type,
+                'gross_weight' => $request->gross_weight,
+                'ocean_freight' => $request->ocean_freight,
+                'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+            ];
+            Mail::send(new BookingMail($data_Adminmail));
+            $data_Membermail = [
+                'email' => Auth::guard('Member')->user()->email,
+                'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+            ];
+            Mail::send(new BookingMail2($data_Membermail));
+            BookingModel::create([
+                'id_booking' => $request->id_booking,
+                'shipment_code' => 'B'.date('Y').$randomStrings,
+                'ref_id_quote' => $price->id_quote,
+                'ref_quote_code' => $price->quote_code,
+                'company_name' => $request->company_name,
+                'customer_name' => $request->customer_name,
+                'booking_party' => $request->booking_party,
+                'actual_shipper' => $request->actual_shipper,
+                'POL' => $request->POL,
+                'POD' => $request->POD,
+                'ETD' => $newDate,
+                'ETA' => $price->VDT,
+                'commodity' => $request->commodity,
+                'other' => $request->other,
+                'rate' => $rate,
+                'pickup_date' => $request->pickup_date,
+                'return_date' => $request->return_date,
+                'term' => $request->term,
+                'container_type' => $request->container_type,
+                'gross_weight' => $request->gross_weight,
+                'ocean_freight' => $request->ocean_freight,
+                'status' => 1,
+                'amount' => 1,
+                'created_id' => Auth::guard('Member')->user()->id,
+                'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }
+        return redirect()->to('/booking-info/'.$price->quote_code)->with('success', 'Save Data Success');
     }
 
     public function bulkLogistics()
@@ -225,23 +455,63 @@ class HomeController extends Controller
         // Create
         $date = $request->VDF;
         $newDate = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
-        PricesModel::create([
-            'id_quote' => $request->id_quote,
-            'POL' => $request->POL,
-            'VDF' => $newDate,
-            'POD' => $request->POD,
-            'equipment_type' => $request->equipment_type,
-            'weight' => $request->weight,
-            'productQty' => $request->productQty,
-            'commodity' => $request->commodity,
-            'other' => $request->other,
-            'status' => 0,
-            'created_id' => Auth::guard('Member')->user()->id,
-            'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-        return redirect()->to('/price-result/search?POL='.$request->POL.'&VDF='.$request->VDF.'&POD='.$request->POD.'&equipment_type='.$request->equipment_type.'&weight='.$request->weight.'&productQty='.$request->productQty)->with('success', 'Save Data Success');
+        $length = 5;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomStrings = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomStrings .= $characters[rand(0, $charactersLength - 1)];
+        }
+        $p = PricesModel::where('quote_code',$randomStrings)->first();
+        if($p != null){
+            $length = 5;
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            PricesModel::create([
+                'id_quote' => $request->id_quote,
+                'quote_code' => 'Q'.date('Y').$randomString,
+                'POL' => $request->POL,
+                'VDF' => $newDate,
+                'POD' => $request->POD,
+                'equipment_type' => $request->equipment_type,
+                'weight' => $request->weight,
+                'productQty' => $request->productQty,
+                'commodity' => $request->commodity,
+                'other' => $request->other,
+                'status' => 0,
+                'amount' => 1,
+                'created_id' => Auth::guard('Member')->user()->id,
+                'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+                'save_datetime' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }else{
+            PricesModel::create([
+                'id_quote' => $request->id_quote,
+                'quote_code' => 'Q'.date('Y').$randomStrings,
+                'POL' => $request->POL,
+                'VDF' => $newDate,
+                'POD' => $request->POD,
+                'equipment_type' => $request->equipment_type,
+                'weight' => $request->weight,
+                'productQty' => $request->productQty,
+                'commodity' => $request->commodity,
+                'other' => $request->other,
+                'status' => 0,
+                'amount' => 1,
+                'created_id' => Auth::guard('Member')->user()->id,
+                'created_by' => Auth::guard('Member')->user()->first_name.' '.Auth::guard('Member')->user()->last_name,
+                'save_datetime' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }
+        return redirect()->to('/price-result/search?POL='.$request->POL.'&VDF='.$request->VDF.'&POD='.$request->POD.'&equipment_type='.$request->equipment_type.'&weight='.$request->weight.'&productQty='.$request->productQty);
     }
     public function price_result(Request $request)
     {   
@@ -269,6 +539,8 @@ class HomeController extends Controller
             $weight = NULL;
             $VDF_result = NULL;
 		}
+        // $Quote = PricesModel::where('status', 1)->where('created_id', Auth::guard('Member')->user()->id)->where('POL', $POL)->where('POD', $POD)->where('productQty', $productQty)->where('equipment_type', $equipment_type)->where('weight', $weight)->where('VDF', '>=', $VDF_result)->orderBy('id_quote', 'DESC')->paginate(3);
+        $Quote = PricesModel::where('status', 1)->where('created_id', Auth::guard('Member')->user()->id)->where('POL', $POL)->where('POD', $POD)->where('VDF', '>=', $VDF_result)->orderBy('id_quote', 'DESC')->paginate(3);
         $data = array(
             'POL' => $POL,
             'POD' => $POD,
@@ -276,6 +548,7 @@ class HomeController extends Controller
             'equipment_type' => $equipment_type,
             'weight' => $weight,
             'VDF_result' => $VDF_result,
+            'Quote' => $Quote,
         );
         return view('layouts/frontend/price-result', $data);
     }
@@ -287,7 +560,150 @@ class HomeController extends Controller
 
     public function schedule()
     {
-        return view('layouts/frontend/schedule');
+        $POL = PricesPortOfLoadingModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $POD = PricesPortOfDischargeModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $pluck = $POL->pluck('POL_name');  
+        $pluck2 = $POD->pluck('POD_name');
+        $result1 = $pluck;
+        $result2 = $pluck2;
+        $EquipmentType = PricesEquipmentTypeModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $data = array(
+            'result1' => $result1,
+            'result2' => $result2,
+            'EquipmentType' => $EquipmentType,
+        );
+        return view('layouts/frontend/schedule', $data);
+    }
+
+    public function schedule_search(Request $request)
+    {
+        $POL_form = $request->POL;
+        if($POL_form == ''){
+           $POLS = NULL;
+        }else{
+           $POLS = $POL_form;
+        }
+        $POD_form = $request->POD;
+        if($POD_form == ''){
+           $PODS =  NULL;
+        }else{
+           $PODS = $POD_form;
+        }
+        $date_form = $request->date;
+        if($date_form == ''){
+           $date = NULL;
+        //    $date = '01-'.date('m-Y');
+        }else{
+           $date = $date_form;
+        }
+        $type_form = $request->type;
+        if($type_form == ''){
+           $type = NULL;
+        }else{
+           $type = date('Y-m-d', strtotime($date_form));
+        }
+        $container_form = $request->container;
+        if($container_form == ''){
+           $container =  NULL;
+        }else{
+           $container = $container_form;
+        }
+        $cargo_form = $request->cargo_temperature;
+        if(isset($cargo_form)){
+           $cargo = 1;
+        }else{
+           $cargo = 0;
+        }
+        $POL = PricesPortOfLoadingModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $POD = PricesPortOfDischargeModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $pluck = $POL->pluck('POL_name');  
+        $pluck2 = $POD->pluck('POD_name');
+        $result1 = $pluck;
+        $result2 = $pluck2;
+        $EquipmentType = PricesEquipmentTypeModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        if($type_form == 'departure'){
+            $Book = BookingModel::where('created_id', Auth::guard('Member')->user()->id)->where('POL', $POLS)->where('POD', $PODS)->where('departure', '>=', $type)->where('container_type', $container)->orderBy('id_booking', 'DESC')->paginate(3);
+        }else if($type_form == 'arrival'){
+            $Book = BookingModel::where('created_id', Auth::guard('Member')->user()->id)->where('POL', $POLS)->where('POD', $PODS)->where('arrival', '>=', $type)->where('container_type', $container)->orderBy('id_booking', 'DESC')->paginate(3);
+        }
+        $data = array(
+            'Book' => $Book,
+            'POLS' => $POLS,
+            'PODS' => $PODS,
+            'type_form' => $type_form,
+            'date' => $date,
+            'container' => $container,
+            'cargo' => $cargo,
+            'EquipmentType' => $EquipmentType,
+            'result1' => $result1,
+            'result2' => $result2,
+        );
+        return view('layouts/frontend/schedule-result', $data);
+    }
+
+    public function schedule_print(Request $request)
+    {
+        $POL_form = $request->POL;
+        if($POL_form == ''){
+           $POLS = NULL;
+        }else{
+           $POLS = $POL_form;
+        }
+        $POD_form = $request->POD;
+        if($POD_form == ''){
+           $PODS =  NULL;
+        }else{
+           $PODS = $POD_form;
+        }
+        $date_form = $request->date;
+        if($date_form == ''){
+           $date = NULL;
+        }else{
+           $date = $date_form;
+        }
+        $type_form = $request->type;
+        if($type_form == ''){
+           $type = NULL;
+        }else{
+           $type = date('Y-m-d', strtotime($date_form));
+        }
+        $container_form = $request->container;
+        if($container_form == ''){
+           $container =  NULL;
+        }else{
+           $container = $container_form;
+        }
+        $cargo_form = $request->cargo_temperature;
+        if(isset($cargo_form)){
+           $cargo = 1;
+        }else{
+           $cargo = 0;
+        }
+        $POL = PricesPortOfLoadingModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $POD = PricesPortOfDischargeModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        $pluck = $POL->pluck('POL_name');  
+        $pluck2 = $POD->pluck('POD_name');
+        $result1 = $pluck;
+        $result2 = $pluck2;
+        $EquipmentType = PricesEquipmentTypeModel::where('status', 1)->orderBy('id', 'ASC')->get();
+        if($type_form == 'departure'){
+            $Book = BookingModel::where('created_id', Auth::guard('Member')->user()->id)->where('POL', $POLS)->where('POD', $PODS)->where('departure', '>=', $type)->where('container_type', $container)->orderBy('id_booking', 'DESC')->paginate(3);
+        }else if($type_form == 'arrival'){
+            $Book = BookingModel::where('created_id', Auth::guard('Member')->user()->id)->where('POL', $POLS)->where('POD', $PODS)->where('arrival', '>=', $type)->where('container_type', $container)->orderBy('id_booking', 'DESC')->paginate(3);
+        }
+        $data = array(
+            'Book' => $Book,
+            'POLS' => $POLS,
+            'PODS' => $PODS,
+            'type_form' => $type_form,
+            'date' => $date,
+            'container' => $container,
+            'cargo' => $cargo,
+            'EquipmentType' => $EquipmentType,
+            'result1' => $result1,
+            'result2' => $result2,
+        );
+        return view('layouts/frontend/schedule-print', $data);
     }
 
     public function service()

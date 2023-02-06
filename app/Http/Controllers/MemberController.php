@@ -53,6 +53,7 @@ class MemberController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('Member')->logout();
+        $request->session()->invalidate();
         return redirect("/login");
     }
 

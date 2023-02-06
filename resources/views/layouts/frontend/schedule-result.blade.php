@@ -1,9 +1,43 @@
+@if(isset(Auth::guard('Member')->user()->id))
 <!doctype html>
 <html lang="th">
 
 <head>
     <title>Schedules - Infinity Shipping (Thailand)Co.,Ltd.</title>
     @include('layouts.frontend.inc_header')
+    <style>
+        .autocomplete {
+            position: relative;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -17,93 +51,126 @@
                     <div class="row">
                         <div class="col-xl-3">
                             <div class="card p-3 mb-3">
-                                <form class="row">
-                                    <div class="col-12 col-md-4 col-xl-12">
-                                        <label for="" class="form-label"><b>Place of receipt</b></label>
-                                        <div class="box-location">
-                                            <input type="text" class="form-control borderR-6" placeholder="Location" />
-                                            <span class="icon-input bx bx-map text-muted"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 d-block d-md-none d-xl-block">
-                                        <hr>
-                                    </div>
+                                <form class="row" action="{{ route('schedule.result') }}" method="get"
+                                    autocomplete="off">
                                     <div class="col-12 col-md-4 col-xl-12 mb-3">
-                                        <label for="" class="form-label"><b>From</b><span
-                                                class="text-muted fw-light">(City, Country/Region)</span></label>
-                                        <div class="box-location mb-1">
-                                            <input type="text" class="form-control borderR-6" placeholder="Location" />
-                                            <span class="icon-input bx bx-map text-muted"></span>
+                                        <label for="" class="form-label"><b>Port of loading</b><br><span
+                                                class="text-muted fw-light small">(POL)</span></label>
+                                        <div class="box-location">
+                                            <div class="autocomplete">
+                                                @if(isset($POLS))
+                                                <input type="text" class="form-control borderR-6" placeholder="Location"
+                                                    id="POL" name="POL" value="{{ $POLS }}">
+                                                @else
+                                                <input type="text" class="form-control borderR-6" placeholder="Location"
+                                                    id="POL" name="POL" value="">
+                                                @endif
+                                                <span class="icon-input bx bx-anchor text-navy"></span>
+                                            </div>
                                         </div>
-                                        <!-- <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="from" id="from1" checked>
-                                            <label class="form-check-label" for="from1">
-                                                Merchant Haulage (CY)
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="from" id=from2">
-                                            <label class="form-check-label" for="from2">
-                                                Carrier Haulage (SD)
-                                            </label>
-                                        </div> -->
                                     </div>
                                     <div class="col-12 col-md-4 col-xl-12">
-                                        <label for="" class="form-label"><b>To</b><span
-                                                class="text-muted fw-light">(City, Country/Region)</span></label>
-                                        <div class="box-location mb-1">
-                                            <input type="text" class="form-control borderR-6" placeholder="Location" />
-                                            <span class="icon-input bx bx-map text-muted"></span>
+                                        <label for="" class="form-label"><b>Port of discharge</b><br><span
+                                                class="text-muted fw-light small">(POD)</span></label>
+                                        <div class="box-location">
+                                            <div class="autocomplete">
+                                                @if(isset($PODS))
+                                                <input type="text" class="form-control borderR-6" placeholder="Location"
+                                                    id="POD" name="POD" value="{{ $PODS }}">
+                                                @else
+                                                <input type="text" class="form-control borderR-6" placeholder="Location"
+                                                    id="POD" name="POD" value="">
+                                                @endif
+                                                <span class="icon-input bx bx-anchor text-navy"></span>
+                                            </div>
                                         </div>
-                                        <!-- <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="to" id="to1" checked>
-                                            <label class="form-check-label" for="to1">
-                                                Merchant Haulage (CY)
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="to" id=to2">
-                                            <label class="form-check-label" for="to2">
-                                                Carrier Haulage (SD)
-                                            </label>
-                                        </div> -->
                                     </div>
                                     <div class="col-12 d-block d-md-none d-xl-block">
                                         <hr>
                                     </div>
                                     <div class="col-12 col-md-4 col-xl-12">
                                         <label for="" class="form-label"><b>Date</b></label>
-                                        <select class="form-select mb-2">
-                                            <option value="1">Departing</option>
-                                            <option value="2">Arriving by</option>
+                                        @if(isset($type_form))
+                                        <select class="form-select mb-2" id="type" name="type">
+                                            <option {{ ($type_form == 'departure') ? 'selected' : '' }}
+                                                value="departure">Departing</option>
+                                            <option {{ ($type_form == 'arrival') ? 'selected' : '' }} value="arrival">
+                                                Arriving by</option>
                                         </select>
-                                        <input type="date" class="form-control" id="">
+                                        @else
+                                        <select class="form-select mb-2" id="type" name="type">
+                                            <option value="departure">Departing</option>
+                                            <option value="arrival">Arriving by</option>
+                                        </select>
+                                        @endif
+                                        @if(isset($date))
+                                        <input type="date" class="form-control" id="date" name="date"
+                                            value="{{ $date }}">
+                                        @else
+                                        <input type="date" class="form-control" id="date" name="date" value="">
+                                        @endif
                                     </div>
                                     <div class="col-12 d-block d-md-none d-xl-block">
                                         <hr>
                                     </div>
                                     <div class="col-12 col-md-4 col-xl-12">
                                         <label for="" class="form-label"><b>Container type</b></label>
-                                        <select class="form-select mb-1">
-                                            <option value="1">20' Dry Standard</option>
-                                            <option value="2">20' Dry High Cube</option>
-                                            <option value="3">40' Dry High Cube</option>
+                                        @if(isset($container))
+                                        <select class="form-select mb-1" id="container" name="container">
+                                            @foreach ($EquipmentType as $key => $val)
+                                            <option {{ ($container == $val->id) ? 'selected' : '' }}
+                                                value="{{ $val->id }}">{{ $val->device_name }}</option>
+                                            @endforeach
                                         </select>
+                                        @else
+                                        <select class="form-select mb-1" id="container" name="container">
+                                            @foreach ($EquipmentType as $key => $val)
+                                            <option value="{{ $val->id }}">{{ $val->device_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @endif
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Cargo requires
+                                            @if(isset($cargo))
+                                            <input type="checkbox" class="form-check-input" id="cargo_temperature"
+                                                name="cargo_temperature" value="1" {{ $cargo == '1' ? 'checked' : '' }}>
+                                            @else
+                                            <input type="checkbox" class="form-check-input" id="cargo_temperature"
+                                                name="cargo_temperature" value="1">
+                                            @endif
+                                            <label class="form-check-label" for="cargo_temperature">Cargo requires
                                                 temperature control</label>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-4 col-xl-12 pt-3">
                                         <button type="submit" class="btn btn-navy rounded-pill w-100"><i
-                                            class="fas fa-search"></i> Search</button>
+                                                class="fas fa-search"></i> Search</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="col-xl-9">
-                            <p>Search result for <b>Bangkok, Thailand (CY)</b> to <b>Jakarta, Indonesia (CY)</b></p>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <ul class="nav">
+                                        <li class="nav-item">
+                                            <p class="nav-link px-0 text-navy">Search result for <b>{{ $POLS }}</b> to
+                                                <b>{{ $PODS }}</b></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-3">
+                                    <ul class="nav justify-content-end" id="share-icon">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="mailto:sales5@infinity.co.th"><i
+                                                    class='bx bx-envelope bx-sm'></i></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" target="_blank" href="{{ url('/schedule-result/print?POL='.$POLS.'&POD='.$PODS.'&type='.$type_form.'&date='.$date.'&container='.$container) }}"><i class='bx bx-printer bx-sm'></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @foreach ($Book as $key => $val)
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <div class="row">
@@ -114,8 +181,17 @@
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
                                                     <p class="mb-0">Departure</p>
-                                                    <b>03 Oct 2022</b><br>
-                                                    <u class="text-navy fw-bold">Lat Krabang</u>
+                                                    <b>
+                                                        <?php
+                                                        $date = new DateTime($val->departure);
+                                                        $dates = $val->departure;
+                                                        $newdate = $date->format(DateTime::RFC822); 
+                                                        $explode = explode(" ",$newdate);
+                                                        $explodes = explode("-",$dates);
+                                                        echo $explode[1]." ".$explode[2]." ".$explodes[0];
+                                                        ?>
+                                                    </b><br>
+                                                    <u class="text-navy fw-bold">{{ $val->place_of_departure }}</u>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,50 +202,82 @@
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
                                                     <p class="mb-0">Arrival</p>
-                                                    <b>13 Oct 2022</b><br>
-                                                    <u class="text-navy fw-bold">PT New Priok Container Terminal One</u>
+                                                    <b>
+                                                        <?php
+                                                        $date = new DateTime($val->arrival);
+                                                        $dates = $val->arrival;
+                                                        $newdate = $date->format(DateTime::RFC822); 
+                                                        $explode = explode(" ",$newdate);
+                                                        $explodes = explode("-",$dates);
+                                                        echo $explode[1]." ".$explode[2]." ".$explodes[0];
+                                                        ?>
+                                                    </b><br>
+                                                    <u class="text-navy fw-bold">{{ $val->place_of_arrival }}</u>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0">
-                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt="" width="24px">
+                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt=""
+                                                        width="24px">
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
                                                     <p class="mb-0">Vessal/Voyage</p>
-                                                    <u class="text-navy fw-bold">BUXFAVOURITE</u> 240S<br>
-                                                    Transit Time: <b>10 Days</b>
+                                                    <?php
+                                                    $books = DB::table('schedules')->where('ref_id_booking',$val->id_booking)->where('ship_code', '!=', null)->orderBy('id_schedules', 'ASC')->first();
+                                                    ?>
+                                                    <u class="text-navy fw-bold">
+                                                        <?php 
+                                                            $ships = $books->ship_code;
+                                                            $explode = explode("/",$ships);
+                                                            echo $explode[0];
+                                                        ?>
+                                                    </u>
+                                                    <?php 
+                                                        $ships = $books->ship_code;
+                                                        $explode = explode("/",$ships);
+                                                        echo $explode[1];
+                                                    ?><br>
+                                                    Transit Time :
+                                                    <b>
+                                                        <?php 
+                                                            $transport1 = DB::table('schedules')->where('ref_id_booking',$val->id_booking)->orderBy('id_schedules', 'ASC')->first();
+                                                            $transport2 = DB::table('schedules')->where('ref_id_booking',$val->id_booking)->orderBy('id_schedules', 'DESC')->first();
+                                                            $date1 = date_create($transport1->save_datetime);
+                                                            $date2 = date_create($transport2->save_datetime);
+                                                            $diff = date_diff($date1,$date2);
+                                                            $explode = $diff->format("%a days");
+                                                            $explodes = explode(" ",$explode);
+                                                            echo $explodes[0].' '.'Days';
+                                                        ?>
+                                                    </b>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 text-center align-self-center">
-                                            <a href="{{ url('/price') }}" class="btn btn-navy rounded-pill mb-2 btn-w130">Get a quote</a>
-                                            <br>
-                                            <a href="{{ url('/booking-info') }}" class="btn btn-red rounded-pill btn-w130">Booking</a>
+                                            <a href="{{ url('/booking-info/'.$val->ref_quote_code) }}"
+                                                class="btn btn-red rounded-pill btn-w130">Booking</a>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-3">
                                             <p class="mb-0"><i class="bx bx-time text-red bx-sm"></i> <b>Deadlines</b>
                                             </p>
                                         </div>
                                         <div class="col-sm-3">
-                                            <span class="fs-12">Container gate-in</span><br>
-                                            <b class="small">02 Oct 2022, 05:00</b>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Shipping Instructions</span><br>
-                                            <b class="small">N/A</b>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Shipping Instructions - AMS</span><br>
-                                            <b class="small">N/A</b>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Verified Gross Mass</span><br>
-                                            <b class="small">03 Oct 2022, 01:00</b>
+                                            <span class="fs-12">PORT CUT-OFF</span><br>
+                                            <b class="small">
+                                                <?php
+                                                    $date = new DateTime($val->deadlines);
+                                                    $dates = $val->deadlines;
+                                                    $newdate = $date->format(DateTime::RFC822); 
+                                                    $explode = explode(" ",$newdate);
+                                                    $explodes = explode("-",$dates);
+                                                    echo $explode[1]." ".$explode[2]." ".$explodes[0];
+                                                ?>
+                                            </b>
                                         </div>
                                     </div>
                                 </div>
@@ -181,534 +289,48 @@
                                     </button>
                                     <div class="collapse pt-2" id="collapseExample">
                                         <ul class="timeline timeline-split">
+                                            <?php 
+                                            $transport = DB::table('schedules')->where('ref_id_booking',$val->id_booking)->get(); 
+                                            ?>
+                                            @foreach ($transport as $key => $val2)
                                             <li class="timeline-item">
                                                 <div class="timeline-info">
-                                                    <span>Bangkok</span><br>
-                                                    <span class="fs-12">Lat Krabang</span>
+                                                    <span>{{ $val2->city_name }}</span><br>
+                                                    <span class="fs-12">{{ $val2->location }}</span>
                                                 </div>
                                                 <div class="timeline-marker dot-none">
-                                                    <i class='bx-xs bx bxs-circle text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Transport via truck</label>
-                                                    <p class="fs-12 mb-0">03 Oct 2022, 05:00</p>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Laem Chabang</span><br>
-                                                    <span class="fs-12">Laem Chabang Port AO</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-xs bx bxs-circle text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Arrival</label>
-                                                    <p class="fs-12 mb-0">03 Oct 2022, 09:00</p>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item img">
-                                                <div class="timeline-info"></div>
-                                                <div class="timeline-marker dot-none">
-                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt="">
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Departing on <u class="text-navy">BUXFAVOURITE / 240S</u></label>
-                                                    <p class="fs-12 mb-0">03 Oct 2022, 09:00</p>
-                                                    <div class="table-responsive">
-                                                        <table class="table border">
-                                                            <thead>
-                                                                <tr class="text-center">
-                                                                    <th>IMO Number</th>
-                                                                    <th>Flag</th>
-                                                                    <th>Built</th>
-                                                                    <th>Service</th>
-                                                                    <th>Call Sign</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="text-center">
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>THA1</td>
-                                                                    <td>THA1</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Tanjung Pelepas</span><br>
-                                                    <span class="fs-12">Pelabuhan Tanjung Pelepas Terminal</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-xs bx bxs-circle text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Arrival</label>
-                                                    <p class="fs-12 mb-0">06 Oct 2022, 14:00</p>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item img">
-                                                <div class="timeline-info"></div>
-                                                <div class="timeline-marker dot-none">
-                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt="">
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Departing on <u class="text-navy">NAVIOS LAPIS / 2395</u></label>
-                                                    <p class="fs-12 mb-0">10 Oct 2022, 09:00</p>
-                                                    <div class="table-responsive">
-                                                        <table class="table border">
-                                                            <thead>
-                                                                <tr class="text-center">
-                                                                    <th>IMO Number</th>
-                                                                    <th>Flag</th>
-                                                                    <th>Built</th>
-                                                                    <th>Service</th>
-                                                                    <th>Call Sign</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="text-center">
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>Intra Asia 3</td>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Jakarta</span><br>
-                                                    <span class="fs-12">PT Mew Priok Container Terminal One</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
+                                                    @if ($val2->transport_status == 'ESTIMATE ARRIVAL')
                                                     <i class='bx-sm bx bxs-map text-red'></i>
+                                                    @else
+                                                    <i class='bx-xs bx bxs-circle text-red'></i>
+                                                    @endif
                                                 </div>
                                                 <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Arrival</label>
-                                                    <p class="fs-12 mb-0">13 Oct 2022, 01:00</p>
+                                                    <label for=""
+                                                        class="form-label mb-0 text-uppercase">{{ $val2->transport_status }}</label>
+                                                    <p class="fs-12 mb-0">{{ $val2->save_datetime }}</p>
+                                                    @if ($val2->ship_code != '')
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-shrink-0">
+                                                            <img src="{{ asset('frontend/images/icon-harbor.png') }}"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="flex-grow-1 ms-3">
+                                                            Departing on <u class="text-navy">{{ $val2->ship_code }}</u>
+                                                        </div>
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                    <i class="bx bxs-map text-red bx-sm"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <p class="mb-0">Departure</p>
-                                                    <b>03 Oct 2022</b><br>
-                                                    <u class="text-navy fw-bold">Lat Krabang</u>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                    <i class="bx bxs-map text-red bx-sm"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <p class="mb-0">Arrival</p>
-                                                    <b>13 Oct 2022</b><br>
-                                                    <u class="text-navy fw-bold">PT New Priok Container Terminal One</u>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt="" width="24px">
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <p class="mb-0">Vessal/Voyage</p>
-                                                    <u class="text-navy fw-bold">BUXFAVOURITE</u> 240S<br>
-                                                    Transit Time: <b>10 Days</b>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 text-center align-self-center">
-                                            <a href="{{ url('/price') }}" class="btn btn-navy rounded-pill mb-2 btn-w130">Get a quote</a>
-                                            <br>
-                                            <a href="{{ url('/booking-info') }}" class="btn btn-red rounded-pill btn-w130">Booking</a>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <p class="mb-0"><i class="bx bx-time text-red bx-sm"></i> <b>Deadlines</b>
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Container gate-in</span><br>
-                                            <b class="small">02 Oct 2022, 05:00</b>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Shipping Instructions</span><br>
-                                            <b class="small">N/A</b>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Shipping Instructions - AMS</span><br>
-                                            <b class="small">N/A</b>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Verified Gross Mass</span><br>
-                                            <b class="small">03 Oct 2022, 01:00</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <button class="btn btn-more" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseExample2" aria-expanded="false"
-                                        aria-controls="collapseExample2">
-                                        <i class='fas fa-chevron-down me-1'></i> Show route details
-                                    </button>
-                                    <div class="collapse pt-2" id="collapseExample2">
-                                        <ul class="timeline timeline-split">
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Bangkok</span><br>
-                                                    <span class="fs-12">Lat Krabang</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-xs bx bxs-circle text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Transport via truck</label>
-                                                    <p class="fs-12 mb-0">03 Oct 2022, 05:00</p>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Laem Chabang</span><br>
-                                                    <span class="fs-12">Laem Chabang Port AO</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-xs bx bxs-circle text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Arrival</label>
-                                                    <p class="fs-12 mb-0">03 Oct 2022, 09:00</p>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item img">
-                                                <div class="timeline-info"></div>
-                                                <div class="timeline-marker dot-none">
-                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt="">
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Departing on <u class="text-navy">BUXFAVOURITE / 240S</u></label>
-                                                    <p class="fs-12 mb-0">03 Oct 2022, 09:00</p>
-                                                    <div class="table-responsive">
-                                                        <table class="table border">
-                                                            <thead>
-                                                                <tr class="text-center">
-                                                                    <th>IMO Number</th>
-                                                                    <th>Flag</th>
-                                                                    <th>Built</th>
-                                                                    <th>Service</th>
-                                                                    <th>Call Sign</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="text-center">
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>THA1</td>
-                                                                    <td>THA1</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Tanjung Pelepas</span><br>
-                                                    <span class="fs-12">Pelabuhan Tanjung Pelepas Terminal</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-xs bx bxs-circle text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Arrival</label>
-                                                    <p class="fs-12 mb-0">06 Oct 2022, 14:00</p>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item img">
-                                                <div class="timeline-info"></div>
-                                                <div class="timeline-marker dot-none">
-                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt="">
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Departing on <u class="text-navy">NAVIOS LAPIS / 2395</u></label>
-                                                    <p class="fs-12 mb-0">10 Oct 2022, 09:00</p>
-                                                    <div class="table-responsive">
-                                                        <table class="table border">
-                                                            <thead>
-                                                                <tr class="text-center">
-                                                                    <th>IMO Number</th>
-                                                                    <th>Flag</th>
-                                                                    <th>Built</th>
-                                                                    <th>Service</th>
-                                                                    <th>Call Sign</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="text-center">
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>Intra Asia 3</td>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Jakarta</span><br>
-                                                    <span class="fs-12">PT Mew Priok Container Terminal One</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-sm bx bxs-map text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Arrival</label>
-                                                    <p class="fs-12 mb-0">13 Oct 2022, 01:00</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                    <i class="bx bxs-map text-red bx-sm"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <p class="mb-0">Departure</p>
-                                                    <b>03 Oct 2022</b><br>
-                                                    <u class="text-navy fw-bold">Lat Krabang</u>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                    <i class="bx bxs-map text-red bx-sm"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <p class="mb-0">Arrival</p>
-                                                    <b>13 Oct 2022</b><br>
-                                                    <u class="text-navy fw-bold">PT New Priok Container Terminal One</u>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt="" width="24px">
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <p class="mb-0">Vessal/Voyage</p>
-                                                    <u class="text-navy fw-bold">BUXFAVOURITE</u> 240S<br>
-                                                    Transit Time: <b>10 Days</b>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 text-center align-self-center">
-                                            <a href="{{ url('/price') }}" class="btn btn-navy rounded-pill mb-2 btn-w130">Get a quote</a>
-                                            <br>
-                                            <a href="{{ url('/booking-info') }}" class="btn btn-red rounded-pill btn-w130">Booking</a>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <p class="mb-0"><i class="bx bx-time text-red bx-sm"></i> <b>Deadlines</b>
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Container gate-in</span><br>
-                                            <b class="small">02 Oct 2022, 05:00</b>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Shipping Instructions</span><br>
-                                            <b class="small">N/A</b>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Shipping Instructions - AMS</span><br>
-                                            <b class="small">N/A</b>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <span class="fs-12">Verified Gross Mass</span><br>
-                                            <b class="small">03 Oct 2022, 01:00</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <button class="btn btn-more" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseExample3" aria-expanded="false"
-                                        aria-controls="collapseExample3">
-                                        <i class='fas fa-chevron-down me-1'></i> Show route details
-                                    </button>
-                                    <div class="collapse pt-2" id="collapseExample3">
-                                        <ul class="timeline timeline-split">
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Bangkok</span><br>
-                                                    <span class="fs-12">Lat Krabang</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-xs bx bxs-circle text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Transport via truck</label>
-                                                    <p class="fs-12 mb-0">03 Oct 2022, 05:00</p>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Laem Chabang</span><br>
-                                                    <span class="fs-12">Laem Chabang Port AO</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-xs bx bxs-circle text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Arrival</label>
-                                                    <p class="fs-12 mb-0">03 Oct 2022, 09:00</p>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item img">
-                                                <div class="timeline-info"></div>
-                                                <div class="timeline-marker dot-none">
-                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt="">
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Departing on <u class="text-navy">BUXFAVOURITE / 240S</u></label>
-                                                    <p class="fs-12 mb-0">03 Oct 2022, 09:00</p>
-                                                    <div class="table-responsive">
-                                                        <table class="table border">
-                                                            <thead>
-                                                                <tr class="text-center">
-                                                                    <th>IMO Number</th>
-                                                                    <th>Flag</th>
-                                                                    <th>Built</th>
-                                                                    <th>Service</th>
-                                                                    <th>Call Sign</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="text-center">
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>THA1</td>
-                                                                    <td>THA1</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Tanjung Pelepas</span><br>
-                                                    <span class="fs-12">Pelabuhan Tanjung Pelepas Terminal</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-xs bx bxs-circle text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Arrival</label>
-                                                    <p class="fs-12 mb-0">06 Oct 2022, 14:00</p>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item img">
-                                                <div class="timeline-info"></div>
-                                                <div class="timeline-marker dot-none">
-                                                    <img src="{{ asset('frontend/images/icon-harbor.png') }}" alt="">
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Departing on <u class="text-navy">NAVIOS LAPIS / 2395</u></label>
-                                                    <p class="fs-12 mb-0">10 Oct 2022, 09:00</p>
-                                                    <div class="table-responsive">
-                                                        <table class="table border">
-                                                            <thead>
-                                                                <tr class="text-center">
-                                                                    <th>IMO Number</th>
-                                                                    <th>Flag</th>
-                                                                    <th>Built</th>
-                                                                    <th>Service</th>
-                                                                    <th>Call Sign</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="text-center">
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>Intra Asia 3</td>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="timeline-item">
-                                                <div class="timeline-info">
-                                                    <span>Jakarta</span><br>
-                                                    <span class="fs-12">PT Mew Priok Container Terminal One</span>
-                                                </div>
-                                                <div class="timeline-marker dot-none">
-                                                    <i class='bx-sm bx bxs-map text-red'></i>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <label for="" class="form-label mb-0">Arrival</label>
-                                                    <p class="fs-12 mb-0">13 Oct 2022, 01:00</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                             <div class="py-3">
                                 <div class="pagination justify-content-center">
-                                    <a href="#" class="prev disabled"><i class='fas fa-angle-left'></i></a>
-                                    <ol>
-                                        <li class="active"><a href="#1">1</a></li>
-                                        <li><a href="#2">2</a></li>
-                                        <li><a href="#3">3</a></li>
-                                        <li><a href="#4">4</a></li>
-                                        <li><a href="#5">5</a></li>
-                                        <li><a href="#6">6</a></li>
-                                        <li><a href="#7">7</a></li>
-                                        <li><a href="#8">8</a></li>
-                                    </ol>
-                                    <a href="#" class="next"><i class='fas fa-angle-right'></i></a>
+                                    {{ $Book->appends(Request::all())->links() }}
                                 </div>
                             </div>
                         </div>
@@ -736,9 +358,10 @@
             </div>
         </div>
     </div>
-    @include('layouts.frontend.inc_footer') 
+    @include('layouts.frontend.inc_footer')
     <script>
         $('#linkMenuTop .nav-item').eq(5).addClass('active');
+
     </script>
     <script>
         $(".btn-more").click(function () {
@@ -750,7 +373,130 @@
 
             $(".btn-more").toggleClass("collapsed");
         });
+
+    </script>
+    <script>
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) {
+                    return false;
+                }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        /*An array containing all the country names in the world:*/
+        var POL = {!! json_encode($result1->toArray()) !!};
+        var POD = {!! json_encode($result2->toArray()) !!};
+
+        var activePOL = POL;
+        var activePOD = POD;
+
+        /*initiate the autocomplete function on the "POL" element, and pass along the countries array as possible autocomplete values:*/
+        autocomplete(document.getElementById("POL"), activePOL);
+        autocomplete(document.getElementById("POD"), activePOD);
+
     </script>
 </body>
 
 </html>
+@else
+<script>
+    var _url = "{{ url('/login') }}";
+    window.location.href = _url;
+
+</script>
+@endif

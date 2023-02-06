@@ -40,6 +40,9 @@ Route::post('member/store', 'MemberController@store')->name('member.store');
 Route::get('member/edit/{id}', 'MemberController@edit');
 Route::put('member/update/{id}', 'MemberController@update');
 Route::delete('member/delete/{id}', 'MemberController@destroy');
+Route::post('member/Forgotpassword', 'MemberController@forgotpassword_mail')->name('forgotpassword.mail');
+Route::get('member/Forgotpassword/{id}', 'MemberController@forgotpassword');
+Route::put('member/Forgotpassword/update/{id}', 'MemberController@forgotpassword_update');
 //** END MEMBER LOGIN && LOGOUT **//
 
 //** REGISTER **//
@@ -57,13 +60,10 @@ Route::get('/about', 'HomeController@about');
 
 //** ACCOUNT **//
 Route::get('/account', 'HomeController@account');
+Route::put('/account/update/{id}', 'HomeController@account_update');
+Route::put('/account/Allupdate/{id}', 'HomeController@allaccount_update');
+Route::put('/account/updates/{id}', 'HomeController@updates');
 //** END ACCOUNT **//
-
-//** BOOKING **//
-Route::get('/booking', 'HomeController@booking');
-Route::get('/booking-info/{id_quote}', 'HomeController@booking_info');
-Route::post('/booking-info/store/{id_quote}', 'HomeController@booking_store');
-//** END BOOKING **//
 
 //** BULKLOGISTICS **//
 Route::get('/bulkLogistics', 'HomeController@bulkLogistics');
@@ -91,9 +91,18 @@ Route::get('/price-result/get_quote', 'HomeController@price_get')->name('quote.g
 Route::get('/price-result/search', 'HomeController@price_result')->name('quote.result');
 //** END PRICES **//
 
+//** BOOKING **//
+Route::get('/booking', 'HomeController@booking');
+Route::get('/booking/search', 'HomeController@booking_search')->name('search.result');
+Route::get('/booking-info/{quote_code}', 'HomeController@booking_info');
+Route::post('/booking-info/store/{quote_code}', 'HomeController@booking_store');
+//** END BOOKING **//
+
 //** SCHEDULE **//
 Route::get('/schedule', 'HomeController@schedule');
 Route::get('/schedule-result', 'HomeController@schedule_result');
+Route::get('/schedule-result/search', 'HomeController@schedule_search')->name('schedule.result');
+Route::get('/schedule-result/print', 'HomeController@schedule_print');
 //** END SCHEDULE **//
 
 //** SERVICE **//
@@ -233,6 +242,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     ////////////////////<!** BOOKING **!>////////////////////
     //** BOOKING **//
     Route::get('/backend/booking', 'Backend\BookingController@index'); // get all Booking data
+    Route::get('/backend/booking/edit/{id}', 'Backend\BookingController@edit');   // edit Booking view
+    Route::put('/backend/booking/updates/{id}', 'Backend\BookingController@updates'); // update Booking data
+    Route::put('/backend/booking/update/{id}', 'Backend\BookingController@update'); // update Booking2 data
     Route::get('/backend/booking/view/{id}', 'Backend\BookingController@show');   // View More Booking view
     //** END BOOKING **//
     //** TERM **//
@@ -244,6 +256,18 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::delete('/backend/booking/term/delete/{id}', 'Backend\BookingTermController@destroy'); // delete Term data
     //** END TERM **//
     ////////////////////<!** END BOOKING **!>////////////////////
+
+    ////////////////////<!** SCHEDULES **!>////////////////////
+    //** SCHEDULES **//
+    Route::get('/backend/schedules', 'Backend\SchedulesController@index'); // get all Schedules data
+    Route::get('/backend/schedules/add-detail/{id}', 'Backend\SchedulesController@show'); // get all Schedules data
+    Route::get('/backend/schedules/add-detail/create/{id}', 'Backend\SchedulesController@create');  // create Schedules view
+    Route::post('/backend/schedules/add-detail/store/{id}', 'Backend\SchedulesController@store'); // store Schedules data
+    Route::get('/backend/schedules/add-detail/edit/{id_booking}/{id}', 'Backend\SchedulesController@edit');   // edit Schedules view
+    Route::put('/backend/schedules/add-detail/update/{id_booking}/{id}', 'Backend\SchedulesController@update'); // update Schedules data
+    Route::delete('/backend/schedules/add-detail/delete/{id}', 'Backend\SchedulesController@destroy'); // delete Schedules data
+    //** END SCHEDULES **//
+    ////////////////////<!** END SCHEDULES **!>////////////////////
 
     ////////////////////<!** CONTACT US **!>////////////////////
     //** CONTACT **//
@@ -258,13 +282,31 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     ////////////////////<!** MANAGEMENT **!>////////////////////
     //** MEMBER **//
-    Route::get('/backend/member', 'Backend\MemberController@index'); // get all Services data
-    Route::get('/backend/member/create', 'Backend\MemberController@create');  // create Services view
-    Route::post('/backend/member/store', 'Backend\MemberController@store')->name('member.store'); // store Services data
-    Route::get('/backend/member/edit/{id}', 'Backend\MemberController@edit');   // edit Services view
-    Route::put('/backend/member/update/{id}', 'Backend\MemberController@update'); // update Services data
-    Route::delete('/backend/member/delete/{id}', 'Backend\MemberController@destroy'); // delete Services data
+    Route::get('/backend/member', 'Backend\MemberController@index'); // get all Members data
+    Route::get('/backend/member/view/{id}', 'Backend\MemberController@show');   // View More Members view
+    Route::get('/backend/member/create', 'Backend\MemberController@create');  // create Members view
+    Route::post('/backend/member/store', 'Backend\MemberController@store')->name('member.store'); // store Members data
+    Route::get('/backend/member/edit/{id}', 'Backend\MemberController@edit');   // edit Members view
+    Route::put('/backend/member/update/{id}', 'Backend\MemberController@update'); // update Members data
+    Route::delete('/backend/member/delete/{id}', 'Backend\MemberController@destroy'); // delete Members data
     //** END MEMBER **//
+    //** USER ROLE **//
+    Route::get('/backend/user-role', 'Backend\RoleController@index'); // get all User Role data
+    Route::get('/backend/user-role/create', 'Backend\RoleController@create');  // create User Role view
+    Route::post('/backend/user-role/store', 'Backend\RoleController@store')->name('role.store'); // store User Role data
+    Route::get('/backend/user-role/edit/{id}', 'Backend\RoleController@edit');   // edit User Role view
+    Route::put('/backend/user-role/update/{id}', 'Backend\RoleController@update'); // update User Role data
+    Route::delete('/backend/user-role/delete/{id}', 'Backend\RoleController@destroy'); // delete User Role data
+    //** END USER ROLE **//
+    //** USER MANAGEMENT **//
+    Route::get('/backend/user-management', 'Backend\UserManagementController@index'); // get all User Management data
+    Route::post('/backend/user-management/reset', 'Backend\UserManagementController@reset_password'); // get all Reset User Management data
+    Route::get('/backend/user-management/create', 'Backend\UserManagementController@create');  // create User Management view
+    Route::post('/backend/user-management/store', 'Backend\UserManagementController@store')->name('user.store'); // store User Management data
+    Route::get('/backend/user-management/edit/{id}', 'Backend\UserManagementController@edit');   // edit User Management view
+    Route::put('/backend/user-management/update/{id}', 'Backend\UserManagementController@update'); // update User Management data
+    Route::delete('/backend/user-management/delete/{id}', 'Backend\UserManagementController@destroy'); // delete User Management data
+    //** END USER MANAGEMENT **//
     ////////////////////<!** END MANAGEMENT **!>////////////////////
 });
 

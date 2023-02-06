@@ -116,7 +116,7 @@
                                     </td>
                                     <td>
                                         @if($val->status == 1 || $val->status == 2 || $val->status == 3 || $val->status
-                                        == 4 || $val->status == 5 || $val->status == 6)
+                                        == 4 || $val->status == 5)
                                         <div class="dropdown">
                                             <button class="btn btn-outline-dark dropdown-toggle" type="button"
                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
