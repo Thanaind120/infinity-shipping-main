@@ -49,9 +49,15 @@
                                     </div>
                                     <div class="form-group row ml-4 mt-5">
                                         <label for="" class="col-md-2 col-form-label">Privilege :</label>
-                                        <div class="col-md-4">
-                                            <input type="checkbox" id="privilege" name="privilege" onclick="checkBoxButton()" value="1">
-                                            Valid : 24Hrs & Mega Sale
+                                        <div class="col-md-3">
+                                            <input type="checkbox" id="privilege" name="privilege"
+                                                onclick="checkBoxButton()" value="1">
+                                            24Hrs & Mega Sale
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="checkbox" id="privilege2" name="privilege2"
+                                                onclick="checkBoxButton2()" value="1">
+                                            24Hrs & Flash Sale
                                         </div>
                                     </div>
                                     <div id="special" class="form-group row ml-4 mt-5" style="display: none">
@@ -61,6 +67,24 @@
                                             <input type="text" class="form-control" id="special_rate"
                                                 name="special_rate" value="">
                                         </div>
+                                    </div>
+                                    <div class="form-group row ml-4 mt-5">
+                                        <label for="" class="col-form-label">Additional Content
+                                            :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <div class="col-md-4">
+                                            <input type="checkbox" id="additional_content" name="additional_content"
+                                                onclick="checkBoxButton3()" value="1">
+                                        </div>
+                                    </div>
+                                    <div id="announce" class="form-group row ml-4 mt-5" style="display: none">
+                                        <label for=""
+                                            class="col-form-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        ฮอตสุดๆ มีคนจองล่าสุดเมื่อ
+                                        <div class="col-md-2">
+                                            <input type="text" class="form-control" id="announce_content"
+                                                name="announce_content" value="">
+                                        </div>
+                                        ชั่วโมงก่อน
                                     </div>
                                     <!-- End : form update -->
                                     <div class="form-group mb-0 row">
@@ -82,7 +106,7 @@
                     </div>
                 </section>
             </div>
-            
+
             @include('include.footer')
         </div>
     </div>
@@ -103,9 +127,31 @@
         function checkBoxButton() {
             var checkBox = document.getElementById("privilege");
             if (checkBox.checked == true) {
+                $('#privilege').filter(':checkbox').prop('checked',true);
+                $('#privilege2').filter(':checkbox').prop('checked',false);
                 $('#special').show();
             } else {
                 $('#special').hide();
+            }
+        }
+
+        function checkBoxButton2() {
+            var checkBox2 = document.getElementById("privilege2");
+            if (checkBox2.checked == true) {
+                $('#privilege2').filter(':checkbox').prop('checked',true);
+                $('#privilege').filter(':checkbox').prop('checked',false);  
+                $('#special').show();
+            } else {
+                $('#special').hide();
+            }
+        }
+
+        function checkBoxButton3() {
+            var checkBox = document.getElementById("additional_content");
+            if (checkBox.checked == true) {
+                $('#announce').show();
+            } else {
+                $('#announce').hide();
             }
         }
 

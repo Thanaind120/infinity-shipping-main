@@ -97,11 +97,24 @@ class PricesController extends Controller
         } else {
             $privilege = 0;
         }
+        if (isset($request->privilege2)) {
+            $privilege2 = 1;
+        } else {
+            $privilege2 = 0;
+        }
+        if (isset($request->additional_content)) {
+            $additional = 1;
+        } else {
+            $additional = 0;
+        }
         PricesModel::find($id)->update([
             'VDT' => $newDate,
             'rate' => $request->rate,
             'privilege' => $privilege,
+            'privilege2' => $privilege2,
             'special_rate' => $request->special_rate,
+            'additional_content' => $additional,
+            'announce_content' => $request->announce_content,
             'save_datetime' => Carbon::now(),
             'status' => 1,
             'updated_at' => Carbon::now()
