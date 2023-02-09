@@ -95,6 +95,8 @@
                                                 <div class="me-1">
                                                     @if($val->privilege == 1)
                                                     <h3 class="text-navy fw-bold">{{ $val->special_rate }}</h3>
+                                                    @elseif($val->privilege2 == 1)
+                                                    <h3 class="text-navy fw-bold">{{ $val->special_rate }}</h3>
                                                     @else
                                                     <h3 class="text-navy fw-bold">{{ $val->rate }}</h3>
                                                     @endif
@@ -103,6 +105,14 @@
                                                 </div>
                                             </div>
                                             <p class="fs-12 text-muted mb-0">Rate for general cargo <font color="red">(Non-DG)</font></p>
+                                            @if($val->additional_content == 1)
+                                            @if($val->announce_content != '')
+                                            <p class="fs-12 text-muted mb-0">
+                                                <font color="red"><i class="fa fa-flag" aria-hidden="true"></i> ฮอตสุดๆ
+                                                    มีคนจองล่าสุดเมื่อ {{ $val->announce_content }} ชั่วโมงก่อน</font>
+                                            </p>
+                                            @endif
+                                            @endif
                                         </div>
                                         <div class="col-sm-3 text-center">
                                             @if($val->privilege == 1)
@@ -115,6 +125,17 @@
                                                     <span></span>
                                                 </div>
                                                 MEGA SALE
+                                            </span>
+                                            @elseif($val->privilege2 == 1)
+                                            <span class="badge bg-danger w-100 rounded-0">VALID : 24Hrs</span>
+                                            <span class="badge w-100 myClass rounded-0 mb-2 position-relative"
+                                                style="color:">
+                                                <div class="scrollDown">
+                                                    <span></span>
+                                                    <span></span>
+                                                    <span></span>
+                                                </div>
+                                                FLASH SALE
                                             </span>
                                             @endif
                                             <a type="button" class="btn btn-navy rounded-pill px-5"
