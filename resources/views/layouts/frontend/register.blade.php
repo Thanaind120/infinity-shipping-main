@@ -134,7 +134,7 @@
                                                 <label for="" class="form-label">Country / Region</label>
                                                 <select class="form-select" name="country_region"
                                                     aria-label="Default select example" id="">
-                                                    <option selected>Choose your country</option>
+                                                    <option value="" selected>Choose your country</option>
                                                     <option value=""></option>
                                                     <option value=""></option>
                                                     <option value=""></option>

@@ -153,7 +153,7 @@
             @foreach($total_members as $key=>$val)
             @if($val->total_members != '')
             <li class="<?php echo isset($active[9]) ? $active[9] : ''; ?>"><a class="nav-link"
-                    href="{{ url('/backend/member') }}"><i class="fas fa-users"></i>
+                    href="{{ url('/backend/member') }}"><i class="fas fa-users" style="color:#dc3545"></i>
                     <span style="color:#dc3545">Members ({{ $val->total_members }})</span>
                 </a>
             </li>
