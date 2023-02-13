@@ -147,13 +147,24 @@
             </li>
             @endif
 
+            <?php $total_members = DB::table('members')->select(DB::raw('SUM(amount) as total_members'))->where('status', 2)->get(); ?>
             @if($check->management_view == 1)
             <li class="menu-header">MANAGEMENT</li>
+            @foreach($total_members as $key=>$val)
+            @if($val->total_members != '')
             <li class="<?php echo isset($active[9]) ? $active[9] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/member') }}"><i class="fas fa-users"></i>
-                    <span>Members </span>
+                    <span style="color:#dc3545">Members ({{ $val->total_members }})</span>
                 </a>
             </li>
+            @else
+            <li class="<?php echo isset($active[9]) ? $active[9] : ''; ?>"><a class="nav-link"
+                href="{{ url('/backend/member') }}"><i class="fas fa-users"></i>
+                <span>Members </span>
+            </a>
+            </li>
+            @endif
+            @endforeach
             <li class="<?php echo isset($active[18]) ? $active[18] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/user-role') }}"><i class="fas fa-user"></i>
                     <span>User Role </span>

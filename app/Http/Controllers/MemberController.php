@@ -124,6 +124,7 @@ class MemberController extends Controller
                 $member->first_name = $request->first_name;
                 $member->last_name = $request->last_name;
                 $member->phone_number = $request->phone_number;
+                $member->amount = 1;
 
                 $member->company_name = $request->company_name;
                 $member->company_type = $companytype;
