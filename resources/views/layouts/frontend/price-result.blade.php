@@ -128,8 +128,7 @@
                                             </span>
                                             @elseif($val->privilege2 == 1)
                                             <span class="badge bg-danger w-100 rounded-0">VALID : 24Hrs</span>
-                                            <span class="badge w-100 myClass rounded-0 mb-2 position-relative"
-                                                style="color:">
+                                            <span class="badge w-100 myClass rounded-0 mb-2 position-relative">
                                                 <div class="scrollDown">
                                                     <span></span>
                                                     <span></span>
