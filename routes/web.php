@@ -564,6 +564,16 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     ////////////////////<!** MANAGEMENT **!>////////////////////
 
+    //** NOTES ON BOOKING **//
+
+    Route::get('/backend/notes-on-booking', 'Backend\BookingNotesController@index'); // get all Notes On Booking Content data
+
+    Route::get('/backend/notes-on-booking/edit/{id}', 'Backend\BookingNotesController@edit');   // edit Notes On Booking view
+
+    Route::put('/backend/notes-on-booking/update/{id}', 'Backend\BookingNotesController@update'); // update Notes On Booking data
+
+    //** END NOTES ON BOOKING **//
+
     //** MEMBER **//
 
     Route::get('/backend/member', 'Backend\MemberController@index'); // get all Members data

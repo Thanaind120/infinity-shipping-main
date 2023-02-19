@@ -83,15 +83,15 @@
 
             <li class="<?php echo isset($active[10]) ? $active[10] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/price/POL') }}"><i class="fas fa-location-arrow"></i>
-                    <span>Port of loading</span></a>
+                    <span>Port Of Loading</span></a>
             </li>
             <li class="<?php echo isset($active[11]) ? $active[11] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/price/POD') }}"><i class="fas fa-map-marker"></i>
-                    <span>Port of discharge</span></a>
+                    <span>Port Of Discharge</span></a>
             </li>
             <li class="<?php echo isset($active[12]) ? $active[12] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/price/equipment-type') }}"><i class="fas fa-clipboard"></i>
-                    <span>Equipment type</span></a>
+                    <span>Equipment Type</span></a>
             </li>
             <li class="<?php echo isset($active[13]) ? $active[13] : ''; ?>"><a class="nav-link"
                     href="{{ url('/backend/price/commodity') }}"><i class="fas fa-clipboard"></i>
@@ -150,6 +150,11 @@
             <?php $total_members = DB::table('members')->select(DB::raw('SUM(amount) as total_members'))->where('status', 2)->get(); ?>
             @if($check->management_view == 1)
             <li class="menu-header">MANAGEMENT</li>
+            <li class="<?php echo isset($active[20]) ? $active[20] : ''; ?>"><a class="nav-link"
+                href="{{ url('/backend/notes-on-booking') }}"><i class="fas fa-flag"></i>
+                <span>Notes On Booking </span>
+            </a>
+            </li>
             @foreach($total_members as $key=>$val)
             @if($val->total_members != '')
             <li class="<?php echo isset($active[9]) ? $active[9] : ''; ?>"><a class="nav-link"

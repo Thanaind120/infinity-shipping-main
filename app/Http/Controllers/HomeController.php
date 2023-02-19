@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\AboutModel;
 use App\Models\BookingTermModel;
+use App\Models\BookingNotesModel;
 use App\Models\BookingModel;
 use App\Models\Contact;
 use App\Models\ContactSales;
@@ -143,6 +144,7 @@ class HomeController extends Controller
             'city' => $request->city,
             'zip_code' => $request->zip_code,
             'country_region' => $request->country_region,
+            'country_region_other' => $request->country_region_other,
             'colleague_email' => $request->colleague_email,
             'updated_at' => Carbon::now()
         ]);
@@ -243,9 +245,11 @@ class HomeController extends Controller
     public function booking_info($quote_code)
     {
         $Quote = PricesModel::where('quote_code',$quote_code)->first();
+        $remark = BookingNotesModel::where('status', 1)->orderBy('id', 'DESC')->get();
         $Term = BookingTermModel::where('status', 1)->orderBy('id', 'DESC')->get();
         $Commodity = PricesCommodityModel::where('status', 1)->orderBy('id', 'ASC')->get();
         $data = array(
+            'remark' => $remark,
             'Term' => $Term,
             'Quote' => $Quote,
             'Commodity' => $Commodity,

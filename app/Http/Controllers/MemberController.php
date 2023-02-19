@@ -134,6 +134,7 @@ class MemberController extends Controller
                 $member->city = $request->city;
                 $member->zip_code = $request->zip_code;
                 $member->country_region = $request->country_region;
+                $member->country_region_other = $request->country_region_other;
                 $member->colleague_email = $request->colleague_email;
 
                 $member->status = 2;
@@ -221,6 +222,7 @@ class MemberController extends Controller
             'city' => $member->city,
             'zip_code' => $member->zip_code,
             'country_region' => $member->country_region,
+            'country_region_other' => $member->country_region_other,
             'colleague_email' => $member->colleague_email,
             'last_login' => $member->last_login,
             'status' => $member->status,
@@ -245,6 +247,7 @@ class MemberController extends Controller
         // $member = MemberModel::find($id);
         if($request->password_1 == $request->password_2 && $request->password_1 != ""){
             $varible = Hash::make($request->password_1);
+            Cookie::queue('newpassword',$request->password_1,time()+(10*365*60*60));
             MemberModel::find($id)->update([
                 'password' => $varible,
                 'updated_at' => Carbon::now()

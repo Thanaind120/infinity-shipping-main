@@ -78,6 +78,13 @@ class MemberController extends Controller
         // dd('asd');
 
         try {
+            if($request->company_type == 1){
+                $companytype = 'Supplier / Explorter';
+            }else if($request->company_type == 2){
+                $companytype = 'Freight Forwarder';
+            }else if($request->company_type == 3){
+                $companytype = 'Other';
+            }
             DB::beginTransaction();
             $member = Member::find($request->id);
             $member->email = $request->email;
@@ -87,13 +94,14 @@ class MemberController extends Controller
             $member->phone_number = $request->phone_number;
 
             $member->company_name = $request->company_name;
-            $member->company_type = $request->company_type;
+            $member->company_type = $companytype;
             $member->company_type_other = $request->company_type_other;
             $member->address = $request->address;
             $member->address_more = $request->address_more;
             $member->city = $request->city;
             $member->zip_code = $request->zip_code;
             $member->country_region = $request->country_region;
+            $member->country_region_other = $request->country_region_other;
             $member->colleague_email = $request->colleague_email;
 
             if ($request->status != null) {

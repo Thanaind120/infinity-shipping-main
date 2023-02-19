@@ -190,15 +190,15 @@
 
                                     </div>
 
+                                    @foreach ($remark as $key => $val)
+
                                     <div class="col-sm-12">
 
-                                        <p class="text-danger fw-bold mb-0">** REMARK : FREE DETENTION 3 DAYS (PICK UP
-
-                                            DATE UNTILL RETURN DATE) FREE DEMURRAGE 3 DAYS (RETURN DATE UNTILL CUT OFF
-
-                                            DATE) **</p>
+                                        <p class="text-danger fw-bold mb-0">** REMARK : {{ $val->remark }} **</p>
 
                                     </div>
+
+                                    @endforeach
 
                                     <div class="col-sm-3">
 
@@ -266,17 +266,15 @@
 
                                                     onclick="checkBoxButton()">
 
+                                                @foreach ($remark as $key => $val)
+                                                
                                                 <label class="form-check-label" for="flexCheckDefault">
 
-                                                    CANCELLATION / POSTPONEMENT MUST BE INFORMED WITHIN 7 DAYS BEFORE
-
-                                                    THE CLOSING TIME. OTHERWISE, WE WILL COLLECT THE PENALTY CHARGE AT
-
-                                                    THB 3,000.00 PER CONTAINER FOR CY SHIPMENT AND THB 5,000.00 PER
-
-                                                    CONTAINER FOR CFS SHIPMENT.
+                                                    {{ $val->note }}
 
                                                 </label>
+
+                                                @endforeach
 
                                             </div>
 

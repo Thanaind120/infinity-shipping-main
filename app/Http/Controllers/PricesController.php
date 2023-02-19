@@ -8,9 +8,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\MemberMail2;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\PricesModel;
+use App\Models\MemberModel;
 
 class PricesController extends Controller
 {
@@ -107,6 +109,14 @@ class PricesController extends Controller
         } else {
             $additional = 0;
         }
+        $mail = PricesModel::find($id);
+        $mail2 = MemberModel::where('id', $mail->created_id)->first();
+        $data_Membermail = [
+            'email' => $mail2->email,
+            'first_name' => $mail2->first_name,
+            'last_name' => $mail2->last_name,
+        ];
+        Mail::send(new MemberMail2($data_Membermail));
         PricesModel::find($id)->update([
             'VDT' => $newDate,
             'rate' => $request->rate,

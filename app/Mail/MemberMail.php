@@ -50,6 +50,7 @@ class MemberMail extends Mailable
             'city' => $this->data['city'],
             'zip_code' => $this->data['zip_code'],
             'country_region' => $this->data['country_region'],
+            'country_region_other' => $this->data['country_region_other'],
             'colleague_email' => $this->data['colleague_email'],
             'last_login' => $this->data['last_login'],
             'status' => $this->data['status'],

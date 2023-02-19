@@ -6,11 +6,11 @@
 
         <br>
 
-        คุณได้ทำการแจ้งลืมรหัสผ่านมายังอีเมลนี้
+        You have sent a forgotten password to this email.
 
        <br> 
 
-       กรุณาคลิกที่ลิงค์เพื่อไปยังหน้าเปลี่ยนรหัสผ่านของคุณ 
+       Please click on the link to go to the change your password page.
 
        <br>
 
