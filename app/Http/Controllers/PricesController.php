@@ -8,6 +8,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 use App\Mail\MemberMail2;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -92,44 +95,103 @@ class PricesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $date = $request->VDT;
-        $newDate = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
-        if (isset($request->privilege)) {
-            $privilege = 1;
-        } else {
-            $privilege = 0;
-        }
-        if (isset($request->privilege2)) {
-            $privilege2 = 1;
-        } else {
-            $privilege2 = 0;
-        }
-        if (isset($request->additional_content)) {
-            $additional = 1;
-        } else {
-            $additional = 0;
-        }
-        $mail = PricesModel::find($id);
-        $mail2 = MemberModel::where('id', $mail->created_id)->first();
-        $data_Membermail = [
-            'email' => $mail2->email,
-            'first_name' => $mail2->first_name,
-            'last_name' => $mail2->last_name,
-        ];
-        Mail::send(new MemberMail2($data_Membermail));
-        PricesModel::find($id)->update([
-            'VDT' => $newDate,
-            'rate' => $request->rate,
-            'privilege' => $privilege,
-            'privilege2' => $privilege2,
-            'special_rate' => $request->special_rate,
-            'additional_content' => $additional,
-            'announce_content' => $request->announce_content,
-            'save_datetime' => Carbon::now(),
-            'status' => 1,
-            'updated_at' => Carbon::now()
-        ]);
-        return redirect()->to('/backend/price')->with('success', 'Save Data Success');
+        $mail1 = PricesModel::find($id);
+        $mail2 = MemberModel::where('id', $mail1->created_id)->first();
+        $mail = new PHPMailer(true);
+        try { 	                 
+            //Server settings 	                 
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = "smtp.mailer2022@gmail.com";
+            $mail->Password   = "krofcmafzshfkpsb";
+            $mail->SMTPSecure = 'tls';
+            $mail->Port       = 587;
+
+            //Recipients
+            $mail->setFrom('smtp.mailer2022@gmail.com', 'Infinity Shipping');
+            $mail->addAddress($mail2->email);
+            // $mail->addReplyTo('', 'Information');
+            // $mail->addCC('');
+            // $mail->addBCC('');
+
+            // // Attachments
+            // $mail->addAttachment('/var/tmp/file.tar.gz');
+            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Quotation confirmation email';
+            $mail->Body    = "
+            <html>
+
+                <body>
+
+                    <b>Dear $mail2->first_name $mail2->last_name,</b>
+
+                    <br>
+
+                    <br>
+
+                    We please to inform you that your rate request has been approved.
+
+                    <br>
+                    
+                    Please Log-in via website by Click at Booking menu to see the rate.
+
+                    <br>
+                    
+                    <br>
+
+                    Thank you for choosing us and look forward to your further support.
+
+                </body>
+
+            </html>";
+            // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+	        // echo 'Message has been sent';
+
+            $date = $request->VDT;
+            $newDate = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+            if (isset($request->privilege)) {
+                $privilege = 1;
+            } else {
+                $privilege = 0;
+            }
+            if (isset($request->privilege2)) {
+                $privilege2 = 1;
+            } else {
+                $privilege2 = 0;
+            }
+            if (isset($request->additional_content)) {
+                $additional = 1;
+            } else {
+                $additional = 0;
+            }
+            // $data_Membermail = [
+            //     'email' => $mail2->email,
+            //     'first_name' => $mail2->first_name,
+            //     'last_name' => $mail2->last_name,
+            // ];
+            // Mail::send(new MemberMail2($data_Membermail));
+            PricesModel::find($id)->update([
+                'VDT' => $newDate,
+                'rate' => $request->rate,
+                'privilege' => $privilege,
+                'privilege2' => $privilege2,
+                'special_rate' => $request->special_rate,
+                'additional_content' => $additional,
+                'announce_content' => $request->announce_content,
+                'save_datetime' => Carbon::now(),
+                'status' => 1,
+                'updated_at' => Carbon::now()
+            ]);
+            return redirect()->to('/backend/price')->with('success', 'Save Data Success');
+        } catch (Exception $e) {
+	        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+	    }
     }
 
     /**
