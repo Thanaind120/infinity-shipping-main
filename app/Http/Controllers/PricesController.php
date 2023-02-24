@@ -99,8 +99,10 @@ class PricesController extends Controller
         $mail2 = MemberModel::where('id', $mail1->created_id)->first();
         $mail = new PHPMailer(true);
         try { 	                 
-            //Server settings 	                 
+            //Server settings 	 
+            $mail->CharSet = "utf-8";                
             $mail->isSMTP();
+            // $mail->SMTPDebug = 0;
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = "smtp.mailer2022@gmail.com";
