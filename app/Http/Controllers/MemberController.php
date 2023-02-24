@@ -233,22 +233,22 @@ class MemberController extends Controller
         return redirect()->to('/login')->with('email', 'The system has successfully sent the email.');
     }
 
-    public function forgotpassword(Request $request, $id)
+    public function forgotpassword(Request $request, $member_code)
     {
-        $member = MemberModel::find($id);
+        $member = MemberModel::where('member_code',$member_code)->first();
         $data = array(
             'member' => $member,
         );
         return view('layouts/frontend/forgot-password', $data);
     }
 
-    public function forgotpassword_update(Request $request, $id)
+    public function forgotpassword_update(Request $request, $member_code)
     {
         // $member = MemberModel::find($id);
         if($request->password_1 == $request->password_2 && $request->password_1 != ""){
             $varible = Hash::make($request->password_1);
             Cookie::queue('newpassword',$request->password_1,time()+(10*365*60*60));
-            MemberModel::find($id)->update([
+            MemberModel::where('member_code',$member_code)->update([
                 'password' => $varible,
                 'updated_at' => Carbon::now()
             ]);

@@ -84,9 +84,9 @@ Route::delete('member/delete/{id}', 'MemberController@destroy');
 
 Route::post('member/Forgotpassword', 'MemberController@forgotpassword_mail')->name('forgotpassword.mail');
 
-Route::get('member/Forgotpassword/{id}', 'MemberController@forgotpassword');
+Route::get('member/Forgotpassword/{member_code}', 'MemberController@forgotpassword');
 
-Route::put('member/Forgotpassword/update/{id}', 'MemberController@forgotpassword_update');
+Route::put('member/Forgotpassword/update/{member_code}', 'MemberController@forgotpassword_update');
 
 //** END MEMBER LOGIN && LOGOUT **//
 

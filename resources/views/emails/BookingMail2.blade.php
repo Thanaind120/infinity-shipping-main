@@ -2,7 +2,7 @@
     <body>
         <b>Dear {{$created_by}},</b>
         <br>
-        Thank you for shipping with ONE!
+        Thank you for shipping with INFNITY SHIPPING (THAILAND)!
         <br> 
         <br> 
         This email response is an acknowledgement of receiving your request only, and is not to be regarded as a booking/space/equipment confirmation.
