@@ -144,7 +144,7 @@
 
                                         <div id="boxOther" class="other box mt-3">
 
-                                            <input type="text" class="form-control filter" placeholder="Enter text..."
+                                            <input type="text" class="form-control filter" placeholder="Please input commodity of cargoes on remark column."
 
                                                 id="other" name="other" value="">
 

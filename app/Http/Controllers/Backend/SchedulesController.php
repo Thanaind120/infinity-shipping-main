@@ -73,6 +73,8 @@ class SchedulesController extends Controller
                 for ($i = 0; $i < $length; $i++) {
                     $randomString .= $characters[rand(0, $charactersLength - 1)];
                 }
+                $date = $request->save_datetime;
+                $newDate = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
                 SchedulesModel::create([
                     'id_schedules' => $request->id_schedules,
                     'transport_code' => 'S'.date('Y').$randomString,
@@ -82,7 +84,7 @@ class SchedulesController extends Controller
                     'location' => $request->location,
                     'transport_status' => $request->transport_status,
                     'ship_code' => $request->ship_code,
-                    'save_datetime' => Carbon::now(),
+                    'save_datetime' => $newDate,
                     'status' => 1,
                     'created_id' => Auth::guard('web')->user()->id,
                     'created_by' => Auth::guard('web')->user()->name,
@@ -96,14 +98,14 @@ class SchedulesController extends Controller
                             'EVV' => $request->ship_code,
                             'place_of_arrival' => $request->location,
                             'ref_transport_status' => $request->transport_status,
-                            'arrival' => Carbon::now(),
+                            'arrival' => $newDate,
                             'updated_at' => Carbon::now()
                         ]);
                     }else if($request->transport_status == 'GATE OUT'){
                         BookingModel::find($Book->id_booking)->update([
                             'EVV' => $request->ship_code,
                             'place_of_departure' => $request->location,
-                            'departure' => Carbon::now(),
+                            'departure' => $newDate,
                             'updated_at' => Carbon::now()
                         ]);
                     }else{
@@ -117,13 +119,13 @@ class SchedulesController extends Controller
                         BookingModel::find($Book->id_booking)->update([
                             'place_of_arrival' => $request->location,
                             'ref_transport_status' => $request->transport_status,
-                            'arrival' => Carbon::now(),
+                            'arrival' => $newDate,
                             'updated_at' => Carbon::now()
                         ]);
                     }else if($request->transport_status == 'GATE OUT'){
                         BookingModel::find($Book->id_booking)->update([
                             'place_of_departure' => $request->location,
-                            'departure' => Carbon::now(),
+                            'departure' => $newDate,
                             'updated_at' => Carbon::now()
                         ]);
                     }else{
@@ -133,6 +135,8 @@ class SchedulesController extends Controller
                     }
                 }
             }else{
+                $date = $request->save_datetime;
+                $newDate = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
                 SchedulesModel::create([
                     'id_schedules' => $request->id_schedules,
                     'transport_code' => 'S'.date('Y').$randomStrings,
@@ -142,7 +146,7 @@ class SchedulesController extends Controller
                     'location' => $request->location,
                     'transport_status' => $request->transport_status,
                     'ship_code' => $request->ship_code,
-                    'save_datetime' => Carbon::now(),
+                    'save_datetime' => $newDate,
                     'status' => 1,
                     'created_id' => Auth::guard('web')->user()->id,
                     'created_by' => Auth::guard('web')->user()->name,
@@ -156,14 +160,14 @@ class SchedulesController extends Controller
                             'EVV' => $request->ship_code,
                             'place_of_arrival' => $request->location,
                             'ref_transport_status' => $request->transport_status,
-                            'arrival' => Carbon::now(),
+                            'arrival' => $newDate,
                             'updated_at' => Carbon::now()
                         ]);
                     }else if($request->transport_status == 'GATE OUT'){
                         BookingModel::find($Book->id_booking)->update([
                             'EVV' => $request->ship_code,
                             'place_of_departure' => $request->location,
-                            'departure' => Carbon::now(),
+                            'departure' => $newDate,
                             'updated_at' => Carbon::now()
                         ]);
                     }else{
@@ -177,13 +181,13 @@ class SchedulesController extends Controller
                         BookingModel::find($Book->id_booking)->update([
                             'place_of_arrival' => $request->location,
                             'ref_transport_status' => $request->transport_status,
-                            'arrival' => Carbon::now(),
+                            'arrival' => $newDate,
                             'updated_at' => Carbon::now()
                         ]);
                     }else if($request->transport_status == 'GATE OUT'){
                         BookingModel::find($Book->id_booking)->update([
                             'place_of_departure' => $request->location,
-                            'departure' => Carbon::now(),
+                            'departure' => $newDate,
                             'updated_at' => Carbon::now()
                         ]);
                     }else{
@@ -250,14 +254,59 @@ class SchedulesController extends Controller
             } else {
                 $status = 0;
             }
+            $date = $request->save_datetime;
+            $newDate = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
             SchedulesModel::find($id)->update([
                 'city_name' => $request->city_name,
                 'location' => $request->location,
                 'transport_status' => $request->transport_status,
                 'ship_code' => $request->ship_code,
+                'save_datetime' => $newDate,
                 'status' => $status,
                 'updated_at' => Carbon::now()
             ]);
+            if($request->ship_code != ''){
+                if($request->transport_status == 'ESTIMATE ARRIVAL'){
+                    BookingModel::find($Book->id_booking)->update([
+                        'EVV' => $request->ship_code,
+                        'place_of_arrival' => $request->location,
+                        'ref_transport_status' => $request->transport_status,
+                        'arrival' => $newDate,
+                        'updated_at' => Carbon::now()
+                    ]);
+                }else if($request->transport_status == 'GATE OUT'){
+                    BookingModel::find($Book->id_booking)->update([
+                        'EVV' => $request->ship_code,
+                        'place_of_departure' => $request->location,
+                        'departure' => $newDate,
+                        'updated_at' => Carbon::now()
+                    ]);
+                }else{
+                    BookingModel::find($Book->id_booking)->update([
+                        'EVV' => $request->ship_code,
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
+            }else{
+                if($request->transport_status == 'ESTIMATE ARRIVAL'){
+                    BookingModel::find($Book->id_booking)->update([
+                        'place_of_arrival' => $request->location,
+                        'ref_transport_status' => $request->transport_status,
+                        'arrival' => $newDate,
+                        'updated_at' => Carbon::now()
+                    ]);
+                }else if($request->transport_status == 'GATE OUT'){
+                    BookingModel::find($Book->id_booking)->update([
+                        'place_of_departure' => $request->location,
+                        'departure' => $newDate,
+                        'updated_at' => Carbon::now()
+                    ]);
+                }else{
+                    BookingModel::find($Book->id_booking)->update([
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
+            }
             return redirect()->to('/backend/schedules/add-detail/'.$Book->id_booking)->with('success', 'Save Data Success');
         }
     }

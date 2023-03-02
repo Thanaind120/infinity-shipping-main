@@ -319,7 +319,7 @@
 
                                                 <input type="text" class="form-control filter" id="other" name="other"
 
-                                                    placeholder="Enter text..." value="">
+                                                    placeholder="Please input commodity of cargoes on remark column." value="">
 
                                             </div>
 

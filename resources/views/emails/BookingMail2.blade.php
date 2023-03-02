@@ -2,14 +2,16 @@
     <body>
         <b>Dear {{$created_by}},</b>
         <br>
-        Thank you for shipping with INFNITY SHIPPING (THAILAND)!
+        Thank you for your booking request.
         <br> 
         <br> 
-        This email response is an acknowledgement of receiving your request only, and is not to be regarded as a booking/space/equipment confirmation.
+        This email response is an acknowledgement of receiving your request only, and is not to be regarded as a
         <br>
-        Our Customer Service representatives will handle your request. If you wish to edit or cancel this booking request, you can do so through the booking status screen.
+        booking/space/equipment confirmation.
         <br>
         <br>
-        We have received your booking request for the following shipment.
+        Our Customer service representatives will handle your request. Please wait for the confirmation via email,
+        <br>
+        If you wish to cancel this booking request, you have to click on menu “History Booking”
     </body>
 </html>
